@@ -6,8 +6,21 @@ body {
   background-position: center;
   background-repeat:no-repeat;
   font-family: Galindo, sans-serif;
-  /* //margin: 0;
-  //background: #f4f4f4; */
+  
+}
+nav{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  background:#461111;
+  padding:10px;
+}
+
+nav a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 header {
@@ -21,7 +34,7 @@ header {
 section {
   padding: 100px;
   margin: 20px;
-  background: white;
+  background: transparent;
   border-radius: 10px;
 }
 
@@ -61,6 +74,7 @@ section {
 }
 
 .intro-text button_take_quiz {
+  display:flex;
   background: #461111;
   font-weight: bold;
   color: white;
@@ -72,6 +86,31 @@ section {
 .intro-text button{
   background: #461111;
   font-weight: bold;
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.genButton{ /* for*/
+  background: white;
+  
+  color: #461111;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.button-grid{
+  max-width: 100%;
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+
+}
+.genButton:hover{
+ background: #461111;
+  
   color: white;
   padding: 15px 25px;
   border: none;
