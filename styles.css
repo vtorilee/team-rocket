@@ -1,11 +1,18 @@
 body {
+
+
+  background-image: url("images/homepage.bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat:no-repeat;
   font-family: Galindo, sans-serif;
-  margin: 0;
-  background: #f4f4f4;
+  /* //margin: 0;
+  //background: #f4f4f4; */
 }
 
 header {
-  background: #8b2323;
+  
+  background: #461111;
   color: white;
   padding: 15px;
   text-align: center;
@@ -23,7 +30,7 @@ section {
 }
 
 .intro {
-  background: white;
+  background: transparent;
   padding: 80px 40px;
 }
 
@@ -44,16 +51,27 @@ section {
 
 .intro-text h1 {
   font-size: 3rem;
-  color: #5a0000;
+  color: white;
 }
 
 .intro-text p {
+  color: white;
   margin: 20px 0;
   font-size: 0.9rem;
 }
 
-.intro-text button {
-  background: #7a1c1c;
+.intro-text button_take_quiz {
+  background: #461111;
+  font-weight: bold;
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.intro-text button{
+  background: #461111;
+  font-weight: bold;
   color: white;
   padding: 15px 25px;
   border: none;
