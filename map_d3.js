@@ -14,7 +14,7 @@ d3.xml("../images/world-map-by-nstav13.svg")
     const svgElement = d3.select("#map-container svg");
     const regions = svgElement.selectAll("path");
 
-    //selecting region zones
+    //selecting region zones with cursor
     regions
       .on("mouseenter", function () {
         d3.select(this).style("fill", "red");
@@ -23,6 +23,38 @@ d3.xml("../images/world-map-by-nstav13.svg")
       .on("mouseleave", function () {
         d3.select(this).style("fill", "transparent");
       });
+
+    //zooming and panning using d3: https://d3js.org/d3-zoom
+    const zoom = d3
+      .zoom()
+      .scaleExtent([1, 8])
+      .on("zoom", (event) => {
+        svgElement
+          .selectAll("g#map-regions")
+          .attr("transform", event.transform);
+      });
+    svgElement.call(zoom);
+
+    regions.on("click", function (event) {
+      //upon click, set selected svg region path as bounding box
+      const bounds = this.getBBox();
+
+      //zoom in and center selected region
+      const x = bounds.x + bounds.width / 2;
+      const y = bounds.y + bounds.height / 2;
+      const scale = 4; //zoom scale
+
+      svgElement
+        .transition()
+        .duration(750)
+        .call(
+          zoom.transform,
+          d3.zoomIdentity
+            .translate(window.innerWidth / 2, window.innerHeight / 2)
+            .scale(scale)
+            .translate(-x, -y),
+        );
+    });
   })
   .catch((error) => {
     console.error("Loading error:", error);
