@@ -1,0 +1,22 @@
+#map-container {
+  width: 100vw;
+  height: 100vh;
+  background: #1a1a1a; /* change to pokemon background red later*/
+  overflow: hidden;
+  position: relative;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+path {
+  pointer-events: all !important;
+  cursor: pointer;
+  transition: fill 0.2s;
+}
+
+path:hover {
+  fill: red !important;
+}
