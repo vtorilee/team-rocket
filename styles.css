@@ -92,28 +92,58 @@ section {
   border-radius: 30px;
   cursor: pointer;
 }
-.genButton{ /* for*/
+.genButton:hover {
+  transform: scale(0.95);
+  transition: 0.2s;
+}
+.result-box {
+  margin-top: 30px;
+  padding: 20px;
   background: white;
-  
   color: #461111;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+  display: none;
 }
-.button-grid{
-  max-width: 100%;
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 15px;
-
+.quiz-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
 }
-.genButton:hover{
- background: #461111;
-  
-  color: white;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
+.quiz-buttons {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+}
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto); 
+  justify-content: left; 
+  margin-left: 2%;
+  gap: 15px 30px;
+}
+.genButton {
+  width: 120px;  
+  height: 60px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 20px;
+}
+.image-container {
+  display: flex;
+  justify-content: right;
+  margin-left: 240px;
+  margin-top: -80px;
+  width: 100%;
+}
+.starter-image {
+  width: 800px;  
+}
+.quiz-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
 }

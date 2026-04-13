@@ -19,10 +19,8 @@
       <a href="quiz.html">Quiz</a>
     </nav>
 
- 
       <div class="quiz-container">
         
-       
         <h1>Which is your Favourite Generation?</h1>
         <div class="button-grid">
             <button class="genButton">Gen 1</button>
@@ -33,15 +31,37 @@
             <button class="genButton">Gen 6</button>
             <button class="genButton">Gen 7</button>
             <button class="genButton">Gen 8</button>
-            <button class="genButton">Gen 9</button>
-
-
-          
-        <img src="images/all.starters.png" alt="Starters" />
-    
         </div>
-         
+
+          <div class="image-container">
+            <img 
+              src="images/all.starters.png" 
+              alt="Starters"
+              class="starter-image"
+              data-info="These are starter Pokémon from different generations!" 
+            />
+          </div>
+         <div id="result" class="result-box"></div>
       </div>
   
+      <script>
+      const buttons = document.querySelectorAll(".genButton");
+      const resultBox = document.getElementById("result");
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          const gen = index + 1;
+
+          // save choice 
+          localStorage.setItem("selectedGen", gen);
+
+          // show result
+          resultBox.style.display = "block";
+          resultBox.innerHTML = `
+            <h2>You chose Generation ${gen}!</h2>
+          `;
+        });
+      });
+      </script>
 </body>
 </html>
