@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizations</title>
+</head>
+
+<body>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <div id="vis"></div>
+
+  <script>
+    const spec = {
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+
+      data: {
+        url: "../datasets/Favourite_Pokemon_Survey.csv",
+        format: { type: "csv" }
+      },
+
+      mark: {
+        type: "bar",
+        size: 25,
+        cornerRadiusTopLeft: 5,
+        cornerRadiusTopRight: 5
+      },
+
+      encoding: {
+
+  x: {
+    field: "Generation",
+    type: "nominal",
+    axis: { labelAngle: -25 },
+    sort: [
+      "Gen I (Kanto)",
+      "Gen II (Johto)",
+      "Gen III (Hoenn)",
+      "Gen IV (Sinnoh)",
+      "Gen V (Unova)",
+      "Gen VI (Kalos)",
+      "Gen VII (Alola)",
+      "Gen VIII (Galar/Hisui)",
+      "Gen IX (Paldea)"
+    ]
+  },
+
+  xOffset: {
+    field: "starter",
+    sort: ["Bulbasaur","Charmander","Squirtle",
+           "Chikorita","Cyndaquil","Totodile",
+           "Treecko","Torchic","Mudkip",
+           "Turtwig","Chimchar","Piplup",
+           "Snivy","Tepig","Oshawott",
+           "Chespin","Fennekin","Froakie",
+           "Rowlet","Litten","Popplio",
+           "Grookey","Scorbunny","Sobble",
+           "Sprigatito","Fuecoco","Quaxly"]
+  },
+
+  y: {
+    field: "votes",
+    type: "quantitative",
+    title: "Number of Votes"
+  },
+
+  color: {
+    field: "type",
+    type: "nominal"
+  }
+},
+      width: 1400,
+      height: 400
+    };
+
+    vegaEmbed("#vis", spec);
+  </script>
+
+</body>
+</html>
