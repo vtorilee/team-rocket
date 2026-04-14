@@ -3,14 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Galindo&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <title>PokeMap</title>
     <script type="module" src="../map_d3.js"></script>
     <link rel="stylesheet" href="../map_styles.css" />
   </head>
   <body>
-    <div id="map-container"></div>
+    <div id="page-container">
+      <div class="page-border">
+        <h1 id="title">Regions and Generations Map</h1>
+      </div>
 
-    <script type="module" src="../map_d3.js"></script>
-    <button id="reset-button">Back to World Map</button>
+      <div id="map-container">
+        <button id="reset-button">Back to World Map</button>
+      </div>
+      <div class="page-border"></div>
+    </div>
   </body>
 </html>
