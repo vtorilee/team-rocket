@@ -35,6 +35,7 @@ d3.xml("../images/world-map-by-nstav13.svg")
       });
     svgElement.call(zoom);
 
+    //zoom event listener
     regions.on("click", function (event) {
       //upon click, set selected svg region path as bounding box
       const bounds = this.getBBox();
@@ -54,6 +55,19 @@ d3.xml("../images/world-map-by-nstav13.svg")
             .scale(scale)
             .translate(-x, -y),
         );
+
+      d3.select("#reset-button").style("display", "block");
+    });
+
+    //reset map zoom
+    d3.select("#reset-button").on("click", function () {
+      svgElement
+        .transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity);
+
+      //get rid of button
+      d3.select(this).style("display", "none");
     });
   })
   .catch((error) => {

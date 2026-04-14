@@ -20,3 +20,13 @@ path {
 path:hover {
   fill: red !important;
 }
+
+#reset-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  display: none;
+  padding: 10px;
+  cursor: pointer;
+}
