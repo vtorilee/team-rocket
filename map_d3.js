@@ -36,18 +36,31 @@ function handleZoom(element, sections) {
   sections.on("click", function (event, d) {
     const regionID = d3.select(this).attr("id");
 
-    //find the matching gen object in the generations array, then zoom screen to that region
-    selectedGen = generations.find((g) => g.region === regionID) || null;
-    zoomToRegion(regionID);
+    d3.select("#hover-label").remove();
+    d3.select("#hover-area").remove();
 
-    //sync timeline appearance
+    //find the matching gen object in the generations array
+    selectedGen = generations.find((g) => g.region === regionID) || null;
+
+    if (selectedGen !== null) {
+      //trigger greying of all non-selected paths
+      svgElement.classed("focus-mode", true);
+      sections.classed("selected-path", false);
+      d3.select(this).classed("selected-path", true);
+    } else return;
+
+    //zoom to specified region on map, re-display timeline
+    zoomToRegion(regionID);
     renderMarks();
   });
 
   d3.select("#reset-button").on("click", function () {
     element.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
 
-    //get rid of button and reset everything
+    svgElement.classed("focus-mode", false);
+    sections.classed("selected-path", false);
+
+    //get rid of button and reset displays
     d3.select(this).style("display", "none");
     selectedGen = null;
     renderMarks();
@@ -57,6 +70,7 @@ function handleZoom(element, sections) {
 //zoom action to a specific region
 function zoomToRegion(regionID) {
   const regionPath = d3.select(`path#${regionID}`);
+
   if (regionPath.empty()) return;
 
   //upon click, set selected svg region path as bounding box
@@ -84,24 +98,44 @@ function zoomToRegion(regionID) {
 function hoverRegion(element, sections) {
   sections
     .on("mouseenter", function (event) {
+      if (selectedGen !== null) return;
+
+      //animating is asynchronous, interrupt any ongoing transition code so nothing gets stuck
+      d3.selectAll(".hover-group").interrupt().remove();
+
       const hovered = d3.select(this);
       const regionID = hovered.attr("id");
+
+      hovered.interrupt().classed("highlighted", true);
 
       //get selected region area
       const bounds = this.getBBox();
       const centerX = bounds.x + bounds.width / 2;
       const centerY = bounds.y + bounds.height / 2;
 
-      //add region name pop-up
-      element
+      ////region-name pop-up fade
+      const hoverArea = element
+        .append("g")
+        .attr("class", "hover-group")
+        .style("opacity", 0)
+        .style("pointer-events", "none");
+
+      hoverArea
         .append("text")
-        .attr("id", "hover-label")
+        .attr("class", "hover-label")
         .attr("x", centerX)
         .attr("y", centerY)
         .text(regionID);
+
+      hoverArea.transition().duration(300).style("opacity", 1);
     })
     .on("mouseleave", function () {
-      d3.select("#hover-label").remove();
+      d3.select(this).classed("highlighted", false);
+      d3.selectAll(".hover-group")
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+        .remove();
     });
 }
 
@@ -144,19 +178,26 @@ d3.xml("../images/world-map-by-nstav13.svg")
     mapSVG.setAttribute("width", "100%");
     mapSVG.setAttribute("height", "100%");
 
-    const svgElement = d3.select("#map-container svg");
-    const regions = svgElement.selectAll("path");
+    const mapElement = d3.select("#map-container svg");
+    const regionString = generations.map((g) => `#${g.region}`).join(", ");
+
+    const regions = mapElement.selectAll(regionString);
+
+    //svg attributes fix for consistency
+    regions
+      .attr("style", null)
+      .attr("stroke", "rgba(0,0,0,0)")
+      .attr("stroke-width", "0px");
 
     //selecting region zones with cursor
-    hoverRegion(svgElement, regions);
-    handleZoom(svgElement, regions);
+    hoverRegion(mapElement, regions);
+    handleZoom(mapElement, regions);
   })
   .catch((error) => {
     console.error("Loading error:", error);
   });
 
 //drawing function for custom timeline
-
 function drawTimeline() {
   //select container, define dimensions of timeline
   const timelineContainer = d3.select("#timeline-container");

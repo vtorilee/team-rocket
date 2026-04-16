@@ -48,20 +48,45 @@ svg {
   height: 100%;
 }
 
+svg.focus-mode path {
+  fill: #444 !important;
+  opacity: 0.4;
+  transition: all 0.5s ease;
+}
+
+svg.focus-mode path.selected-path {
+  fill: #ff000000 !important;
+  opacity: 1;
+}
+
+#focus-label {
+  font-family: "Galindo", sans-serif;
+  font-size: 40px;
+  fill: white;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
 path {
   pointer-events: all !important;
   cursor: pointer;
   fill: transparent;
-  transition: all 0.5s;
+  stroke: rgba(174, 119, 0, 0);
+  stroke-width: 0px;
+  transition: all 0.5s ease;
 }
 
-path:hover {
-  fill: rgba(255, 222, 222, 0.463) !important;
-  stroke: #ae7700;
+.highlighted {
+  fill: rgba(255, 222, 222, 0.46) !important;
+  stroke: #ae7700 !important;
   stroke-width: 3px;
 }
 
-#hover-label {
+.hover-group {
+  pointer-events: none;
+}
+
+.hover-label {
   text-anchor: middle;
   dominant-baseline: middle;
   font-family: "Galindo", sans-serif;
