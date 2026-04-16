@@ -1,3 +1,4 @@
+/* webpage ui display */
 html,
 body {
   margin: 0;
@@ -33,6 +34,7 @@ body {
   font-size: 42px;
 }
 
+/* map area */
 #map-container {
   width: 100vw;
   height: 100vh;
@@ -49,11 +51,25 @@ svg {
 path {
   pointer-events: all !important;
   cursor: pointer;
-  transition: fill 0.2s;
+  fill: transparent;
+  transition: all 0.5s;
 }
 
 path:hover {
-  fill: red !important;
+  fill: rgba(255, 222, 222, 0.463) !important;
+  stroke: #ae7700;
+  stroke-width: 3px;
+}
+
+#hover-label {
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-family: "Galindo", sans-serif;
+  font-size: 28px;
+  fill: #000000;
+  stroke: #eeab19;
+  stroke-width: 0.7px;
+  pointer-events: none;
 }
 
 #reset-button {
@@ -66,6 +82,53 @@ path:hover {
   cursor: pointer;
 }
 
+/* timeline */
+
+.bg-circle {
+  fill: #f7e6e6;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
 .mark-text {
-  color: #715555;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-size: 20px;
+  font-family: "Galindo", sans-serif;
+}
+
+.unselected {
+  fill: #ae4c4c;
+  stroke: #231a1aa7;
+}
+
+.pb-icon {
+  x: -37.5;
+  y: -37.5;
+  width: 75px;
+  height: 75px;
+}
+
+.gen-mark:hover .bg-circle {
+  r: 32px;
+  stroke: #fff;
+  fill: rgb(198, 66, 66);
+}
+
+.gen-mark:hover .mark-text {
+  font-size: 30px;
+  fill: #fff;
+}
+
+.gen-mark:hover .pb-icon {
+  x: -42.5;
+  y: -42.5;
+  width: 85px;
+  height: 85px;
+}
+
+.bg-circle,
+.mark-text,
+.pb-icon {
+  transition: all 0.2s;
 }

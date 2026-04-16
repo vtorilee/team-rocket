@@ -1,5 +1,138 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
+//for tracking generations
+let selectedGen = null;
+const generations = [
+  { region: "Kanto", number: 1 },
+  { region: "Johto", number: 2 },
+  { region: "Hoenn", number: 3 },
+  { region: "Sinnoh", number: 4 },
+  { region: "Unova", number: 5 },
+  { region: "Kalos", number: 6 },
+  { region: "Alola", number: 7 },
+  { region: "Galar", number: 8 },
+  { region: "Paldea", number: 9 },
+];
+let genMarks;
+
+//variables for handling zoom with selected regions
+let zoom;
+let svgElement;
+
+//function for handling map zooming
+function handleZoom(element, sections) {
+  //zooming and panning using d3: https://d3js.org/d3-zoom
+  svgElement = element;
+
+  zoom = d3
+    .zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", (event) => {
+      element.selectAll("g#map-regions").attr("transform", event.transform);
+    });
+  element.call(zoom);
+
+  //zoom event listener
+  sections.on("click", function (event, d) {
+    const regionID = d3.select(this).attr("id");
+
+    //find the matching gen object in the generations array, then zoom screen to that region
+    selectedGen = generations.find((g) => g.region === regionID) || null;
+    zoomToRegion(regionID);
+
+    //sync timeline appearance
+    renderMarks();
+  });
+
+  d3.select("#reset-button").on("click", function () {
+    element.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+
+    //get rid of button and reset everything
+    d3.select(this).style("display", "none");
+    selectedGen = null;
+    renderMarks();
+  });
+}
+
+//zoom action to a specific region
+function zoomToRegion(regionID) {
+  const regionPath = d3.select(`path#${regionID}`);
+  if (regionPath.empty()) return;
+
+  //upon click, set selected svg region path as bounding box
+  const bounds = regionPath.node().getBBox();
+
+  //zoom in and center selected region
+  const x = bounds.x + bounds.width / 2;
+  const y = bounds.y + bounds.height / 2;
+  const scale = 4; //zoom scale
+
+  svgElement
+    .transition()
+    .duration(750)
+    .call(
+      zoom.transform,
+      d3.zoomIdentity
+        .translate(window.innerWidth / 2, window.innerHeight / 2)
+        .scale(scale)
+        .translate(-x, -y),
+    );
+  d3.select("#reset-button").style("display", "block");
+}
+
+//handle region highlight when viewer hovers over
+function hoverRegion(element, sections) {
+  sections
+    .on("mouseenter", function (event) {
+      const hovered = d3.select(this);
+      const regionID = hovered.attr("id");
+
+      //get selected region area
+      const bounds = this.getBBox();
+      const centerX = bounds.x + bounds.width / 2;
+      const centerY = bounds.y + bounds.height / 2;
+
+      //add region name pop-up
+      element
+        .append("text")
+        .attr("id", "hover-label")
+        .attr("x", centerX)
+        .attr("y", centerY)
+        .text(regionID);
+    })
+    .on("mouseleave", function () {
+      d3.select("#hover-label").remove();
+    });
+}
+
+//function to draw the circles based on different states:
+//https://d3js.org/d3-selection/events
+function renderMarks() {
+  if (!genMarks) return;
+
+  genMarks.html("");
+  genMarks.each(function (d) {
+    const g = d3.select(this);
+
+    if (selectedGen === d) {
+      // https://stackoverflow.com/questions/20086884/add-image-inside-a-circle-d3
+      g.append("image")
+        .attr("xlink:href", "../images/pokeball-pixel.png")
+        .attr("class", "pb-icon");
+    } else if (selectedGen !== null) {
+      g.append("circle").attr("r", 25).attr("class", "bg-circle unselected");
+      g.append("text")
+        .attr("class", "mark-text")
+        .text(d.number)
+        .style("opacity", 0.5);
+    } else {
+      g.append("circle").attr("r", 25).attr("class", "bg-circle");
+
+      g.append("text").attr("class", "mark-text").text(d.number);
+    }
+  });
+}
+
 const mapContainer = d3.select("#map-container");
 
 //load map svg image: https://stackoverflow.com/questions/12975929/how-to-use-svg-file-for-image-source-in-d3#:~:text=Sorted%20by:,%2C%20100)
@@ -15,69 +148,16 @@ d3.xml("../images/world-map-by-nstav13.svg")
     const regions = svgElement.selectAll("path");
 
     //selecting region zones with cursor
-    regions
-      .on("mouseenter", function () {
-        d3.select(this).style("fill", "red");
-        console.log("Currently on:", d3.select(this).attr("id"));
-      })
-      .on("mouseleave", function () {
-        d3.select(this).style("fill", "transparent");
-      });
-
-    //zooming and panning using d3: https://d3js.org/d3-zoom
-    const zoom = d3
-      .zoom()
-      .scaleExtent([1, 8])
-      .on("zoom", (event) => {
-        svgElement
-          .selectAll("g#map-regions")
-          .attr("transform", event.transform);
-      });
-    svgElement.call(zoom);
-
-    //zoom event listener
-    regions.on("click", function (event) {
-      //upon click, set selected svg region path as bounding box
-      const bounds = this.getBBox();
-
-      //zoom in and center selected region
-      const x = bounds.x + bounds.width / 2;
-      const y = bounds.y + bounds.height / 2;
-      const scale = 4; //zoom scale
-
-      svgElement
-        .transition()
-        .duration(750)
-        .call(
-          zoom.transform,
-          d3.zoomIdentity
-            .translate(window.innerWidth / 2, window.innerHeight / 2)
-            .scale(scale)
-            .translate(-x, -y),
-        );
-
-      d3.select("#reset-button").style("display", "block");
-    });
-
-    //reset map zoom
-    d3.select("#reset-button").on("click", function () {
-      svgElement
-        .transition()
-        .duration(750)
-        .call(zoom.transform, d3.zoomIdentity);
-
-      //get rid of button
-      d3.select(this).style("display", "none");
-    });
+    hoverRegion(svgElement, regions);
+    handleZoom(svgElement, regions);
   })
   .catch((error) => {
     console.error("Loading error:", error);
   });
 
 //drawing function for custom timeline
-function drawTimeline() {
-  const generations = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+function drawTimeline() {
   //select container, define dimensions of timeline
   const timelineContainer = d3.select("#timeline-container");
   const width = window.innerWidth - 100;
@@ -100,41 +180,28 @@ function drawTimeline() {
     .attr("y1", height / 2)
     .attr("x2", x(9))
     .attr("y2", height / 2)
-    .attr("stroke", "#fff")
+    .attr("stroke", "#ffffffc3")
     .attr("stroke-width", 9);
 
   //create the container groups for each mark's components
-  const genMarks = timelineSVG
+  genMarks = timelineSVG
     .selectAll(".gen-mark")
     .data(generations)
     .enter()
     .append("g")
     .attr("class", "gen-mark")
-    .attr("transform", (d) => `translate(${x(d)}, ${height / 2})`);
-
-  //draw the circles and mouse hover handling
-  genMarks
-    .append("circle")
-    .attr("r", 25)
-    .attr("fill", "#ffffff")
-    .attr("stroke", "#000")
-    .attr("stroke-width", 3)
-    .on("mouseenter", function () {
-      d3.select(this).attr("fill", "yellow").attr("r", 30);
-    })
-    .on("mouseleave", function () {
-      d3.select(this).attr("fill", "#fff").attr("r", 25);
+    .attr("transform", (d) => `translate(${x(d.number)}, ${height / 2})`)
+    .on("click", function (event, d) {
+      selectedGen = selectedGen === d ? null : d;
+      renderMarks();
+      if (selectedGen) {
+        zoomToRegion(d.region);
+      } else {
+        d3.select("#reset-button").dispatch("click");
+      }
     });
 
-  genMarks
-    .append("text")
-    .attr("class", "mark-text")
-    .text((d) => `${d}`)
-    .attr("y", 0)
-    .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "middle")
-    .style("font-family", "Rubik, sans-serif")
-    .style("font-size", "20px");
+  renderMarks();
 }
 
 drawTimeline();
