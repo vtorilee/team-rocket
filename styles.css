@@ -1,6 +1,5 @@
 body {
 
-
   background-image: url("images/homepage.bg.png");
   background-size: cover;
   background-position: center;
@@ -130,6 +129,16 @@ section {
   font-weight: bold;
   border-radius: 20px;
 }
+
+
+.starter-image {
+  width: 100%;
+  transition: 0.5s ease;
+  height: auto;
+  display: block;
+
+}
+
 .image-container {
   display: flex;
   justify-content: right;
