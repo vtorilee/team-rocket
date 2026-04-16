@@ -28,30 +28,21 @@ function handleZoom(element, sections) {
     .zoom()
     .scaleExtent([1, 8])
     .on("zoom", (event) => {
-      element.selectAll("g#map-regions").attr("transform", event.transform);
+      element.select("g").attr("transform", event.transform);
     });
   element.call(zoom);
 
   //zoom event listener
   sections.on("click", function (event, d) {
+    //fetch the correct gen object based on the one clicked
     const regionID = d3.select(this).attr("id");
+    const selected = generations.find((g) => g.region === regionID);
 
-    d3.select("#hover-label").remove();
-    d3.select("#hover-area").remove();
-
-    //find the matching gen object in the generations array
-    selectedGen = generations.find((g) => g.region === regionID) || null;
-
-    if (selectedGen !== null) {
-      //trigger greying of all non-selected paths
-      svgElement.classed("focus-mode", true);
-      sections.classed("selected-path", false);
-      d3.select(this).classed("selected-path", true);
-    } else return;
-
-    //zoom to specified region on map, re-display timeline
-    zoomToRegion(regionID);
-    renderMarks();
+    //assign selected gen globally and update the UI with it
+    if (selected) {
+      selectedGen = selected;
+      updateUI(selected);
+    }
   });
 
   d3.select("#reset-button").on("click", function () {
@@ -70,24 +61,30 @@ function handleZoom(element, sections) {
 //zoom action to a specific region
 function zoomToRegion(regionID) {
   const regionPath = d3.select(`path#${regionID}`);
-
   if (regionPath.empty()) return;
 
   //upon click, set selected svg region path as bounding box
   const bounds = regionPath.node().getBBox();
+  const container = d3.select("#map-container").node();
 
-  //zoom in and center selected region
-  const x = bounds.x + bounds.width / 2;
+  //calculate values to zoom in and offset selected region to the right
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  const scale = Math.min(
+    8,
+    0.5 / Math.max(bounds.width / width, bounds.height / height),
+  );
+  const x = bounds.x + bounds.width / 5;
   const y = bounds.y + bounds.height / 2;
-  const scale = 4; //zoom scale
 
+  //zoom in map
   svgElement
     .transition()
     .duration(750)
     .call(
       zoom.transform,
       d3.zoomIdentity
-        .translate(window.innerWidth / 2, window.innerHeight / 2)
+        .translate(width / 2, height / 2)
         .scale(scale)
         .translate(-x, -y),
     );
@@ -167,6 +164,29 @@ function renderMarks() {
   });
 }
 
+function updateUI(gen) {
+  if (!gen) {
+    //no data --> reset to default map view
+    svgElement.classed("focus-mode", false);
+    svgElement.selectAll("path").classed("selected-path", false);
+
+    svgElement.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+    d3.select("#reset-button").style("display", "none");
+  } else {
+    //set selected region state, while all other paths are unselected
+    const regionID = gen.region;
+    const regionPath = d3.select(`path#${regionID}`);
+
+    svgElement.classed("focus-mode", true);
+    svgElement.selectAll("path").classed("selected-path", false);
+    regionPath.classed("selected-path", true);
+
+    //zoom to the selected region
+    zoomToRegion(regionID);
+  }
+  renderMarks();
+}
+
 const mapContainer = d3.select("#map-container");
 
 //load map svg image: https://stackoverflow.com/questions/12975929/how-to-use-svg-file-for-image-source-in-d3#:~:text=Sorted%20by:,%2C%20100)
@@ -233,14 +253,17 @@ function drawTimeline() {
     .attr("class", "gen-mark")
     .attr("transform", (d) => `translate(${x(d.number)}, ${height / 2})`)
     .on("click", function (event, d) {
+      //revert to default view if currently in focus state,
+      //otherwise display zoomed into newly selected gen region
       selectedGen = selectedGen === d ? null : d;
-      renderMarks();
-      if (selectedGen) {
-        zoomToRegion(d.region);
-      } else {
-        d3.select("#reset-button").dispatch("click");
-      }
+      updateUI(selectedGen);
     });
+
+  //remove selection and revert UI
+  d3.select("#reset-button").on("click", function () {
+    selectedGen = null;
+    updateUI(null);
+  });
 
   renderMarks();
 }
