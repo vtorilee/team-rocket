@@ -96,13 +96,15 @@ section {
   transition: 0.2s;
 }
 .result-box {
-  margin-top: 30px;
-  padding: 20px;
+  
+
   background: white;
   color: #461111;
   border-radius: 10px;
   text-align: center;
   display: none;
+  margin-left:10%;
+  margin-top:20%;
 }
 .quiz-layout {
   display: flex;
@@ -156,3 +158,45 @@ section {
   padding: 30px;
   border-radius: 20px;
 }
+.type-container {
+  display: grid;
+  grid-template-columns: repeat(5, auto); 
+  justify-content: left; 
+  margin-left: 20%;
+  margin-top: 10%;
+  gap: 15px 30px;
+}
+
+.type {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.type:hover {
+  transform: scale(0.95);
+  transition: 0.2s;
+}
+
+/* Pokémon type colors */
+.fire { background-color: #F08030; }
+.water { background-color: #6890F0; }
+.grass { background-color: #78C850; }
+.electric { background-color: #F8D030; color: black; }
+.psychic { background-color: #F85888; }
+.normal { background-color: #A8A878; }
+.fighting { background-color: #C03028; }
+.rock { background-color: #B8A038; }
+.ghost { background-color: #705898; }
+.poison { background-color: #A040A0; }
+.flying { background-color: #A890F0; }
+.ground { background-color: #E0C068; color: black; }
+.dragon { background-color: #7038F8; }
+.ice { background-color: #98D8D8; color: black; }
+.bug { background-color: #A8B820; }
+.steel { background-color: #B8B8D0; color: black; }
+.dark { background-color: #705848; }
+.fairy { background-color: #EE99AC; }
