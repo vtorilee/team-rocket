@@ -144,6 +144,10 @@ section {
   justify-content: space-between;
   align-items: flex-start;
   gap: 40px;
+
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
 }
 .quiz-buttons {
   background: white;
@@ -166,9 +170,8 @@ section {
 }
 
 
-.starter-image {
-  width: 100%;
-  transition: 0.5s ease;
+.right-side img {
+  max-width: 100%;
   height: auto;
   display: block;
 
@@ -182,9 +185,7 @@ section {
   width: auto;   
   height: 400px;  
 }
-.starter-image {
-  width: 800px;  
-}
+
 .quiz-container {
   width: 90%;
   max-width: 1200px;
@@ -204,12 +205,16 @@ section {
   margin-left: 0;
 }
 
-.quiz-right {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  margin: 0;
+
+
+.quiz-right img{
+  width: 600px;
+  height: auto;
+  margin-top: 50px;
+  margin-left: 70px;
 }
+
+
 
 .type-container {
   display: grid;
@@ -256,6 +261,11 @@ section {
 .dark { background-color: #705848; }
 .fairy { background-color: #EE99AC; }
 
+
+#typesImage{
+  width: 450px;
+  height: auto;
+}
 
 .trainer-layout {
   display: flex;
