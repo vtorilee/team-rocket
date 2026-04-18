@@ -14,69 +14,110 @@
   <div id="vis"></div>
 
   <script>
-    const spec = {
-      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    async function loadDataWithImages() {
+      const csvUrl = "../datasets/Favourite_Pokemon_Survey.csv";
+      const csvText = await fetch(csvUrl).then(r => r.text());
 
-      data: {
-        url: "../datasets/Favourite_Pokemon_Survey.csv",
-        format: { type: "csv" }
-      },
+      const rows = csvText.trim().split("\n").slice(1);
+      const data = rows.map(row => {
+        const [Generation, type, starter, dex, votes] = row.split(",");
+        return { Generation, type, starter, dex, votes: +votes };
+      });
 
-      mark: {
-        type: "bar",
-        size: 25,
-        cornerRadiusTopLeft: 5,
-        cornerRadiusTopRight: 5
-      },
+      const starters = [...new Set(data.map(d => d.starter))];
+      const starterImages = {};
 
-      encoding: {
+      for (const starter of starters) {
+        const apiName = starter.toLowerCase();
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
+        const json = await res.json();
+        starterImages[starter] = json.sprites.other["official-artwork"].front_default;
+      }
 
-  x: {
-    field: "Generation",
-    type: "nominal",
-    axis: { labelAngle: -25 },
-    sort: [
-      "Gen I (Kanto)",
-      "Gen II (Johto)",
-      "Gen III (Hoenn)",
-      "Gen IV (Sinnoh)",
-      "Gen V (Unova)",
-      "Gen VI (Kalos)",
-      "Gen VII (Alola)",
-      "Gen VIII (Galar/Hisui)",
-      "Gen IX (Paldea)"
-    ]
-  },
+      data.forEach(d => {
+        d.img = starterImages[d.starter];
+      });
 
-  xOffset: {
-    field: "starter",
-    sort: ["Bulbasaur","Charmander","Squirtle",
-           "Chikorita","Cyndaquil","Totodile",
-           "Treecko","Torchic","Mudkip",
-           "Turtwig","Chimchar","Piplup",
-           "Snivy","Tepig","Oshawott",
-           "Chespin","Fennekin","Froakie",
-           "Rowlet","Litten","Popplio",
-           "Grookey","Scorbunny","Sobble",
-           "Sprigatito","Fuecoco","Quaxly"]
-  },
+      return data;
+    }
 
-  y: {
-    field: "votes",
-    type: "quantitative",
-    title: "Number of Votes"
-  },
+    loadDataWithImages().then(data => {
+      console.log("Loaded data:", data);
+      const spec = {
+        $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
-  color: {
-    field: "type",
-    type: "nominal"
-  }
-},
-      width: 1400,
-      height: 400
-    };
+        data: { values: data },
 
-    vegaEmbed("#vis", spec);
+        encoding: {
+          column: {
+            field: "Generation",
+            type: "nominal",
+            sort: [
+              "Gen I (Kanto)", "Gen II (Johto)", "Gen III (Hoenn)",
+              "Gen IV (Sinnoh)", "Gen V (Unova)", "Gen VI (Kalos)",
+              "Gen VII (Alola)", "Gen VIII (Galar/Hisui)", "Gen IX (Paldea)"
+            ],
+            header: { labelAngle: 0 }
+          },
+
+          x: {
+            field: "starter",
+            type: "nominal",
+            axis: { labelAngle: -25, title: "Starter Pokémon" }
+          },
+
+          y: {
+            field: "votes",
+            type: "quantitative",
+            title: "Number of Votes"
+          }
+        },
+
+        layer: [
+          {
+            mark: {
+              type: "bar",
+              size: 25,
+              cornerRadiusTopLeft: 5,
+              cornerRadiusTopRight: 5
+            },
+            encoding: {
+              color: {
+                field: "type",
+                type: "nominal",
+                scale: {
+                  domain: ["Grass", "Fire", "Water"],
+                  range: ["#78C850", "#F08030", "#6890F0"]
+                }
+              },
+              tooltip: [
+                { field: "starter", title: "Starter" },
+                { field: "votes", title: "Votes" },
+                { field: "type", title: "Type" }
+              ]
+            }
+          },
+
+          {
+            mark: {
+              type: "image",
+              width: 40,
+              height: 40,
+              yOffset: -20
+            },
+            encoding: {
+              url: { field: "img" }
+            }
+          }
+        ],
+
+        width: 900,
+        height: 500,
+        spacing: 40
+      };
+
+      vegaEmbed("#vis", spec);
+    });
   </script>
 
 </body>
