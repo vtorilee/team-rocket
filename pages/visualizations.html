@@ -34,9 +34,23 @@
         starterImages[starter] = json.sprites.other["official-artwork"].front_default;
       }
 
-      data.forEach(d => {
-        d.img = starterImages[d.starter];
-      });
+      data.forEach((d, i) => {
+          d.img = starterImages[d.starter];
+
+          const orderMap = {
+            "Bulbasaur": 1, "Charmander": 2, "Squirtle": 3,
+            "Chikorita": 5, "Cyndaquil": 6, "Totodile": 7,
+            "Treecko": 9, "Torchic": 10, "Mudkip": 11,
+            "Turtwig": 13, "Chimchar": 14, "Piplup": 15,
+            "Snivy": 17, "Tepig": 18, "Oshawott": 19,
+            "Chespin": 21, "Fennekin": 22, "Froakie": 23,
+            "Rowlet": 25, "Litten": 26, "Popplio": 27,
+            "Grookey": 29, "Scorbunny": 30, "Sobble": 31,
+            "Sprigatito": 33, "Fuecoco": 34, "Quaxly": 35
+          };
+
+          d.order = orderMap[d.starter];
+        });
 
       return data;
     }
@@ -63,7 +77,9 @@
           x: {
             field: "starter",
             type: "nominal",
-            axis: { labelAngle: -25, title: "Starter Pokémon" }
+            sort: { field: "order", order: "ascending" },
+            axis: { labelAngle: -25, title: "Starter Pokémon" },
+            scale: { paddingInner: 0.2 }
           },
 
           y: {
@@ -111,9 +127,10 @@
           }
         ],
 
-        width: 900,
-        height: 500,
+        width: 1200,
+        height: 600,
         spacing: 40
+        
       };
 
       vegaEmbed("#vis", spec);
