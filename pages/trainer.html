@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trainer Profile</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+<header>
+  <h1>PokeScope</h1>
+</header>
+
+<nav>
+  <a href="../index.html">HomePage</a>
+  <a href="./quiz.html">Quiz</a>
+  <a href="./map.html">Poke Map</a>
+  <a href="./visualizations.html">Visualizations</a>
+</nav>
+
+<div class="trainer-layout">
+
+ 
+  <div class="trainer-left">
+
+    
+    <div class="card-row">
+      <div class="label-section">
+        <h2>Favourite Generation:</h2>
+       
+      </div>
+
+      <div class="value-section">
+        <h2 id="genResult">Loading...</h2>
+         <a href="./map.html" class="btn">See Where </a>
+      </div>
+    </div>
+
+    
+    <div class="card-row">
+      <div class="label-section">
+        <h2>Favourite Type:</h2>
+      </div>
+
+      <div class="value-section">
+        <h2 id="typeResult">Loading...</h2>
+        <a href="./visualizations.html" class="btn">Compare</a>
+      </div>
+    </div>
+
+   
+    <div class="card-row">
+
+      <div class="label-section">
+        <h2>Favourite Starter:</h2>
+        
+      </div>
+
+      <div class="value-section">
+        <img id="starterImage" src="" alt="Starter Pokémon">
+        <a href="./visualizations.html" class="btn">Compare</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  
+  <div class="trainer-right">
+    <img src="../images/trainer.png" alt="Trainer">
+  </div>
+
+</div>
+
+
+<script src="../trainer.js"></script>
+
+</body>
+</html>

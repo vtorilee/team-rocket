@@ -30,6 +30,31 @@ header {
   text-align: center;
 }
 
+h1 {
+  
+  background: transparent;
+  color: white;
+  padding: 15px 20px;
+  
+}
+
+.btn {
+  display: inline-block;
+  background: #461111;
+  font-weight: bold;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  transform: scale(0.95);
+  transition: 0.2s;
+}
+
 section {
   padding: 100px;
   margin: 20px;
@@ -43,22 +68,23 @@ section {
 
 .intro {
   background: transparent;
-  padding: 80px 40px;
+  padding: 30px 20px;
 }
 
 .intro-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  gap: 50px;
 }
 
 .intro-image img {
-  width: 300px;
+  width: 500px;
 }
 
 .intro-text {
   max-width: 500px;
+  max-height:400px;
 }
 
 .intro-text h1 {
@@ -96,20 +122,27 @@ section {
   transition: 0.2s;
 }
 .result-box {
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-left: 2%;
   padding: 20px;
   background: white;
   color: #461111;
   border-radius: 10px;
   text-align: center;
-  display: none;
-  margin-left:10%;
-  margin-top:20%;
+
+  width: 600px;
+  height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
 }
 .quiz-layout {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 40px;
 }
 .quiz-buttons {
@@ -140,13 +173,14 @@ section {
   display: block;
 
 }
-
 .image-container {
   display: flex;
-  justify-content: right;
-  margin-left: 240px;
-  margin-top: -80px;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.image-container img {
+  width: auto;   
+  height: 400px;  
 }
 .starter-image {
   width: 800px;  
@@ -158,13 +192,29 @@ section {
   padding: 30px;
   border-radius: 20px;
 }
+
+
+
+.quiz-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 50%;
+  margin-left: 0;
+}
+
+.quiz-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
 .type-container {
   display: grid;
-  grid-template-columns: repeat(5, auto); 
-  justify-content: left; 
-  margin-left: 20%;
-  margin-top: 10%;
-  gap: 15px 30px;
+  grid-template-columns: repeat(5, auto);
+  gap: 10px 30px;
 }
 
 .type {
@@ -174,8 +224,6 @@ section {
   color: white;
   font-weight: bold;
   cursor: pointer;
-
-
   width: 120px;  
   height: 60px;
   font-size: 1rem;
@@ -188,7 +236,7 @@ section {
   transition: 0.2s;
 }
 
-/* Pokémon type colors */
+/* Pokémon type colors  on types section*/
 .fire { background-color: #F08030; }
 .water { background-color: #6890F0; }
 .grass { background-color: #78C850; }
@@ -207,3 +255,71 @@ section {
 .steel { background-color: #B8B8D0; color: black; }
 .dark { background-color: #705848; }
 .fairy { background-color: #EE99AC; }
+
+
+.trainer-layout {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  color: white;
+}
+
+
+.trainer-left {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;   
+  align-items: center;      
+
+  min-height: 80vh;         
+  gap: 20px;
+}
+
+.card-row {
+  width: 70%;              
+  padding: 15px 20px;     
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: white;
+  color: #461111;
+}
+
+
+.label-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.value-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+
+#starterImage {
+  width: 120px;
+  height: auto;
+}
+
+
+.trainer-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trainer-right img {
+  width: 300px;
+  height: auto;
+}

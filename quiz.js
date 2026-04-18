@@ -7,6 +7,7 @@ const defaultImage = "../images/all.starters.png";
 let selectedGen = null;
 let locked = false;
 
+// Hover + image preview
 buttons.forEach((button, index) => {
   const gen = index + 1;
   const hoverImage = `../images/starters/gen${gen}.png`;
@@ -23,26 +24,18 @@ buttons.forEach((button, index) => {
     }
   });
 
+  // Click selection
   button.addEventListener("click", () => {
     selectedGen = gen;
-    locked = true; // 🔒 freeze image state
+    locked = true;
 
     localStorage.setItem("selectedGen", gen);
 
-    mainImage.src = hoverImage; // keep selected image showing
+    mainImage.src = hoverImage;
 
-    resultBox.style.display = "block";
+    // ✅ ALWAYS UPDATE TEXT (no display toggle)
     resultBox.innerHTML = `
-      <h2>You chose Generation ${gen}!</h2>
+      <h2>Your favourite gen is Generation ${gen}</h2>
     `;
   });
 });
-
-function goToTypes() {
-  if (!selectedGen) {
-    alert("Please choose a generation first!");
-    return;
-  }
-
-  window.location.href = "types.html";
-}

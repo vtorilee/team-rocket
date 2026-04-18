@@ -20,51 +20,42 @@
       <a href="./pages/visualizations.html">Visualizations</a>
     </nav>
 
-      <div class="quiz-container">
-        
-        <h1>Which is your Favourite Generation?</h1>
-        <div class="button-grid">
-            <button class="genButton ">Gen 1</button>
-            <button class="genButton ">Gen 2</button>
-            <button class="genButton ">Gen 3</button>
-            <button class="genButton ">Gen 4</button>
-            <button class="genButton ">Gen 5</button>
-            <button class="genButton">Gen 6</button>
-            <button class="genButton">Gen 7</button>
-            <button class="genButton">Gen 8</button>
-        </div>
+     <div class="quiz-layout">
 
-          <div class="image-container">
-            <img 
-                id="mainImage"
-                src="../images/all.starters.png"
-                alt="Starters"
-                class="starter-image"
-              />
-          </div>
-         <div id="result" class="result-box"></div>
-      </div>
+  <div class="quiz-left">
+
+    <h1>Which is your Favourite Generation?</h1>
+
+    <div class="button-grid">
+      <button class="genButton">Gen 1</button>
+      <button class="genButton">Gen 2</button>
+      <button class="genButton">Gen 3</button>
+      <button class="genButton">Gen 4</button>
+      <button class="genButton">Gen 5</button>
+      <button class="genButton">Gen 6</button>
+      <button class="genButton">Gen 7</button>
+      <button class="genButton">Gen 8</button>
+    </div>
+
+    <div id="result" class="result-box">
+      Pick your favourite generation
+    </div>
+
+     <a href="../pages/types.html" class="btn" id="nextBtn">
+    Next
+  </a>
+
+  </div>
+
+ 
+  <div class="quiz-right">
+    <div class="image-container">
+      <img id="mainImage" src="../images/all.starters.png" class="starter-image">
+    </div>
+  </div>
+
+</div>
   
-      <!-- <script>
-      const buttons = document.querySelectorAll(".genButton");
-      const resultBox = document.getElementById("result");
-
-      buttons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-          const gen = index + 1;
-
-          // save choice 
-          localStorage.setItem("selectedGen", gen);
-
-          // show result
-          resultBox.style.display = "block";
-          resultBox.innerHTML = `
-            <h2>You chose Generation ${gen}!</h2>
-          `;
-        });
-      });
-      </script> -->
-      <button onclick="goToTypes()" class="next-btn">Next</button>
       
 
       <script src="../quiz.js">
