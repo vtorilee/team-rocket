@@ -106,7 +106,7 @@ path {
 #reset-button {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 52vw;
   z-index: 100;
   display: none;
   padding: 10px;
@@ -162,4 +162,40 @@ path {
 .mark-text,
 .pb-icon {
   transition: all 0.2s;
+}
+
+/* selected region data display */
+#data-container {
+  position: absolute;
+  top: 10px;
+  left: -15px;
+  width: 50vw;
+  height: 70vh;
+}
+
+.data-box {
+  fill: rgba(255, 242, 240, 0.932);
+  stroke: #000000;
+  stroke-width: 10px;
+  rx: 20px;
+}
+
+#data-gen-title {
+  fill: #ffc011;
+  stroke: #000000;
+  stroke-width: 1.5px;
+  font-size: 1.8vw;
+  font-family: "Galindo", sans-serif;
+}
+
+.data-section-h1 {
+  fill: #000000;
+  font-size: 1.5vw;
+  font-family: "Galindo", sans-serif;
+}
+
+.data-section-h2 {
+  fill: #4f4f4f;
+  font-size: 1vw;
+  font-family: "Galindo", sans-serif;
 }
