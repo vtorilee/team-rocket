@@ -273,7 +273,11 @@ section {
   padding: 50px;
   color: white;
 }
+#trainerImage {
+  width: 450px;
+  height: auto;
 
+}
 
 .trainer-left {
   width: 60%;
