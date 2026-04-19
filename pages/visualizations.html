@@ -14,16 +14,19 @@
   <div id="vis"></div>
 
   <script>
+    // load CSV data + fetch Pokémon images from PokéAPI
     async function loadDataWithImages() {
       const csvUrl = "../datasets/Favourite_Pokemon_Survey.csv";
       const csvText = await fetch(csvUrl).then(r => r.text());
 
+      // convert CSV into structured objects
       const rows = csvText.trim().split("\n").slice(1);
       const data = rows.map(row => {
         const [Generation, type, starter, dex, votes] = row.split(",");
         return { Generation, type, starter, dex, votes: +votes };
       });
 
+      // get starter names
       const starters = [...new Set(data.map(d => d.starter))];
       const starterImages = {};
 
@@ -31,12 +34,16 @@
         const apiName = starter.toLowerCase();
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
         const json = await res.json();
+
+        // store image URL
         starterImages[starter] = json.sprites.other["official-artwork"].front_default;
       }
 
+      // attach image + ordering
       data.forEach((d, i) => {
           d.img = starterImages[d.starter];
 
+          // group starters in sets of 3 with spacing
           const orderMap = {
             "Bulbasaur": 1, "Charmander": 2, "Squirtle": 3,
             "Chikorita": 5, "Cyndaquil": 6, "Totodile": 7,
@@ -63,6 +70,7 @@
         data: { values: data },
 
         encoding: {
+          // x-axis = generations (ordered chronologically)
           "x": {
               "field": "Generation",
               "type": "ordinal",
@@ -80,6 +88,7 @@
             "field": "type"
           },
 
+          // y-axis = number of votes
           y: {
             field: "votes",
             type: "quantitative",
@@ -96,6 +105,7 @@
               cornerRadiusTopRight: 5
             },
             encoding: {
+              // color bars by Pokémon type
               color: {
                 field: "type",
                 type: "nominal",
@@ -104,6 +114,7 @@
                   range: ["#78C850", "#F08030", "#6890F0"]
                 }
               },
+              // tooltip info on hover
               tooltip: [
                 { field: "starter", title: "Starter" },
                 { field: "votes", title: "Votes" },
@@ -113,6 +124,7 @@
           },
 
           {
+            // image layer (Pokémon sprites above bars)
             mark: {
               type: "image",
               width: 40,
@@ -131,6 +143,7 @@
         
       };
 
+      // render visualization
       vegaEmbed("#vis", spec);
     });
   </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Favourite Types Jitter Plot</title>
+  <title>Favourite Types</title>
 </head>
 
 <body>
@@ -17,45 +17,51 @@
 const spec = {
   $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
+  // load CSV data
   data: {
     url: "../datasets/favourite_types.csv",
     format: { type: "csv" }
   },
 
   transform: [
-    { calculate: "random()", as: "jitter" },
-    
-    {
-      lookup: "Type",
-      from: {
-        data: {
-          values: [
-            { Type: "Water", img: "../images/types/water.png" },
-            { Type: "Fire", img: "../images/types/fire.png" },
-            { Type: "Grass", img: "../images/types/grass.png" },
-            { Type: "Ghost", img: "../images/types/ghost.png" },
-            { Type: "Flying", img: "../images/types/flying.png" },
-            { Type: "Psychic", img: "../images/types/psychic.png" },
-            { Type: "Normal", img: "../images/types/normal.png" },
-            { Type: "Dragon", img: "../images/types/dragon.png" },
-            { Type: "Fairy", img: "../images/types/fairy.png" },
-            { Type: "Dark", img: "../images/types/dark.png" },
-            { Type: "Ground", img: "../images/types/ground.png" },
-            { Type: "Electric", img: "../images/types/electric.png" },
-            { Type: "Steel", img: "../images/types/steel.png" },
-            { Type: "Poison", img: "../images/types/poison.png" },
-            { Type: "Fighting", img: "../images/types/fighting.png" },
-            { Type: "Bug", img: "../images/types/bug.png" },
-            { Type: "Ice", img: "../images/types/ice.png" },
-            { Type: "Rock", img: "../images/types/rock.png" }
-          ]
-        },
-        key: "Type",
-        fields: ["img"]
-      }
+  {
+    // convert percentage from string to number (fixes sorting issues)
+    calculate: "toNumber(datum.Percentage)",
+    as: "Percentage_num"
+  },
+  {
+    // attach icon images to each Pokémon type
+    lookup: "Type",
+    from: {
+      data: {
+        values: [
+          { Type: "Water", img: "../images/types/water.png" },
+          { Type: "Fire", img: "../images/types/fire.png" },
+          { Type: "Grass", img: "../images/types/grass.png" },
+          { Type: "Ghost", img: "../images/types/ghost.png" },
+          { Type: "Flying", img: "../images/types/flying.png" },
+          { Type: "Psychic", img: "../images/types/psychic.png" },
+          { Type: "Normal", img: "../images/types/normal.png" },
+          { Type: "Dragon", img: "../images/types/dragon.png" },
+          { Type: "Fairy", img: "../images/types/fairy.png" },
+          { Type: "Dark", img: "../images/types/dark.png" },
+          { Type: "Ground", img: "../images/types/ground.png" },
+          { Type: "Electric", img: "../images/types/electric.png" },
+          { Type: "Steel", img: "../images/types/steel.png" },
+          { Type: "Poison", img: "../images/types/poison.png" },
+          { Type: "Fighting", img: "../images/types/fighting.png" },
+          { Type: "Bug", img: "../images/types/bug.png" },
+          { Type: "Ice", img: "../images/types/ice.png" },
+          { Type: "Rock", img: "../images/types/rock.png" }
+        ]
+      },
+      key: "Type",
+      fields: ["img"]
     }
-  ],
+  }
+],
 
+  // use images instead of shapes
   mark: {
     type: "image",
     width: 38,
@@ -64,13 +70,17 @@ const spec = {
 
   encoding: {
     x: {
-      field: "jitter",
-      type: "quantitative",
+      field: "Type",
+      type: "nominal",
+      sort: {
+        field: "Percentage_num",
+        order: "descending"
+      },
       axis: null
     },
-
+    // y-axis = percentage popularity
     y: {
-      field: "Percentage",
+      field: "Percentage_num",
       type: "quantitative",
       title: "Popularity (%)"
     },
@@ -79,6 +89,7 @@ const spec = {
       field: "img"
     },
 
+    // tooltip on hover
     tooltip: [
       { field: "Type" },
       { field: "Votes" },
@@ -86,9 +97,12 @@ const spec = {
     ]
   },
 
-  width: 600,
+  width: 700,
   height: 500
 };
 
 vegaEmbed("#vis", spec);
 </script>
+
+</body>
+</html>
