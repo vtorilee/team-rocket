@@ -65,8 +65,10 @@ svg.focus-mode path.selected-path {
 
 #focus-label {
   font-family: "Galindo", sans-serif;
-  font-size: 40px;
+  font-size: 12px;
   fill: white;
+  stroke: #000;
+  stroke-width: 0.5px;
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
   pointer-events: none;
 }
@@ -171,6 +173,8 @@ path {
   left: -15px;
   width: 50vw;
   height: 70vh;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .data-box {
@@ -198,4 +202,23 @@ path {
   fill: #4f4f4f;
   font-size: 1vw;
   font-family: "Galindo", sans-serif;
+}
+
+.data-section-body {
+  color: #4f4f4f;
+  transition: color 0.3s ease;
+  font-family: "Galindo", sans-serif;
+  text-align: center;
+}
+
+.data-section-body a {
+  color: #5d71f5;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.data-section-body a:hover {
+  color: #ff1616 !important;
+  /* text-decoration: none; */
+  background-color: rgba(22, 53, 255, 0.1);
 }

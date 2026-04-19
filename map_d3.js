@@ -7,6 +7,7 @@ const generations = [
     region: "Kanto",
     number: 1,
     years: "1996-1999",
+    starters: "Charmander, Bulbasaur, Squirtle",
     color_1: "#d12828",
     color_2: "#1676d6",
     mascot: { name: "Gengar", dexNum: "0094", votes: 270 },
@@ -16,6 +17,7 @@ const generations = [
     region: "Johto",
     number: 2,
     years: "1999-2001",
+    starters: "Cyndaquil, Totodile, Chikorita",
     color_1: "#d4a642",
     color_2: "#c5cdd5",
     mascot: { name: "Umbreon", dexNum: "0197", votes: 190 },
@@ -25,6 +27,7 @@ const generations = [
     region: "Hoenn",
     number: 3,
     years: "2002-2006",
+    starters: "Treecko, Torchic, Mudkip",
     color_1: "#b02036",
     color_2: "#3559a8",
     mascot: { name: "Mudkip", dexNum: "0258", votes: 236 },
@@ -34,6 +37,7 @@ const generations = [
     region: "Sinnoh",
     number: 4,
     years: "2006-2010",
+    starters: "Piplup, Turtwig, Chimchar",
     color_1: "#2c355b",
     color_2: "#eccfcf",
     mascot: { name: "Lucario", dexNum: "0448", votes: 202 },
@@ -43,6 +47,7 @@ const generations = [
     region: "Unova",
     number: 5,
     years: "2010-2013",
+    starters: "Snivy, Oshawott, Tepig",
     color_1: "#202020",
     color_2: "#ebebeb",
     mascot: { name: "Oshawott", dexNum: "0501", votes: 181 },
@@ -52,6 +57,7 @@ const generations = [
     region: "Kalos",
     number: 6,
     years: "2013-2016",
+    starters: "Chespin, Fennekin, Froakie",
     color_1: "#094976",
     color_2: "#b11d38",
     mascot: { name: "Sylveon", dexNum: "0700", votes: 296 },
@@ -61,6 +67,7 @@ const generations = [
     region: "Alola",
     number: 7,
     years: "2016-2019",
+    starters: "Litten, Rowlet, Popplio",
     color_1: "#e69034",
     color_2: "#32297a",
     mascot: { name: "Mimikyu", dexNum: "0778", votes: 434 },
@@ -70,6 +77,7 @@ const generations = [
     region: "Galar",
     number: 8,
     years: "2019-2022",
+    starters: "Scorbunny, Sobble, Grookey",
     color_1: "#0d63aa",
     color_2: "#e42971",
     mascot: { name: "Dragapult", dexNum: "0887", votes: 110 },
@@ -79,6 +87,7 @@ const generations = [
     region: "Paldea",
     number: 9,
     years: "2022-Present",
+    starters: "Sprigatito, Fuecoco, Quaxly",
     color_1: "#ad1a0f",
     color_2: "#9a16ba",
     mascot: { name: "Tinkaton", dexNum: "0959", votes: 120 },
@@ -112,6 +121,8 @@ function handleZoom(element, sections) {
 
     //assign selected gen globally and update the UI with it
     if (selected) {
+      d3.selectAll(".hover-group").interrupt().remove();
+
       selectedGen = selected;
       updateUI(selected);
       displayDataBox();
@@ -125,6 +136,7 @@ function handleZoom(element, sections) {
     sections.classed("selected-path", false);
 
     //get rid of button and reset displays
+    svgElement.selectAll(".focus-label-group").remove();
     d3.select(this).style("display", "none");
     d3.select("#data-container").html("");
 
@@ -163,6 +175,8 @@ function zoomToRegion(regionID) {
         .scale(scale)
         .translate(-x, -y),
     );
+
+  //display reset button
   d3.select("#reset-button").style("display", "block");
 }
 
@@ -315,11 +329,13 @@ function displayDataBox() {
     .attr("width", "100%")
     .attr("height", "100%");
 
-  //track "current location" as we place box elements
-  let currentX = dataBoxContainer.node().clientWidth * 0.04;
-  let currentY = dataBoxContainer.node().clientHeight * 0.07;
+  //variables for dimensions and tracking "current location" as we place box elements
+  const dataBoxWidth = dataBoxContainer.node().clientWidth;
+  const dataBoxHeight = dataBoxContainer.node().clientHeight;
+  let currentX = dataBoxWidth * 0.04;
+  let currentY = dataBoxHeight * 0.07;
 
-  //main title
+  //main title + divider
   const titleGroup = dataBoxSVG
     .append("g")
     .attr("transform", `translate(${currentX}, ${currentY})`);
@@ -338,6 +354,16 @@ function displayDataBox() {
     .style("fill", selectedGen.color_2)
     .text(`(${selectedGen.years})`);
 
+  dataBoxSVG
+    .append("line")
+    .attr("x1", dataBoxWidth * 0.67)
+    .attr("y1", dataBoxHeight * 0.1)
+    .attr("x2", dataBoxWidth * 0.67)
+    .attr("y2", dataBoxHeight * 0.9)
+    .style("stroke", "#757575")
+    .style("stroke-width", 3)
+    .style("stroke-linecap", "round");
+
   //game releases section
   currentY += 25;
 
@@ -351,8 +377,8 @@ function displayDataBox() {
     .style("dominant-baseline", "hanging")
     .text("Main Series Releases:");
 
-  //mascot img section
-  currentX = dataBoxContainer.node().clientWidth * 0.7;
+  //mascot section
+  currentX = dataBoxWidth * 0.73;
 
   const mascotGroup = dataBoxSVG
     .append("g")
@@ -362,17 +388,102 @@ function displayDataBox() {
     .append("text")
     .attr("class", "data-section-h2")
     .style("dominant-baseline", "hanging")
-    .text(`${selectedGen.mascot.name}`);
+    .text(`#${selectedGen.mascot.dexNum}: ${selectedGen.mascot.name}`);
+
+  mascotGroup
+    .append("image")
+    .attr("xlink:href", `../images/mascots/${selectedGen.mascot.name}.png`)
+    .attr("width", dataBoxWidth * 0.2)
+    .attr("x", 0)
+    .attr("y", 20);
+
+  //https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/foreignObject
+  mascotGroup
+    .append("foreignObject")
+    .attr("x", -dataBoxWidth * 0.1)
+    .attr("y", dataBoxWidth * 0.25)
+    .attr("width", dataBoxWidth * 0.4)
+    .attr("height", 200)
+    .append("xhtml:div")
+    .attr("class", "data-section-body")
+    .style("font-size", "0.75vw").html(`
+        Ranked #1 ${selectedGen.region} Pokémon in 
+        <br>
+        <a href="https://www.reddit.com/r/pokemon/comments/1o7nb3l/results_is_every_pok%C3%A9mon_someones_favourite/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button" 
+        target="_blank">
+            u/Jawnysparklez's 2025 Survey
+        </a>
+        <br>
+        with ${selectedGen.mascot.votes} / 26,407 Votes!
+    `);
+
+  //starters section
+  currentY += dataBoxWidth * 0.3;
+
+  const startersGroup = dataBoxSVG
+    .append("g")
+    .attr("transform", `translate(${currentX}, ${currentY})`);
+
+  startersGroup
+    .append("image")
+    .attr("xlink:href", `../images/starters/gen${selectedGen.number}.png`)
+    .attr("width", dataBoxWidth * 0.25)
+    .attr("height", dataBoxHeight * 0.15)
+    .attr("x", -dataBoxWidth * 0.02)
+    .attr("y", 20);
+
+  startersGroup
+    .append("foreignObject")
+    .attr("x", -dataBoxWidth * 0.1)
+    .attr("y", dataBoxWidth * 0.15)
+    .attr("width", dataBoxWidth * 0.4)
+    .attr("height", 75)
+    .append("xhtml:div")
+    .attr("class", "data-section-body")
+    .style("font-size", "0.75vw").html(`
+        <a href="">
+            Starter Pokémon:
+        </a>
+        <br>
+        ${selectedGen.starters}
+    `);
+
+  //pokedex count section
+  const dexStats = dataBoxSVG
+    .append("g")
+    .attr("transform", `translate(${currentX}, ${currentY})`);
+
+  dexStats
+    .append("foreignObject")
+    .attr("x", -dataBoxWidth * 0.1)
+    .attr("y", dataBoxWidth * 0.23)
+    .attr("width", dataBoxWidth * 0.4)
+    .attr("height", 75)
+    .append("xhtml:div")
+    .attr("class", "data-section-body")
+    .style("font-size", "0.75vw").html(`
+        <a href="">
+            Pokédex Count:
+        </a>
+        <br>
+        ${selectedGen.count} / 1025 Total Pokémon
+        <br>
+        were added in Generation ${selectedGen.number}
+    `);
 }
 
 //map state handler
 function updateUI(gen) {
+  //clear existing zoomed region labels upon state update
+  svgElement.selectAll(".focus-label-group").remove();
+
   if (!gen) {
     //no data --> reset to default map view
     svgElement.classed("focus-mode", false);
     svgElement.selectAll("path").classed("selected-path", false);
 
     svgElement.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+    d3.select("#data-container").html("");
     d3.select("#reset-button").style("display", "none");
   } else {
     //set selected region state, while all other paths are unselected
@@ -382,6 +493,27 @@ function updateUI(gen) {
     svgElement.classed("focus-mode", true);
     svgElement.selectAll("path").classed("selected-path", false);
     regionPath.classed("selected-path", true);
+
+    //display the fixed region label
+    const bounds = regionPath.node().getBBox();
+    const centerX = bounds.x + bounds.width / 2;
+    const centerY = bounds.y + bounds.height / 2;
+
+    const labelGroup = svgElement
+      .select("g")
+      .append("g")
+      .attr("class", "focus-label-group")
+      .style("opacity", 0);
+
+    labelGroup
+      .append("text")
+      .attr("x", centerX)
+      .attr("y", centerY)
+      .attr("id", "focus-label")
+      .attr("text-anchor", "middle")
+      .text(regionID);
+
+    labelGroup.transition().delay(300).duration(500).style("opacity", 1);
 
     displayDataBox();
 
