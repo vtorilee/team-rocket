@@ -33,7 +33,6 @@ button:hover {
   margin: auto;
 }
 
-
 .btn {
   display: inline-block;
   background: #461111;
@@ -45,7 +44,6 @@ button:hover {
   cursor: pointer;
   margin-top: 20px;
 
-  /* important: smooth animation should be here */
   transition: transform 0.2s;
 }
 
@@ -99,3 +97,65 @@ button:hover {
       }
     }
   
+.sunburst-vis {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.sunburst-vis h1 {
+  margin-bottom: 10px;
+}
+
+.sunburst-vis #chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.sunburst-vis #tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  pointer-events: none;
+  display: none;
+  max-width: 250px;
+}
+
+/* tooltip card */
+.sunburst-vis .tooltip-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  max-width: 260px;
+}
+
+.sunburst-vis .tooltip-sprite {
+  width: 56px;
+  height: 56px;
+  image-rendering: pixelated;
+}
+
+.sunburst-vis .tooltip-text {
+  text-align: left;
+}
+
+.sunburst-vis .tooltip-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.sunburst-vis .tooltip-sub {
+  font-size: 11px;
+  color: #ccc;
+}
