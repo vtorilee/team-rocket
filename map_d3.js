@@ -405,7 +405,7 @@ function renderFactBox(
     .attr("class", "data-section-detail")
     .attr("x", 20)
     .attr("y", 65)
-    .attr("width", width * 0.66)
+    .attr("width", imgSrc ? width * 0.66 : width)
     .attr("height", height)
     .style("font-size", "18px")
     .style("text-align", "left")
@@ -513,7 +513,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (JP): <span class="data-section-body">Feb 27, 1996</span> 
+        > Release (JP): <span class="data-section-body">27/02/96</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
         <br>
@@ -548,7 +548,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.1)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (JP): <span class="data-section-body">Oct 15, 1996</span> 
+        > Release (JP): <span class="data-section-body">15/10/96</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
         <br>
@@ -585,7 +585,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.1)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (JP): <span class="data-section-body">Sept 12, 1998</span> 
+        > Release (JP): <span class="data-section-body">12/09/98</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
         <br>
@@ -652,7 +652,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (JP): <span class="data-section-body">Nov 21, 1999</span> 
+        > Release (JP): <span class="data-section-body">21/11/99</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy Color</span> 
         <br>
@@ -689,7 +689,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.1)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (JP): <span class="data-section-body">Dec 14, 2000</span> 
+        > Release (JP): <span class="data-section-body">14/12/00</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
         <br>
@@ -714,6 +714,155 @@ function gameInfo(gen, container, dim) {
         > Crystal gave an option to play as Kris, the first female protagonist of the series! `,
         "../assets/games/gen2/kris.png",
       );
+
+      return;
+
+    case 3:
+      const rubySapphireGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      rubySapphireGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Ruby & Pokémon Sapphire");
+
+      renderGameCover(
+        rubySapphireGroup,
+        0,
+        30,
+        imgSize,
+        "../assets/games/gen3/ruby.png",
+        "../assets/games/gen3/ruby-jp.png",
+      );
+
+      renderGameCover(
+        rubySapphireGroup,
+        imgSize + 20,
+        30,
+        imgSize,
+        "../assets/games/gen3/sapphire.png",
+        "../assets/games/gen3/sapphire-jp.png",
+      );
+
+      rubySapphireGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">21/11/02</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy Advance</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const emeraldGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      emeraldGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("x", imgSize * 2.2)
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Emerald");
+
+      renderGameCover(
+        emeraldGroup,
+        imgSize * 2.2,
+        30,
+        imgSize,
+        "../assets/games/gen3/emerald.png",
+        "../assets/games/gen3/emerald-jp.png",
+      );
+
+      emeraldGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", imgSize * 2.2)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">16/09/04</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy Advance</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[####]</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+      `);
+
+      const fireRedLeafGreenGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      fireRedLeafGreenGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.375)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon FireRed & Pokémon LeafGreen");
+
+      renderGameCover(
+        fireRedLeafGreenGroup,
+        0,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen3/firered.png",
+        "../assets/games/gen3/firered-jp.png",
+      );
+
+      renderGameCover(
+        fireRedLeafGreenGroup,
+        imgSize + 20,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen3/leafgreen.png",
+        "../assets/games/gen3/leafgreen-jp.png",
+      );
+
+      fireRedLeafGreenGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.585)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">29/01/04</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy Advance</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      fireRedLeafGreenGroup
+        .append("foreignObject")
+        .attr("class", "data-section-body")
+        .attr("x", imgSize * 2.25)
+        .attr("y", dim * 0.41)
+        .attr("width", imgSize + 20)
+        .attr("height", imgSize)
+        .append("xhtml:div")
+        .style("font-size", "20px").html(`
+        Note: 
+        <br>
+        FireRed & LeafGreen are both remakes of the Gen 1 games, Pokémon Red & Green
+        `);
 
       return;
     default:
