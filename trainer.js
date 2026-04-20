@@ -11,5 +11,5 @@ document.getElementById("typeResult").innerText =
 const starterImage = document.getElementById("starterImage");
 
 if (gen) {
-  starterImage.src = `../images/starters/gen${gen}.png`;
+  starterImage.src = `../assets/starters/gen${gen}.png`;
 }

@@ -2,7 +2,7 @@ const buttons = document.querySelectorAll(".genButton");
 const resultBox = document.getElementById("result");
 const mainImage = document.getElementById("mainImage");
 
-const defaultImage = "../images/all.starters.png";
+const defaultImage = "../assets/all.starters.png";
 
 let selectedGen = null;
 let locked = false;
@@ -10,7 +10,7 @@ let locked = false;
 // Hover + image preview
 buttons.forEach((button, index) => {
   const gen = index + 1;
-  const hoverImage = `../images/starters/gen${gen}.png`;
+  const hoverImage = `../assets/starters/gen${gen}.png`;
 
   button.addEventListener("mouseenter", () => {
     if (!locked) {

@@ -237,7 +237,7 @@ function renderMarks() {
     if (selectedGen === d) {
       // https://stackoverflow.com/questions/20086884/add-image-inside-a-circle-d3
       g.append("image")
-        .attr("xlink:href", "../images/pokeball-pixel.png")
+        .attr("xlink:href", "../assets/pokeball-pixel.png")
         .attr("class", "pb-icon");
     } else if (selectedGen !== null) {
       g.append("circle").attr("r", 25).attr("class", "bg-circle unselected");
@@ -470,8 +470,8 @@ function gameInfo(gen, container, dim) {
         0,
         20,
         imgSize,
-        "../images/games/gen1/red.png",
-        "../images/games/gen1/red-jp.png",
+        "../assets/games/gen1/red.png",
+        "../assets/games/gen1/red-jp.png",
       );
 
       renderGameCover(
@@ -479,7 +479,7 @@ function gameInfo(gen, container, dim) {
         imgSize,
         20,
         imgSize,
-        "../images/games/gen1/green-jp.png",
+        "../assets/games/gen1/green-jp.png",
       );
 
       //fun fact box
@@ -532,8 +532,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.32,
         imgSize,
-        "../images/games/gen1/blue.png",
-        "../images/games/gen1/blue-jp.png",
+        "../assets/games/gen1/blue.png",
+        "../assets/games/gen1/blue-jp.png",
       );
 
       blueGroup
@@ -569,8 +569,8 @@ function gameInfo(gen, container, dim) {
         imgSize * 2.2,
         dim * 0.32,
         imgSize,
-        "../images/games/gen1/yellow.png",
-        "../images/games/gen1/yellow-jp.png",
+        "../assets/games/gen1/yellow.png",
+        "../assets/games/gen1/yellow-jp.png",
       );
 
       yellowGroup
@@ -702,7 +702,7 @@ function displayDataBox() {
 
   mascotGroup
     .append("image")
-    .attr("xlink:href", `../images/mascots/${selectedGen.mascot.name}.png`)
+    .attr("xlink:href", `../assets/mascots/${selectedGen.mascot.name}.png`)
     .attr("width", dataBoxWidth * 0.2)
     .attr("x", 0)
     .attr("y", 20);
@@ -736,7 +736,7 @@ function displayDataBox() {
 
   startersGroup
     .append("image")
-    .attr("xlink:href", `../images/starters/gen${selectedGen.number}.png`)
+    .attr("xlink:href", `../assets/starters/gen${selectedGen.number}.png`)
     .attr("width", dataBoxWidth * 0.25)
     .attr("height", dataBoxHeight * 0.15)
     .attr("x", -dataBoxWidth * 0.02)
@@ -839,7 +839,7 @@ function updateUI(gen) {
 const mapContainer = d3.select("#map-container");
 
 //load map svg image: https://stackoverflow.com/questions/12975929/how-to-use-svg-file-for-image-source-in-d3#:~:text=Sorted%20by:,%2C%20100)
-d3.xml("../images/world-map-by-nstav13.svg")
+d3.xml("../assets/world-map-by-nstav13.svg")
   .then((xml) => {
     const mapSVG = xml.documentElement;
     mapContainer.node().appendChild(mapSVG);
