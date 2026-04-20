@@ -1160,7 +1160,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (Worldwide): <span class="data-section-body">12/10/13</span> 
+        > Release (WW): <span class="data-section-body">12/10/13</span> 
         <br>
         > Platform: <span class="data-section-body">Nintendo 3DS</span> 
         <br>
@@ -1204,7 +1204,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (Worldwide): <span class="data-section-body">21/11/14</span> 
+        > Release (WW): <span class="data-section-body">21/11/14</span> 
         <br>
         > Platform: <span class="data-section-body">Nintendo 3DS</span> 
         <br>
@@ -1299,12 +1299,12 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "21px").html(`
         > Platform: <span class="data-section-body">Nintendo 3DS</span> 
         <br>
-        > [SM] Release (Worldwide): <span class="data-section-body">18/11/16</span> 
+        > [SM] Release (WW): <span class="data-section-body">18/11/16</span> 
         <br>
         >> Sales (Units): <span class="data-section-body">16.32 mil</span> 
         <a href="">(## Bestselling)</a>
         <br>
-        > [USUM] Release (Worldwide): <span class="data-section-body">17/11/17</span> 
+        > [USUM] Release (WW): <span class="data-section-body">17/11/17</span> 
         <br>
         >> Sales (Units): <span class="data-section-body">9.19 mil</span> 
         <a href="">(## Bestselling)</a>
@@ -1321,7 +1321,7 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "20px").html(`
         Note:
         <br>
-        Ultra Sun & Ultra Moon are revisions, akin to extended cuts
+        Ultra Sun & Ultra Moon are akin to enhanced editions/extended cuts
         `);
 
       const pikachuEeveeGroup = gamesGroup
@@ -1333,7 +1333,7 @@ function gameInfo(gen, container, dim) {
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.34)
         .style("text-decoration-line", "underline")
-        .text("Pokémon Let's Go Pikachu & Pokémon Let's Go Eevee");
+        .text("Let's Go Pikachu & Let's Go Eevee");
 
       renderGameCover(
         pikachuEeveeGroup,
@@ -1362,7 +1362,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (Worldwide): <span class="data-section-body">16/11/18</span> 
+        > Release (WW): <span class="data-section-body">16/11/18</span> 
         <br>
         > Platform: <span class="data-section-body">Nintendo Switch</span> 
         <br>
@@ -1383,6 +1383,152 @@ function gameInfo(gen, container, dim) {
         `,
       );
 
+      return;
+
+    case 8:
+      const swordShieldGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      swordShieldGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Sword & Shield");
+
+      renderGameCover(
+        swordShieldGroup,
+        -10,
+        30,
+        imgSizeTall * 0.85,
+        "../assets/games/gen8/sword.png",
+        "../assets/games/gen8/sword-jp.png",
+      );
+
+      renderGameCover(
+        swordShieldGroup,
+        imgSizeSmall * 0.8,
+        30,
+        imgSizeTall * 0.85,
+        "../assets/games/gen8/shield.png",
+        "../assets/games/gen8/shield-jp.png",
+      );
+
+      swordShieldGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.21)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (WW): <span class="data-section-body">15/11/19</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo Switch</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">26.17 mil</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const legendsArceusGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      legendsArceusGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("x", dim * 0.335)
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Legends: Arceus");
+
+      renderGameCover(
+        legendsArceusGroup,
+        dim * 0.38,
+        30,
+        imgSizeTall * 0.85,
+        "../assets/games/gen8/legendsarceus.png",
+        "../assets/games/gen8/legendsarceus-jp.png",
+      );
+
+      legendsArceusGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", dim * 0.33)
+        .attr("y", dim * 0.21)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (WW): <span class="data-section-body">28/01/22</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo Switch</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">14.83 mil</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const bdspGroup = gamesGroup.append("g").attr("class", "games-display");
+
+      bdspGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.35)
+        .style("text-decoration-line", "underline")
+        .text("Brilliant Diamond & Shining Pearl");
+
+      renderGameCover(
+        bdspGroup,
+        0,
+        dim * 0.34 + 30,
+        imgSizeTall,
+        "../assets/games/gen8/brilliantdiamond.png",
+        "../assets/games/gen8/brilliantdiamond-jp.png",
+      );
+
+      renderGameCover(
+        bdspGroup,
+        imgSizeSmall,
+        dim * 0.34 + 30,
+        imgSizeTall,
+        "../assets/games/gen8/shiningpearl.png",
+        "../assets/games/gen8/shiningpearl-jp.png",
+      );
+
+      bdspGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.585)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (WW): <span class="data-section-body">19/11/21</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo Switch</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">15.06 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      renderFactBox(
+        bdspGroup,
+        imgSizeTall * 1.6,
+        dim * 0.34 + 50,
+        imgSize * 1.5,
+        imgSizeTall,
+        "Adventures in the past and present of Sinnoh!",
+        `> Brilliant Diamond & Shining Pearl are enhanced remakes of Gen IV's Pokémon Diamond & Pearl
+        <br> 
+        > Pokémon Legends: Arceus on the other hand, is the first of the subseries and takes place in a past era, when Sinnoh Region was still known as the Hisui Region
+        `,
+      );
       return;
     default:
       return;
