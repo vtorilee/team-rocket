@@ -10,6 +10,12 @@ body {
 
   color: white;
 }
+.type-display {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
 nav{
   display:flex;
   justify-content: space-evenly;

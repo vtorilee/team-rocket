@@ -224,6 +224,14 @@ svg.append("circle")
 
 function clicked(event, p) {
 
+  
+  const label = p.depth === 0
+    ? "All Types"
+    : capitalize(p.data.name);
+
+  d3.select("#currentType")
+    .text("Type: " + label);
+
   const transition = svg.transition().duration(750);
 
   currentRoot.each(d => {
@@ -252,6 +260,10 @@ function capitalize(str) {
 }
 
 function zoomToRoot() {
+
+  
+  d3.select("#currentType")
+    .text("Type: All Types");
 
   const transition = svg.transition().duration(750);
 
