@@ -117,6 +117,10 @@ path {
 
 /* timeline */
 
+#timeline-container {
+  z-index: 20;
+}
+
 .bg-circle {
   fill: #f7e6e6;
   stroke: #000;
@@ -177,6 +181,10 @@ path {
   z-index: 10;
 }
 
+#data-container svg {
+  pointer-events: auto;
+}
+
 .data-box {
   fill: rgba(255, 242, 240, 0.932);
   stroke: #000000;
@@ -190,6 +198,9 @@ path {
   stroke-width: 1.5px;
   font-size: 1.8vw;
   font-family: "Galindo", sans-serif;
+  text-shadow:
+    0px 0px 4px #877138,
+    0px 0px 2px #817373;
 }
 
 .data-section-h1 {
@@ -199,13 +210,22 @@ path {
 }
 
 .data-section-h2 {
-  fill: #4f4f4f;
+  fill: #f1f1f1;
+  font-size: 1vw;
+  font-family: "Galindo", sans-serif;
+  text-shadow:
+    0px 0px 4px #0e0d0d,
+    0px 0px 2px #010101;
+}
+
+.data-section-stats {
+  color: #5c5c5c;
   font-size: 1vw;
   font-family: "Galindo", sans-serif;
 }
 
 .data-section-body {
-  color: #4f4f4f;
+  color: #7e7e7e;
   transition: color 0.3s ease;
   font-family: "Galindo", sans-serif;
   text-align: center;
@@ -221,4 +241,24 @@ path {
   color: #ff1616 !important;
   /* text-decoration: none; */
   background-color: rgba(22, 53, 255, 0.1);
+}
+
+.data-section-detail {
+  color: #7f6969;
+  fill: #7f6969;
+  font-family: "Galindo", sans-serif;
+}
+
+.toggle-text {
+  fill: #fff;
+  font-family: "Galindo", sans-serif;
+  font-size: 0.8vw;
+  font-weight: bold;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  text-shadow:
+    0px 0px 8px rgba(0, 0, 0, 1),
+    0px 0px 4px rgba(0, 0, 0, 1);
+  transition: opacity 0.2s ease;
 }

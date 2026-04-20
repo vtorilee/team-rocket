@@ -100,6 +100,86 @@ let genMarks;
 let zoom;
 let svgElement;
 
+//handle region highlight when viewer hovers over
+function hoverRegion(element, sections) {
+  sections
+    .on("mouseenter", function (event) {
+      if (selectedGen !== null) return;
+
+      //animating is asynchronous, interrupt any ongoing transition code so nothing gets stuck
+      d3.selectAll(".hover-group").interrupt().remove();
+
+      const hovered = d3.select(this);
+      const regionID = hovered.attr("id");
+
+      hovered.interrupt().classed("highlighted", true);
+
+      //get selected region area
+      const bounds = this.getBBox();
+      const centerX = bounds.x + bounds.width / 2;
+      const centerY = bounds.y + bounds.height / 2;
+
+      ////region-name pop-up fade
+      const hoverArea = element
+        .append("g")
+        .attr("class", "hover-group")
+        .style("opacity", 0)
+        .style("pointer-events", "none");
+
+      hoverArea
+        .append("text")
+        .attr("class", "hover-label")
+        .attr("x", centerX)
+        .attr("y", centerY)
+        .text(regionID);
+
+      hoverArea.transition().duration(300).style("opacity", 1);
+    })
+    .on("mouseleave", function () {
+      d3.select(this).classed("highlighted", false);
+      d3.selectAll(".hover-group")
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+        .remove();
+    });
+}
+
+//zoom action to a specific region
+function zoomToRegion(regionID) {
+  const regionPath = d3.select(`path#${regionID}`);
+  if (regionPath.empty()) return;
+
+  //upon click, set selected svg region path as bounding box
+  const bounds = regionPath.node().getBBox();
+  const container = d3.select("#map-container").node();
+
+  //calculate values to zoom in and offset selected region to the right
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  const scale = Math.min(
+    8,
+    0.75 / Math.max(bounds.width / width, bounds.height / height),
+  );
+  const x = bounds.x + bounds.width / 6;
+  const y = bounds.y + bounds.height / 3.5;
+
+  //zoom in map
+  svgElement
+    .transition()
+    .duration(750)
+    .call(
+      zoom.transform,
+      d3.zoomIdentity
+        .translate(width / 2, height / 2)
+        .scale(scale)
+        .translate(-x, -y),
+    );
+
+  //display reset button
+  d3.select("#reset-button").style("display", "block");
+}
+
 //function for handling map zooming
 function handleZoom(element, sections) {
   //zooming and panning using d3: https://d3js.org/d3-zoom
@@ -145,84 +225,32 @@ function handleZoom(element, sections) {
   });
 }
 
-//zoom action to a specific region
-function zoomToRegion(regionID) {
-  const regionPath = d3.select(`path#${regionID}`);
-  if (regionPath.empty()) return;
+//function to draw the circles based on different states:
+//https://d3js.org/d3-selection/events
+function renderMarks() {
+  if (!genMarks) return;
 
-  //upon click, set selected svg region path as bounding box
-  const bounds = regionPath.node().getBBox();
-  const container = d3.select("#map-container").node();
+  genMarks.html("");
+  genMarks.each(function (d) {
+    const g = d3.select(this);
 
-  //calculate values to zoom in and offset selected region to the right
-  const width = container.clientWidth;
-  const height = container.clientHeight;
-  const scale = Math.min(
-    8,
-    0.75 / Math.max(bounds.width / width, bounds.height / height),
-  );
-  const x = bounds.x + bounds.width / 6;
-  const y = bounds.y + bounds.height / 3.5;
+    if (selectedGen === d) {
+      // https://stackoverflow.com/questions/20086884/add-image-inside-a-circle-d3
+      g.append("image")
+        .attr("xlink:href", "../images/pokeball-pixel.png")
+        .attr("class", "pb-icon");
+    } else if (selectedGen !== null) {
+      g.append("circle").attr("r", 25).attr("class", "bg-circle unselected");
+      g.append("text")
+        .attr("class", "mark-text")
+        .text(d.number)
+        .style("opacity", 0.5);
+    } else {
+      g.append("circle").attr("r", 25).attr("class", "bg-circle");
 
-  //zoom in map
-  svgElement
-    .transition()
-    .duration(750)
-    .call(
-      zoom.transform,
-      d3.zoomIdentity
-        .translate(width / 2, height / 2)
-        .scale(scale)
-        .translate(-x, -y),
-    );
-
-  //display reset button
-  d3.select("#reset-button").style("display", "block");
-}
-
-//handle region highlight when viewer hovers over
-function hoverRegion(element, sections) {
-  sections
-    .on("mouseenter", function (event) {
-      if (selectedGen !== null) return;
-
-      //animating is asynchronous, interrupt any ongoing transition code so nothing gets stuck
-      d3.selectAll(".hover-group").interrupt().remove();
-
-      const hovered = d3.select(this);
-      const regionID = hovered.attr("id");
-
-      hovered.interrupt().classed("highlighted", true);
-
-      //get selected region area
-      const bounds = this.getBBox();
-      const centerX = bounds.x + bounds.width / 2;
-      const centerY = bounds.y + bounds.height / 2;
-
-      ////region-name pop-up fade
-      const hoverArea = element
-        .append("g")
-        .attr("class", "hover-group")
-        .style("opacity", 0)
-        .style("pointer-events", "none");
-
-      hoverArea
-        .append("text")
-        .attr("class", "hover-label")
-        .attr("x", centerX)
-        .attr("y", centerY)
-        .text(regionID);
-
-      hoverArea.transition().duration(300).style("opacity", 1);
-    })
-    .on("mouseleave", function () {
-      d3.select(this).classed("highlighted", false);
-      d3.selectAll(".hover-group")
-        .transition()
-        .duration(200)
-        .style("opacity", 0)
-        .remove();
-    });
+      g.append("text").attr("class", "mark-text").text(d.number);
+    }
+  });
 }
 
 //drawing function for custom timeline
@@ -276,32 +304,298 @@ function drawTimeline() {
   renderMarks();
 }
 
-//function to draw the circles based on different states:
-//https://d3js.org/d3-selection/events
-function renderMarks() {
-  if (!genMarks) return;
+function renderGameCover(container, x, y, height, globalSrc, jpSrc = null) {
+  let isJP = false;
 
-  genMarks.html("");
-  genMarks.each(function (d) {
-    const g = d3.select(this);
+  const group = container
+    .append("g")
+    .attr("transform", `translate(${x}, ${y})`)
+    .style("cursor", "pointer")
+    .style("pointer-events", "all");
 
-    if (selectedGen === d) {
-      // https://stackoverflow.com/questions/20086884/add-image-inside-a-circle-d3
-      g.append("image")
-        .attr("xlink:href", "../images/pokeball-pixel.png")
-        .attr("class", "pb-icon");
-    } else if (selectedGen !== null) {
-      g.append("circle").attr("r", 25).attr("class", "bg-circle unselected");
-      g.append("text")
-        .attr("class", "mark-text")
-        .text(d.number)
-        .style("opacity", 0.5);
-    } else {
-      g.append("circle").attr("r", 25).attr("class", "bg-circle");
+  //add images and toggle label
+  //for alignment: https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/preserveAspectRatio
+  const img = group
+    .append("image")
+    .attr("href", globalSrc)
+    .attr("height", height)
+    .attr("width", height)
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .style("transition", "opacity 0.2s ease");
 
-      g.append("text").attr("class", "mark-text").text(d.number);
-    }
+  const toggle = group
+    .append("text")
+    .attr("class", "toggle-text")
+    .attr("x", height / 2)
+    .attr("y", height / 2)
+    .attr("text-anchor", "middle")
+    .style("opacity", 0)
+    .text("Toggle Cover");
+
+  //handle hover display states
+  group
+    .on("mouseenter", () => {
+      if (jpSrc === null) return;
+      img.style("opacity", 0.4);
+      toggle.style("opacity", 1);
+    })
+    .on("mouseleave", () => {
+      img.style("opacity", 1);
+      toggle.style("opacity", 0);
+    });
+
+  group.on(
+    "click",
+    (event) => {
+      //if no JP cover available
+      if (jpSrc === null) return;
+
+      const jpX = height / 8.5;
+      //change display image state and update img src accordingly
+      isJP = !isJP;
+      img.attr("href", isJP ? jpSrc : globalSrc);
+      img.style("opacity", 0.4);
+    },
+    100,
+  );
+}
+
+function renderFactBox(container, x, y, width, height, funFact, factDetails) {
+  let isRevealed = false;
+
+  const group = container
+    .append("g")
+    .attr("transform", `translate(${x}, ${y})`)
+    .style("cursor", "pointer")
+    .style("pointer-events", "all")
+    .style("transition", "opacity 0.2s ease");
+
+  const textGroup = group
+    .append("g")
+    .attr("transform", `translate(-10,10)`)
+    .style("opacity", 0)
+    .style("pointer-events", "none")
+    .style("transition", "opacity 0.2s ease");
+
+  textGroup
+    .append("text")
+    .attr("class", "data-section-detail")
+    .style("font-size", "0.7vw")
+    .style("font-weight", "bold")
+    .style("text-anchor", "center")
+    .text(funFact);
+
+  textGroup
+    .append("foreignObject")
+    .attr("class", "data-section-detail")
+    .attr("x", 20)
+    .attr("y", 10)
+    .attr("width", width)
+    .attr("height", height)
+    .style("font-size", "0.7vw")
+    .style("text-align", "left")
+    .append("xhtml:div")
+    .html(factDetails);
+
+  const boxGroup = group
+    .append("g")
+    .style("opacity", 1)
+    .style("transition", "opacity 0.4s ease");
+
+  const revealBox = boxGroup
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("rx", 10)
+    .style("fill", "transparent")
+    .style("transition", "fill 0.2s ease");
+
+  const revealText = boxGroup
+    .append("text")
+    .attr("class", "toggle-text")
+    .attr("x", width / 2)
+    .attr("y", height / 2)
+    .text("Click for a fun fact!");
+
+  //handle hover display states
+  group
+    .on("mouseenter", () => {
+      if (!isRevealed) {
+        revealText.style("fill", "#ffc011");
+      } else {
+        textGroup.style("opacity", 0.6);
+      }
+    })
+    .on("mouseleave", () => {
+      if (!isRevealed) {
+        revealText.style("fill", "#ffffff");
+      } else {
+        textGroup.style("opacity", 1);
+      }
+    });
+
+  //toggle opacities of both groups to determine which is visible
+  group.on("click", (event) => {
+    isRevealed = !isRevealed;
+
+    boxGroup
+      .style("opacity", isRevealed ? 0 : 1)
+      .style("pointer-events", isRevealed ? "none" : "all");
+
+    textGroup
+      .style("opacity", isRevealed ? 1 : 0)
+      .style("pointer-events", isRevealed ? "all" : "none");
   });
+}
+
+function gameInfo(gen, container, dim) {
+  const gamesGroup = container.append("g").attr("class", "games-layout");
+  const imgSize = dim * 0.15;
+
+  switch (Number(gen)) {
+    case 1:
+      const redGreenGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      redGreenGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Red & Pokémon Green");
+
+      renderGameCover(
+        redGreenGroup,
+        0,
+        20,
+        imgSize,
+        "../images/games/gen1/red.png",
+        "../images/games/gen1/red-jp.png",
+      );
+
+      renderGameCover(
+        redGreenGroup,
+        imgSize,
+        20,
+        imgSize,
+        "../images/games/gen1/green-jp.png",
+      );
+
+      //fun fact box
+      const factGroup = redGreenGroup
+        .append("g")
+        .attr("transform", `translate(${imgSize * 2}, 40)`)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.2);
+
+      renderFactBox(
+        factGroup,
+        10,
+        -10,
+        dim * 0.3,
+        dim * 0.13,
+        "Pokémon Green was a Japan only release!",
+        `> These two games were remade into Pokémon Red and Blue for global releases.
+        <br>
+        > JP audiences also got Pokémon Blue (see below) as a remake.`,
+      );
+
+      redGreenGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.185)
+        .attr("width", dim * 0.75)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "0.85vw").html(`
+        > Release (JP): <span class="data-section-body">Feb 27, 1996</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const blueGroup = gamesGroup.append("g").attr("class", "games-display");
+
+      blueGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.3)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Blue");
+
+      renderGameCover(
+        blueGroup,
+        0,
+        dim * 0.32,
+        imgSize,
+        "../images/games/gen1/blue.png",
+        "../images/games/gen1/blue-jp.png",
+      );
+
+      blueGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.485)
+        .attr("width", dim * 0.75)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "0.85vw").html(`
+        > Release (JP): <span class="data-section-body">Oct 15, 1996</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const yellowGroup = gamesGroup.append("g").attr("class", "games-display");
+
+      yellowGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("x", imgSize * 2.2)
+        .attr("y", dim * 0.3)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Yellow");
+
+      renderGameCover(
+        yellowGroup,
+        imgSize * 2.2,
+        dim * 0.32,
+        imgSize,
+        "../images/games/gen1/yellow.png",
+        "../images/games/gen1/yellow-jp.png",
+      );
+
+      yellowGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", imgSize * 2.2)
+        .attr("y", dim * 0.485)
+        .attr("width", dim * 0.75)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "0.85vw").html(`
+        > Release (JP): <span class="data-section-body">Sept 12, 1998</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      return;
+
+    default:
+      return;
+  }
 }
 
 function displayDataBox() {
@@ -357,9 +651,9 @@ function displayDataBox() {
   dataBoxSVG
     .append("line")
     .attr("x1", dataBoxWidth * 0.67)
-    .attr("y1", dataBoxHeight * 0.1)
+    .attr("y1", dataBoxHeight * 0.15)
     .attr("x2", dataBoxWidth * 0.67)
-    .attr("y2", dataBoxHeight * 0.9)
+    .attr("y2", dataBoxHeight * 0.85)
     .style("stroke", "#757575")
     .style("stroke-width", 3)
     .style("stroke-linecap", "round");
@@ -377,7 +671,18 @@ function displayDataBox() {
     .style("dominant-baseline", "hanging")
     .text("Main Series Releases:");
 
+  currentY += 40;
+
+  const gamesDisplay = gameInfo(
+    selectedGen.number,
+    dataBoxSVG
+      .append("g")
+      .attr("transform", `translate(${currentX}, ${currentY})`),
+    dataBoxWidth,
+  );
+
   //mascot section
+  currentY = dataBoxHeight * 0.07 + 25;
   currentX = dataBoxWidth * 0.73;
 
   const mascotGroup = dataBoxSVG
@@ -523,6 +828,7 @@ function updateUI(gen) {
   renderMarks();
 }
 
+//actual container + ui rendering
 const mapContainer = d3.select("#map-container");
 
 //load map svg image: https://stackoverflow.com/questions/12975929/how-to-use-svg-file-for-image-source-in-d3#:~:text=Sorted%20by:,%2C%20100)
