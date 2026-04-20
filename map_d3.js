@@ -473,6 +473,8 @@ function renderFactBox(
 function gameInfo(gen, container, dim) {
   const gamesGroup = container.append("g").attr("class", "games-layout");
   const imgSize = dim * 0.18;
+  const imgSizeSmall = dim * 0.15;
+  const imgSizeTall = dim * 0.21;
 
   switch (Number(gen)) {
     case 1:
@@ -1202,7 +1204,7 @@ function gameInfo(gen, container, dim) {
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
-        > Release (JP): <span class="data-section-body">21/11/14</span> 
+        > Release (Worldwide): <span class="data-section-body">21/11/14</span> 
         <br>
         > Platform: <span class="data-section-body">Nintendo 3DS</span> 
         <br>
@@ -1238,6 +1240,150 @@ function gameInfo(gen, container, dim) {
 
       return;
 
+    case 7:
+      const sunMoonGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      sunMoonGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Sun & Pokémon Moon / Ultra Sun & Ultra Moon");
+
+      renderGameCover(
+        sunMoonGroup,
+        0,
+        30,
+        imgSizeSmall,
+        "../assets/games/gen7/sun.png",
+        "../assets/games/gen7/sun-jp.png",
+      );
+
+      renderGameCover(
+        sunMoonGroup,
+        imgSizeSmall + 7,
+        30,
+        imgSizeSmall,
+        "../assets/games/gen7/moon.png",
+        "../assets/games/gen7/moon-jp.png",
+      );
+
+      renderGameCover(
+        sunMoonGroup,
+        imgSizeSmall * 2 + 14,
+        30,
+        imgSizeSmall,
+        "../assets/games/gen7/ultrasun.png",
+        "../assets/games/gen7/ultrasun-jp.png",
+      );
+
+      renderGameCover(
+        sunMoonGroup,
+        imgSizeSmall * 3 + 21,
+        30,
+        imgSizeSmall,
+        "../assets/games/gen7/ultramoon.png",
+        "../assets/games/gen7/ultramoon-jp.png",
+      );
+
+      sunMoonGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.18)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Platform: <span class="data-section-body">Nintendo 3DS</span> 
+        <br>
+        > [SM] Release (Worldwide): <span class="data-section-body">18/11/16</span> 
+        <br>
+        >> Sales (Units): <span class="data-section-body">16.32 mil</span> 
+        <a href="">(## Bestselling)</a>
+        <br>
+        > [USUM] Release (Worldwide): <span class="data-section-body">17/11/17</span> 
+        <br>
+        >> Sales (Units): <span class="data-section-body">9.19 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      sunMoonGroup
+        .append("foreignObject")
+        .attr("class", "data-section-body")
+        .attr("x", imgSizeSmall * 2 + imgSizeSmall / 1.5)
+        .attr("y", dim * 0.2)
+        .attr("width", imgSize + 30)
+        .attr("height", imgSize)
+        .append("xhtml:div")
+        .style("font-size", "20px").html(`
+        Note:
+        <br>
+        Ultra Sun & Ultra Moon are revisions, akin to extended cuts
+        `);
+
+      const pikachuEeveeGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      pikachuEeveeGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.34)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Let's Go Pikachu & Pokémon Let's Go Eevee");
+
+      renderGameCover(
+        pikachuEeveeGroup,
+        0,
+        dim * 0.34 + 30,
+        imgSizeTall,
+        "../assets/games/gen7/lgpikachu.png",
+        "../assets/games/gen7/lgpikachu-jp.png",
+      );
+
+      renderGameCover(
+        pikachuEeveeGroup,
+        imgSizeSmall,
+        dim * 0.34 + 30,
+        imgSizeTall,
+        "../assets/games/gen7/lgeevee.png",
+        "../assets/games/gen7/lgeevee-jp.png",
+      );
+
+      pikachuEeveeGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.585)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (Worldwide): <span class="data-section-body">16/11/18</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo Switch</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">15.07 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      renderFactBox(
+        pikachuEeveeGroup,
+        imgSizeTall * 1.6,
+        dim * 0.34 + 50,
+        imgSize * 1.5,
+        imgSizeTall,
+        "A first generation throwback with a modern twist!",
+        `> Let's Go is a Pokémon Yellow remake, taking place in Kanto Region, but including gameplay elements from hit mobile game, Pokémon Go
+        <br> 
+        > It contains Gen I pokémon, some with Alolan forms, and a new mythical pokémon—Meltan—who first debuted in Pokémon Go
+        `,
+      );
+
+      return;
     default:
       return;
   }
@@ -1349,7 +1495,7 @@ function displayDataBox() {
     .attr("xlink:href", `../assets/mascots/${selectedGen.mascot.name}.png`)
     .attr("width", dataBoxWidth * 0.2)
     .attr("x", 0)
-    .attr("y", 20);
+    .attr("y", 40);
 
   //https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/foreignObject
   mascotGroup
