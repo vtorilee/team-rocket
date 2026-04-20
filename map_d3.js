@@ -1120,6 +1120,124 @@ function gameInfo(gen, container, dim) {
       );
 
       return;
+
+    case 6:
+      const xYGroup = gamesGroup.append("g").attr("class", "games-display");
+
+      xYGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon X & Pokémon Y");
+
+      renderGameCover(
+        xYGroup,
+        0,
+        30,
+        imgSize,
+        "../assets/games/gen6/x.png",
+        "../assets/games/gen6/x-jp.png",
+      );
+
+      renderGameCover(
+        xYGroup,
+        imgSize + 20,
+        30,
+        imgSize,
+        "../assets/games/gen6/y.png",
+        "../assets/games/gen6/y-jp.png",
+      );
+
+      xYGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (Worldwide): <span class="data-section-body">12/10/13</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo 3DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">16.72 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const orasGroup = gamesGroup.append("g").attr("class", "games-display");
+
+      orasGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.375)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Omega Ruby & Pokémon Alpha Sapphire");
+
+      renderGameCover(
+        orasGroup,
+        0,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen6/omegaruby.png",
+        "../assets/games/gen6/omegaruby-jp.png",
+      );
+
+      renderGameCover(
+        orasGroup,
+        imgSize + 20,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen6/alphasapphire.png",
+        "../assets/games/gen6/alphasapphire-jp.png",
+      );
+
+      orasGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.585)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">21/11/14</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo 3DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">14.6 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      orasGroup
+        .append("foreignObject")
+        .attr("class", "data-section-body")
+        .attr("x", imgSize * 2.25)
+        .attr("y", dim * 0.41)
+        .attr("width", imgSize + 20)
+        .attr("height", imgSize)
+        .append("xhtml:div")
+        .style("font-size", "20px").html(`
+        Note: 
+        <br>
+        Omega Ruby & Alpha Sapphire are both remakes of the Gen 3 games, Pokémon Ruby & Sapphire
+        `);
+
+      renderFactBox(
+        orasGroup,
+        imgSize * 2.15,
+        20,
+        dim * 0.23,
+        dim * 0.2,
+        "First appearance of the Fairy Type! ",
+        `> Fairy type was introduced as the 18th regular Pokémon type in this generation
+        <br>
+        > New Fairy Pokémon and Fairy-type moves were introduced, as well its addition to an existing 22 Pokémon and 3 moves`,
+      );
+
+      return;
+
     default:
       return;
   }
