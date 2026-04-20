@@ -372,27 +372,33 @@ function renderFactBox(container, x, y, width, height, funFact, factDetails) {
 
   const textGroup = group
     .append("g")
-    .attr("transform", `translate(-10,10)`)
+    .attr("transform", `translate(-10,-20)`)
     .style("opacity", 0)
     .style("pointer-events", "none")
     .style("transition", "opacity 0.2s ease");
 
   textGroup
-    .append("text")
+    .append("foreignObject")
     .attr("class", "data-section-detail")
-    .style("font-size", "0.7vw")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", "50px")
+    .style("font-size", "19px")
     .style("font-weight", "bold")
+    .style("text-align", "center")
     .style("text-anchor", "center")
-    .text(funFact);
+    .append("xhtml:div")
+    .html(funFact);
 
   textGroup
     .append("foreignObject")
     .attr("class", "data-section-detail")
     .attr("x", 20)
-    .attr("y", 10)
+    .attr("y", 65)
     .attr("width", width)
     .attr("height", height)
-    .style("font-size", "0.7vw")
+    .style("font-size", "18px")
     .style("text-align", "left")
     .append("xhtml:div")
     .html(factDetails);
@@ -450,7 +456,7 @@ function renderFactBox(container, x, y, width, height, funFact, factDetails) {
 
 function gameInfo(gen, container, dim) {
   const gamesGroup = container.append("g").attr("class", "games-layout");
-  const imgSize = dim * 0.15;
+  const imgSize = dim * 0.18;
 
   switch (Number(gen)) {
     case 1:
@@ -468,7 +474,7 @@ function gameInfo(gen, container, dim) {
       renderGameCover(
         redGreenGroup,
         0,
-        20,
+        30,
         imgSize,
         "../images/games/gen1/red.png",
         "../images/games/gen1/red-jp.png",
@@ -477,39 +483,20 @@ function gameInfo(gen, container, dim) {
       renderGameCover(
         redGreenGroup,
         imgSize,
-        20,
+        30,
         imgSize,
         "../images/games/gen1/green-jp.png",
-      );
-
-      //fun fact box
-      const factGroup = redGreenGroup
-        .append("g")
-        .attr("transform", `translate(${imgSize * 2}, 40)`)
-        .attr("width", dim * 0.3)
-        .attr("height", dim * 0.2);
-
-      renderFactBox(
-        factGroup,
-        10,
-        -10,
-        dim * 0.3,
-        dim * 0.13,
-        "Pokémon Green was a Japan only release!",
-        `> These two games were remade into Pokémon Red and Blue for global releases.
-        <br>
-        > JP audiences also got Pokémon Blue (see below) as a remake.`,
       );
 
       redGreenGroup
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
-        .attr("y", dim * 0.185)
+        .attr("y", dim * 0.22)
         .attr("width", dim * 0.5)
         .attr("height", dim * 0.2)
         .append("xhtml:div")
-        .style("font-size", "0.85vw").html(`
+        .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">Feb 27, 1996</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
@@ -523,14 +510,14 @@ function gameInfo(gen, container, dim) {
       blueGroup
         .append("text")
         .attr("class", "data-section-h2")
-        .attr("y", dim * 0.3)
+        .attr("y", dim * 0.33)
         .style("text-decoration-line", "underline")
         .text("Pokémon Blue");
 
       renderGameCover(
         blueGroup,
         0,
-        dim * 0.32,
+        dim * 0.33 + 20,
         imgSize,
         "../images/games/gen1/blue.png",
         "../images/games/gen1/blue-jp.png",
@@ -540,11 +527,11 @@ function gameInfo(gen, container, dim) {
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
-        .attr("y", dim * 0.485)
+        .attr("y", dim * 0.54)
         .attr("width", dim * 0.3)
         .attr("height", dim * 0.1)
         .append("xhtml:div")
-        .style("font-size", "0.85vw").html(`
+        .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">Oct 15, 1996</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
@@ -559,15 +546,15 @@ function gameInfo(gen, container, dim) {
       yellowGroup
         .append("text")
         .attr("class", "data-section-h2")
-        .attr("x", imgSize * 2.2)
-        .attr("y", dim * 0.3)
+        .attr("x", dim * 0.33)
+        .attr("y", dim * 0.33)
         .style("text-decoration-line", "underline")
         .text("Pokémon Yellow");
 
       renderGameCover(
         yellowGroup,
-        imgSize * 2.2,
-        dim * 0.32,
+        dim * 0.33,
+        dim * 0.33 + 20,
         imgSize,
         "../images/games/gen1/yellow.png",
         "../images/games/gen1/yellow-jp.png",
@@ -576,12 +563,12 @@ function gameInfo(gen, container, dim) {
       yellowGroup
         .append("foreignObject")
         .attr("class", "data-section-stats")
-        .attr("x", imgSize * 2.2)
-        .attr("y", dim * 0.485)
+        .attr("x", dim * 0.33)
+        .attr("y", dim * 0.54)
         .attr("width", dim * 0.3)
         .attr("height", dim * 0.1)
         .append("xhtml:div")
-        .style("font-size", "0.85vw").html(`
+        .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">Sept 12, 1998</span> 
         <br>
         > Platform(s): <span class="data-section-body">Game Boy</span> 
@@ -590,6 +577,23 @@ function gameInfo(gen, container, dim) {
         <br>
         <a href="">(## Bestselling)</a>
     `);
+
+      //fun fact box
+      const factGroup = redGreenGroup
+        .append("g")
+        .attr("transform", `translate(${imgSize * 2}, 40)`);
+
+      renderFactBox(
+        factGroup,
+        10,
+        -10,
+        dim * 0.23,
+        dim * 0.13,
+        "Pokémon Green was a Japan-only release!",
+        `> These two games were remade into Pokémon Red and Blue for global releases.
+        <br>
+        > JP audiences also got Pokémon Blue (see below) as a remake.`,
+      );
 
       return;
 
@@ -608,10 +612,12 @@ function displayDataBox() {
     return;
   }
 
-  //base coords for scaling
-  const dataBoxWidth = dataBoxContainer.node().clientWidth;
-  const dataBoxHeight = dataBoxContainer.node().clientHeight;
-  console.log("width: ", dataBoxWidth, " height: ", dataBoxHeight);
+  //coords dimensions for scaling
+  const dataBoxWidth = 1200;
+  const dataBoxHeight = 1000;
+  // const dataBoxWidth = dataBoxContainer.node().clientWidth;
+  // const dataBoxHeight = dataBoxContainer.node().clientHeight;
+  // console.log("width: ", dataBoxWidth, " height: ", dataBoxHeight);
 
   //create box svg object
   const dataBoxSVG = dataBoxContainer
@@ -627,8 +633,8 @@ function displayDataBox() {
     .attr("class", "data-box")
     .attr("x", 0)
     .attr("y", 0)
-    .attr("width", "100%")
-    .attr("height", "100%");
+    .attr("width", dataBoxWidth)
+    .attr("height", dataBoxHeight);
 
   //variables for dimensions and tracking "current location" as we place box elements
   let currentX = dataBoxWidth * 0.04;
@@ -664,7 +670,7 @@ function displayDataBox() {
     .style("stroke-linecap", "round");
 
   //game releases section
-  currentY += 25;
+  currentY += 40;
 
   const releaseGroup = dataBoxSVG
     .append("g")
@@ -676,7 +682,7 @@ function displayDataBox() {
     .style("dominant-baseline", "hanging")
     .text("Main Series Releases:");
 
-  currentY += 40;
+  currentY += 70;
 
   const gamesDisplay = gameInfo(
     selectedGen.number,
@@ -687,7 +693,7 @@ function displayDataBox() {
   );
 
   //mascot section
-  currentY = dataBoxHeight * 0.07 + 25;
+  currentY = dataBoxHeight * 0.12;
   currentX = dataBoxWidth * 0.73;
 
   const mascotGroup = dataBoxSVG
@@ -716,7 +722,7 @@ function displayDataBox() {
     .attr("height", dataBoxWidth * 0.075)
     .append("xhtml:div")
     .attr("class", "data-section-body")
-    .style("font-size", "0.75vw").html(`
+    .style("font-size", "22px").html(`
         Ranked #1 ${selectedGen.region} Pokémon in 
         <br>
         <a href="https://www.reddit.com/r/pokemon/comments/1o7nb3l/results_is_every_pok%C3%A9mon_someones_favourite/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button" 
@@ -728,7 +734,7 @@ function displayDataBox() {
     `);
 
   //starters section
-  currentY += dataBoxHeight * 0.43;
+  currentY += dataBoxHeight * 0.4;
 
   const startersGroup = dataBoxSVG
     .append("g")
@@ -745,12 +751,12 @@ function displayDataBox() {
   startersGroup
     .append("foreignObject")
     .attr("x", -dataBoxWidth * 0.04)
-    .attr("y", dataBoxHeight * 0.2)
+    .attr("y", dataBoxHeight * 0.18)
     .attr("width", dataBoxWidth * 0.28)
-    .attr("height", 75)
+    .attr("height", "90px")
     .append("xhtml:div")
     .attr("class", "data-section-body")
-    .style("font-size", "0.75vw").html(`
+    .style("font-size", "22px").html(`
         <a href="">
             Starter Pokémon:
         </a>
@@ -759,7 +765,7 @@ function displayDataBox() {
     `);
 
   //pokedex count section
-  currentY += dataBoxHeight * 0.23;
+  currentY += dataBoxHeight * 0.25;
 
   const dexStats = dataBoxSVG
     .append("g")
@@ -770,10 +776,10 @@ function displayDataBox() {
     .attr("x", -dataBoxWidth * 0.04)
     .attr("y", dataBoxWidth * 0.05)
     .attr("width", dataBoxWidth * 0.28)
-    .attr("height", 75)
+    .attr("height", "90px")
     .append("xhtml:div")
     .attr("class", "data-section-body")
-    .style("font-size", "0.75vw").html(`
+    .style("font-size", "22px").html(`
         <a href="">
             Pokédex Count:
         </a>

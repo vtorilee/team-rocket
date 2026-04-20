@@ -125,7 +125,7 @@ path {
   display: none;
   position: absolute;
   top: 1.5vh;
-  left: 50vw;
+  left: 50%;
 
   padding: 10px;
 
@@ -205,15 +205,16 @@ path {
 /* selected region data display */
 #data-container {
   position: absolute;
-  top: 1.5vh;
+  top: 1%;
   left: -15px;
 
-  width: clamp(500px, 50vw, 1200px);
-  height: clamp(300px, 70vh, 1000px);
+  width: 50%;
+  height: 98%;
   filter: drop-shadow(5px 0px 15px rgba(0, 0, 0, 0.5));
 
   pointer-events: none;
   z-index: 10;
+  overflow: hidden;
 }
 
 #data-container svg {
@@ -231,7 +232,7 @@ path {
   fill: #ffc011;
   stroke: #000000;
   stroke-width: 1.5px;
-  font-size: 1.8vw;
+  font-size: 48px;
   font-family: "Galindo", sans-serif;
   text-shadow:
     0px 0px 4px #877138,
@@ -240,13 +241,13 @@ path {
 
 .data-section-h1 {
   fill: #000000;
-  font-size: 1.5vw;
+  font-size: 36px;
   font-family: "Galindo", sans-serif;
 }
 
 .data-section-h2 {
   fill: #f1f1f1;
-  font-size: 1vw;
+  font-size: 24px;
   font-family: "Galindo", sans-serif;
   text-shadow:
     0px 0px 4px #0e0d0d,
@@ -255,7 +256,6 @@ path {
 
 .data-section-stats {
   color: #5c5c5c;
-  font-size: 1vw;
   font-family: "Galindo", sans-serif;
 }
 
@@ -287,7 +287,7 @@ path {
 .toggle-text {
   fill: #fff;
   font-family: "Galindo", sans-serif;
-  font-size: 0.8vw;
+  font-size: 20px;
   font-weight: bold;
   pointer-events: none;
   text-anchor: middle;
