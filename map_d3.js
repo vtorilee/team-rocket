@@ -515,9 +515,9 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">27/02/96</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        > Platform: <span class="data-section-body">Game Boy</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        > Sales (Units): <span class="data-section-body">31.38 mil</span> 
         <a href="">(## Bestselling)</a>
     `);
 
@@ -545,14 +545,14 @@ function gameInfo(gen, container, dim) {
         .attr("x", 0)
         .attr("y", dim * 0.54)
         .attr("width", dim * 0.3)
-        .attr("height", dim * 0.1)
+        .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">15/10/96</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        > Platform: <span class="data-section-body">Game Boy</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        > Sales (Units): <span class="data-section-body">31.38 mil (with Red/Green)</span> 
         <br>
         <a href="">(## Bestselling)</a>
     `);
@@ -587,9 +587,9 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">12/09/98</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        > Platform: <span class="data-section-body">Game Boy</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        > Sales (Units): <span class="data-section-body">14.64 mil</span> 
         <br>
         <a href="">(## Bestselling)</a>
     `);
@@ -654,9 +654,9 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">21/11/99</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy Color</span> 
+        > Platform: <span class="data-section-body">Game Boy Color</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        > Sales (Units): <span class="data-section-body">23.7 mil</span> 
         <a href="">(## Bestselling)</a>
     `);
 
@@ -667,14 +667,14 @@ function gameInfo(gen, container, dim) {
       crystalGroup
         .append("text")
         .attr("class", "data-section-h2")
-        .attr("y", dim * 0.33)
+        .attr("y", dim * 0.355)
         .style("text-decoration-line", "underline")
         .text("Pokémon Crystal");
 
       renderGameCover(
         crystalGroup,
         0,
-        dim * 0.33 + 20,
+        dim * 0.355 + 20,
         imgSize,
         "../assets/games/gen2/crystal.png",
         "../assets/games/gen2/crystal-jp.png",
@@ -684,29 +684,28 @@ function gameInfo(gen, container, dim) {
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
-        .attr("y", dim * 0.54)
-        .attr("width", dim * 0.3)
+        .attr("y", dim * 0.565)
+        .attr("width", dim * 0.5)
         .attr("height", dim * 0.1)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">14/12/00</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        > Platform: <span class="data-section-body">Game Boy</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
-        <br>
+        > Sales (Units): <span class="data-section-body">6.3 mil</span> 
         <a href="">(## Bestselling)</a>
       `);
 
       const factGroup2 = crystalGroup
         .append("g")
-        .attr("transform", `translate(${imgSize * 1.35},${dim * 0.33})`);
+        .attr("transform", `translate(${imgSize * 1.35},${dim * 0.35})`);
 
       renderFactBox(
         factGroup2,
         0,
         0,
-        dim * 0.34,
+        dim * 0.365,
         dim * 0.2,
         "Pokémon Crystal was the first game to let you play as a girl!",
         `> Players could only venture as one of the male protagonists, Red (Gen 1) or Ethan (Gold/Silver), prior
@@ -758,9 +757,9 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">21/11/02</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy Advance</span> 
+        > Platform: <span class="data-section-body">Game Boy Advance</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        > Sales (Units): <span class="data-section-body">16.22 mil</span> 
         <br>
         <a href="">(## Bestselling)</a>
     `);
@@ -791,15 +790,15 @@ function gameInfo(gen, container, dim) {
         .attr("class", "data-section-stats")
         .attr("x", imgSize * 2.2)
         .attr("y", dim * 0.22)
-        .attr("width", dim * 0.3)
+        .attr("width", dim * 0.25)
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">16/09/04</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy Advance</span> 
+        > Platform: <span class="data-section-body">Game Boy Advance</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[####]</span> 
+        > Sales (Units): <span class="data-section-body">7.06 mil</span> 
         <br>
         <a href="">(## Bestselling)</a>
       `);
@@ -844,9 +843,9 @@ function gameInfo(gen, container, dim) {
         .style("font-size", "21px").html(`
         > Release (JP): <span class="data-section-body">29/01/04</span> 
         <br>
-        > Platform(s): <span class="data-section-body">Game Boy Advance</span> 
+        > Platform: <span class="data-section-body">Game Boy Advance</span> 
         <br>
-        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        > Sales (Units): <span class="data-section-body">12 mil</span> 
         <a href="">(## Bestselling)</a>
     `);
 
@@ -863,6 +862,262 @@ function gameInfo(gen, container, dim) {
         <br>
         FireRed & LeafGreen are both remakes of the Gen 1 games, Pokémon Red & Green
         `);
+
+      return;
+
+    case 4:
+      const diamondPearlGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      diamondPearlGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Diamond & Pokémon Pearl");
+
+      renderGameCover(
+        diamondPearlGroup,
+        0,
+        30,
+        imgSize,
+        "../assets/games/gen4/diamond.png",
+        "../assets/games/gen4/diamond-jp.png",
+      );
+
+      renderGameCover(
+        diamondPearlGroup,
+        imgSize + 20,
+        30,
+        imgSize,
+        "../assets/games/gen4/pearl.png",
+        "../assets/games/gen4/pearl-jp.png",
+      );
+
+      diamondPearlGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">28/09/06</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">17.67 mil</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const platinumGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      platinumGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("x", imgSize * 2.2)
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Platinum");
+
+      renderGameCover(
+        platinumGroup,
+        imgSize * 2.2,
+        30,
+        imgSize,
+        "../assets/games/gen4/platinum.png",
+        "../assets/games/gen4/platinum-jp.png",
+      );
+
+      platinumGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", imgSize * 2.2)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">13/09/08</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">7.69 mil</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+      `);
+
+      const heartGoldSoulSilverGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      heartGoldSoulSilverGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.375)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon HeartGold & Pokémon SoulSilver");
+
+      renderGameCover(
+        heartGoldSoulSilverGroup,
+        0,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen4/heartgold.png",
+        "../assets/games/gen4/heartgold-jp.png",
+      );
+
+      renderGameCover(
+        heartGoldSoulSilverGroup,
+        imgSize + 20,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen4/soulsilver.png",
+        "../assets/games/gen4/soulsilver-jp.png",
+      );
+
+      heartGoldSoulSilverGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.585)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">12/09/09</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">12.72 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      heartGoldSoulSilverGroup
+        .append("foreignObject")
+        .attr("class", "data-section-body")
+        .attr("x", imgSize * 2.25)
+        .attr("y", dim * 0.41)
+        .attr("width", imgSize + 30)
+        .attr("height", imgSize)
+        .append("xhtml:div")
+        .style("font-size", "20px").html(`
+        Note: 
+        <br>
+        HeartGold & SoulSilver are both remakes of the Gen 2 games, Pokémon Gold & Silver
+        `);
+      return;
+
+    case 5:
+      const blackWhiteGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      blackWhiteGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Black & Pokémon White");
+
+      renderGameCover(
+        blackWhiteGroup,
+        0,
+        30,
+        imgSize,
+        "../assets/games/gen5/black.png",
+        "../assets/games/gen5/black-jp.png",
+      );
+
+      renderGameCover(
+        blackWhiteGroup,
+        imgSize + 20,
+        30,
+        imgSize,
+        "../assets/games/gen5/white.png",
+        "../assets/games/gen5/white-jp.png",
+      );
+
+      blackWhiteGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">18/09/10</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">15.64 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const blackWhite2Group = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      blackWhite2Group
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.375)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Black 2 & Pokémon White 2");
+
+      renderGameCover(
+        blackWhite2Group,
+        0,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen5/black2.png",
+        "../assets/games/gen5/black2-jp.png",
+      );
+
+      renderGameCover(
+        blackWhite2Group,
+        imgSize + 20,
+        dim * 0.375 + 20,
+        imgSize,
+        "../assets/games/gen5/white2.png",
+        "../assets/games/gen5/white2-jp.png",
+      );
+
+      blackWhite2Group
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.585)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">23/06/12</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo DS</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">8.25 mil</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      renderFactBox(
+        blackWhite2Group,
+        imgSize * 2.2,
+        dim * 0.37,
+        imgSize + 30,
+        imgSize + 75,
+        "Black 2 & White 2 are direct sequels!",
+        `> Unlike the Gen 1 & 2 remake games, both games are narratively unique from their original counterpart
+        <br>
+        > They feature a different storyline with different protagonist options, taking place some years after the events of Black & White.
+        `,
+      );
 
       return;
     default:
@@ -987,7 +1242,7 @@ function displayDataBox() {
     .attr("height", dataBoxWidth * 0.075)
     .append("xhtml:div")
     .attr("class", "data-section-body")
-    .style("font-size", "22px").html(`
+    .style("font-size", "19px").html(`
         Ranked #1 ${selectedGen.region} Pokémon in 
         <br>
         <a href="https://www.reddit.com/r/pokemon/comments/1o7nb3l/results_is_every_pok%C3%A9mon_someones_favourite/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button" 
