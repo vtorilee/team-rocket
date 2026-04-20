@@ -215,13 +215,8 @@ function handleZoom(element, sections) {
     svgElement.classed("focus-mode", false);
     sections.classed("selected-path", false);
 
-    //get rid of button and reset displays
-    svgElement.selectAll(".focus-label-group").remove();
-    d3.select(this).style("display", "none");
-    d3.select("#data-container").html("");
-
     selectedGen = null;
-    renderMarks();
+    updateUI();
   });
 }
 
@@ -233,6 +228,23 @@ function renderMarks() {
   genMarks.html("");
   genMarks.each(function (d) {
     const g = d3.select(this);
+
+    const genYears = g
+      .append("text")
+      .attr("class", "hover-years-text")
+      .attr("y", 48)
+      .attr("text-anchor", "middle")
+      .style("opacity", 0)
+      .style("font-family", `"Galindo", sans-serif`)
+      .style("font-size", "12px")
+      .style("fill", "white")
+      .style(
+        "text-shadow",
+        "0px 0px 8px rgba(0, 0, 0, 1),0px 0px 4px rgba(0, 0, 0, 1)",
+      )
+      .style("pointer-events", "none")
+      .style("transition", "opacity 0.2s ease")
+      .text(d.years);
 
     if (selectedGen === d) {
       // https://stackoverflow.com/questions/20086884/add-image-inside-a-circle-d3
@@ -247,9 +259,14 @@ function renderMarks() {
         .style("opacity", 0.5);
     } else {
       g.append("circle").attr("r", 25).attr("class", "bg-circle");
-
       g.append("text").attr("class", "mark-text").text(d.number);
     }
+
+    g.on("mouseenter", () => {
+      genYears.style("opacity", 1);
+    }).on("mouseleave", () => {
+      genYears.style("opacity", 0);
+    });
   });
 }
 
@@ -465,6 +482,195 @@ function renderFactBox(
       .style("pointer-events", isRevealed ? "none" : "all");
 
     textGroup
+      .style("opacity", isRevealed ? 1 : 0)
+      .style("pointer-events", isRevealed ? "all" : "none");
+  });
+}
+
+function renderSpoilerBox(container, x, y, width, height) {
+  let isRevealed = false;
+
+  const group = container
+    .append("g")
+    .attr("transform", `translate(${x}, ${y})`)
+    .style("cursor", "pointer")
+    .style("pointer-events", "all")
+    .style("transition", "opacity 0.2s ease");
+
+  const textGroup = group
+    .append("g")
+    .style("opacity", 0)
+    .style("pointer-events", "none")
+    .style("transition", "opacity 0.2s ease");
+
+  textGroup
+    .append("text")
+    .attr("class", "data-section-h1")
+    .attr("y", 35)
+    .text("Generation 10: Coming in 2027");
+
+  textGroup
+    .append("text")
+    .attr("class", "data-section-h2")
+    .attr("y", 190)
+    .style("text-decoration-line", "underline")
+    .text("Pokémon Winds & Pokémon Waves");
+
+  textGroup
+    .append("foreignObject")
+    .attr("class", "data-section-detail")
+    .attr("x", 0)
+    .attr("y", 210)
+    .attr("width", width)
+    .attr("height", "80px")
+    .style("font-size", "20px")
+    .style("text-anchor", "center")
+    .append("xhtml:div").html(`
+     > Revealed in the February 27, 2026 <span style="font-style: italic">Pokémon Presents</span> 
+     <br>
+     for Nintendo Switch 2 
+     <br>
+     >
+     `);
+
+  const link = group
+    .append("foreignObject")
+    .attr("x", 20)
+    .attr("y", 270)
+    .attr("width", width)
+    .attr("height", 40)
+    .style("opacity", 0)
+    .style("pointer-events", "none")
+    .style("transition", "opacity 0.2s ease");
+
+  link
+    .append("xhtml:div")
+    .html(
+      `<a href="https://windswaves.pokemon.com/en-ca/" target="_blank" class="data-section-hyperlink" style="font-size: 20px">(EN) Official Winds & Waves Website</a>
+     `,
+    )
+    .on("click", (event) => event.stopPropagation());
+
+  const imageGroup = group
+    .append("g")
+    .style("opacity", 0)
+    .style("pointer-events", "none")
+    .style("transition", "opacity 0.2s ease");
+
+  imageGroup
+    .append("image")
+    .attr("href", "../assets/games/gen9/winds.png")
+    .attr("x", -90)
+    .attr("y", 55)
+    .attr("width", width * 0.5)
+    .attr("height", height * 0.35);
+
+  imageGroup
+    .append("image")
+    .attr("href", "../assets/games/gen9/winds-jp.png")
+    .attr("x", 70)
+    .attr("y", 55)
+    .attr("width", width * 0.5)
+    .attr("height", height * 0.3);
+
+  imageGroup
+    .append("image")
+    .attr("href", "../assets/games/gen9/waves.png")
+    .attr("x", 260)
+    .attr("y", 55)
+    .attr("width", width * 0.5)
+    .attr("height", height * 0.33);
+
+  imageGroup
+    .append("image")
+    .attr("href", "../assets/games/gen9/waves-jp.png")
+    .attr("x", 430)
+    .attr("y", 55)
+    .attr("width", width * 0.5)
+    .attr("height", height * 0.3);
+
+  const boxGroup = group
+    .append("g")
+    .style("opacity", 1)
+    .style("transition", "opacity 0.4s ease");
+
+  const revealBox = boxGroup
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("rx", 20)
+    .style("fill", "transparent")
+    .style("transition", "fill 0.4s ease");
+
+  const spoilerText = boxGroup
+    .append("text")
+    .attr("x", width / 2)
+    .attr("y", height * 0.37)
+    .style("font-size", "24px")
+    .style("font-family", `"Galindo", sans-serif`)
+    .style("text-anchor", "middle")
+    .style("fill", "#171717")
+    .style("transition", "all 0.4s ease")
+    .text("Spoilers Ahead!");
+
+  const revealText = boxGroup
+    .append("text")
+    .attr("class", "toggle-text")
+    .attr("x", width / 2)
+    .attr("y", height / 2)
+    .style("font-size", "32px")
+    .style("transition", "all 0.4s ease")
+    .text("Reveal Upcoming");
+
+  //handle hover display states
+  group
+    .on("mouseenter", () => {
+      if (!isRevealed) {
+        spoilerText.style(
+          "text-shadow",
+          `0px 0px 12px rgb(248, 180, 78),
+           0px 0px 12px rgb(224, 149, 28)`,
+        );
+        spoilerText.style("fill", "#b10a0a");
+        revealText.style("fill", "#ffc011");
+        revealText.style("text-decoration-line", "underline");
+        revealBox.style("fill", "#dbcdcd");
+      } else {
+        textGroup.style("opacity", 0.6);
+        imageGroup.style("opacity", 0.6);
+      }
+    })
+    .on("mouseleave", () => {
+      if (!isRevealed) {
+        spoilerText.style("text-shadow", "none");
+        spoilerText.style("fill", "#171717");
+        revealText.style("fill", "#ffffff");
+        revealText.style("text-decoration-line", "none");
+        revealBox.style("fill", "transparent");
+      } else {
+        textGroup.style("opacity", 1);
+        imageGroup.style("opacity", 1);
+        link.style("opacity", 1);
+      }
+    });
+
+  //toggle opacities of both groups to determine which is visible
+  group.on("click", (event) => {
+    isRevealed = !isRevealed;
+
+    boxGroup
+      .style("opacity", isRevealed ? 0 : 1)
+      .style("pointer-events", isRevealed ? "none" : "all");
+
+    textGroup
+      .style("opacity", isRevealed ? 1 : 0)
+      .style("pointer-events", isRevealed ? "all" : "none");
+
+    imageGroup
+      .style("opacity", isRevealed ? 1 : 0)
+      .style("pointer-events", isRevealed ? "all" : "none");
+
+    link
       .style("opacity", isRevealed ? 1 : 0)
       .style("pointer-events", isRevealed ? "all" : "none");
   });
@@ -1530,6 +1736,97 @@ function gameInfo(gen, container, dim) {
         `,
       );
       return;
+
+    case 9:
+      const scarletVioletGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      scarletVioletGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Scarlet & Violet");
+
+      renderGameCover(
+        scarletVioletGroup,
+        -50,
+        30,
+        imgSizeTall,
+        "../assets/games/gen9/scarlet.png",
+        "../assets/games/gen9/scarlet-jp.png",
+      );
+
+      renderGameCover(
+        scarletVioletGroup,
+        imgSizeSmall * 0.65,
+        30,
+        imgSizeTall,
+        "../assets/games/gen9/violet.png",
+        "../assets/games/gen9/violet-jp.png",
+      );
+
+      scarletVioletGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.25)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (WW): <span class="data-section-body">18/11/22</span> 
+        <br>
+        > Platform: <span class="data-section-body">Nintendo Switch</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">24.36 mil</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const legendsZA = gamesGroup.append("g").attr("class", "games-display");
+
+      legendsZA
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("x", dim * 0.335)
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Legends: Z-A");
+
+      renderGameCover(
+        legendsZA,
+        dim * 0.35,
+        30,
+        imgSizeTall,
+        "../assets/games/gen9/legendsza.png",
+        "../assets/games/gen9/legendsza-ns2.png",
+      );
+
+      legendsZA
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", dim * 0.33)
+        .attr("y", dim * 0.25)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (WW): <span class="data-section-body">16/10/25</span> 
+        <br>
+        > Platforms: <span class="data-section-body">Nintendo Switch, Nintendo Switch 2</span> 
+        <br>
+        > Sales (Units): <span class="data-section-body">5.8 mil</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const upcomingGen = gamesGroup.append("g");
+
+      renderSpoilerBox(upcomingGen, 0, dim * 0.4, dim * 0.6, dim * 0.25);
+      return;
     default:
       return;
   }
@@ -1718,10 +2015,18 @@ function displayDataBox() {
         <br>
         were added in Generation ${selectedGen.number}
     `);
+
+  //load in box before transitioning in
+  //https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+  requestAnimationFrame(() => {
+    dataBoxContainer.classed("visible", true);
+  });
 }
 
 //map state handler
 function updateUI(gen) {
+  const dataBox = d3.select("#data-container");
+
   //clear existing zoomed region labels upon state update
   svgElement.selectAll(".focus-label-group").remove();
 
@@ -1729,10 +2034,14 @@ function updateUI(gen) {
     //no data --> reset to default map view
     svgElement.classed("focus-mode", false);
     svgElement.selectAll("path").classed("selected-path", false);
-
     svgElement.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
-    d3.select("#data-container").html("");
     d3.select("#reset-button").style("display", "none");
+
+    //trigger smooth transition out and allow time for elements to fade out
+    dataBox.classed("visible", false);
+    setTimeout(() => {
+      if (!selectedGen) dataBox.html("");
+    }, 500);
   } else {
     //set selected region state, while all other paths are unselected
     const regionID = gen.region;
@@ -1764,8 +2073,6 @@ function updateUI(gen) {
     labelGroup.transition().delay(300).duration(500).style("opacity", 1);
 
     displayDataBox();
-
-    //zoom to the selected region
     zoomToRegion(regionID);
   }
   renderMarks();

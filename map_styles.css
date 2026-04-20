@@ -215,6 +215,21 @@ path {
   pointer-events: none;
   z-index: 10;
   overflow: hidden;
+
+  /* setup for smooth enter transitioning */
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  pointer-events: none;
+}
+
+#data-container.visible {
+  /* ssmooth enter transition */
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 #data-container svg {
@@ -282,6 +297,17 @@ path {
   color: #7f6969;
   fill: #7f6969;
   font-family: "Galindo", sans-serif;
+}
+
+.data-section-hyperlink {
+  color: #5d71f5;
+  font-family: "Galindo", sans-serif;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.data-section-hyperlink:hover {
+  color: #d84141;
 }
 
 .toggle-text {
