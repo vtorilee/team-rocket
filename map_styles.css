@@ -15,7 +15,6 @@ body {
 
 #header {
   background-color: #641919;
-  padding: 3px;
 }
 
 #footer {
@@ -28,10 +27,27 @@ body {
   -webkit-text-stroke: 1px black;
   color: white;
   text-align: center;
-  padding: 3px;
-
   font-family: "Galindo", sans-serif;
   font-size: 42px;
+  margin-bottom: 0;
+}
+
+#credits {
+  text-align: center;
+  color: #b87f7f;
+  font-family: "Galindo", sans-serif;
+  font-size: 16px;
+  margin-top: 0;
+}
+
+#credits a {
+  color: #b87f7f;
+  text-decoration-line: underline;
+}
+
+#credits a:hover {
+  text-decoration-line: underline;
+  color: #ffc011;
 }
 
 /* map area */
@@ -106,13 +122,29 @@ path {
 }
 
 #reset-button {
-  position: absolute;
-  top: 20px;
-  left: 52vw;
-  z-index: 100;
   display: none;
+  position: absolute;
+  top: 1.5vh;
+  left: 50vw;
+
   padding: 10px;
+
+  font-family: "Galindo", sans-serif;
+  color: #000;
+  background-color: #fff2f0ee;
+  border-width: 6px;
+  border-radius: 10px;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
+
+  z-index: 100;
   cursor: pointer;
+}
+
+#reset-button:hover {
+  color: #711212;
+  background-color: #d0b9b4ee;
 }
 
 /* timeline */
@@ -173,10 +205,13 @@ path {
 /* selected region data display */
 #data-container {
   position: absolute;
-  top: 10px;
+  top: 1.5vh;
   left: -15px;
-  width: 50vw;
-  height: 70vh;
+
+  width: clamp(500px, 50vw, 1200px);
+  height: clamp(300px, 70vh, 1000px);
+  filter: drop-shadow(5px 0px 15px rgba(0, 0, 0, 0.5));
+
   pointer-events: none;
   z-index: 10;
 }
@@ -186,7 +221,7 @@ path {
 }
 
 .data-box {
-  fill: rgba(255, 242, 240, 0.932);
+  fill: #fff2f0ee;
   stroke: #000000;
   stroke-width: 10px;
   rx: 20px;

@@ -506,7 +506,7 @@ function gameInfo(gen, container, dim) {
         .attr("class", "data-section-stats")
         .attr("x", 0)
         .attr("y", dim * 0.185)
-        .attr("width", dim * 0.75)
+        .attr("width", dim * 0.5)
         .attr("height", dim * 0.2)
         .append("xhtml:div")
         .style("font-size", "0.85vw").html(`
@@ -541,8 +541,8 @@ function gameInfo(gen, container, dim) {
         .attr("class", "data-section-stats")
         .attr("x", 0)
         .attr("y", dim * 0.485)
-        .attr("width", dim * 0.75)
-        .attr("height", dim * 0.2)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.1)
         .append("xhtml:div")
         .style("font-size", "0.85vw").html(`
         > Release (JP): <span class="data-section-body">Oct 15, 1996</span> 
@@ -578,8 +578,8 @@ function gameInfo(gen, container, dim) {
         .attr("class", "data-section-stats")
         .attr("x", imgSize * 2.2)
         .attr("y", dim * 0.485)
-        .attr("width", dim * 0.75)
-        .attr("height", dim * 0.2)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.1)
         .append("xhtml:div")
         .style("font-size", "0.85vw").html(`
         > Release (JP): <span class="data-section-body">Sept 12, 1998</span> 
@@ -608,9 +608,16 @@ function displayDataBox() {
     return;
   }
 
+  //base coords for scaling
+  const dataBoxWidth = dataBoxContainer.node().clientWidth;
+  const dataBoxHeight = dataBoxContainer.node().clientHeight;
+  console.log("width: ", dataBoxWidth, " height: ", dataBoxHeight);
+
   //create box svg object
   const dataBoxSVG = dataBoxContainer
     .append("svg")
+    .attr("viewBox", `0,0,${dataBoxWidth}, ${dataBoxHeight}`)
+    .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("width", "100%")
     .attr("height", "100%");
 
@@ -624,8 +631,6 @@ function displayDataBox() {
     .attr("height", "100%");
 
   //variables for dimensions and tracking "current location" as we place box elements
-  const dataBoxWidth = dataBoxContainer.node().clientWidth;
-  const dataBoxHeight = dataBoxContainer.node().clientHeight;
   let currentX = dataBoxWidth * 0.04;
   let currentY = dataBoxHeight * 0.07;
 
@@ -705,10 +710,10 @@ function displayDataBox() {
   //https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/foreignObject
   mascotGroup
     .append("foreignObject")
-    .attr("x", -dataBoxWidth * 0.1)
+    .attr("x", -dataBoxWidth * 0.04)
     .attr("y", dataBoxWidth * 0.25)
-    .attr("width", dataBoxWidth * 0.4)
-    .attr("height", 200)
+    .attr("width", dataBoxWidth * 0.28)
+    .attr("height", dataBoxWidth * 0.075)
     .append("xhtml:div")
     .attr("class", "data-section-body")
     .style("font-size", "0.75vw").html(`
@@ -723,7 +728,7 @@ function displayDataBox() {
     `);
 
   //starters section
-  currentY += dataBoxWidth * 0.3;
+  currentY += dataBoxHeight * 0.43;
 
   const startersGroup = dataBoxSVG
     .append("g")
@@ -739,9 +744,9 @@ function displayDataBox() {
 
   startersGroup
     .append("foreignObject")
-    .attr("x", -dataBoxWidth * 0.1)
-    .attr("y", dataBoxWidth * 0.15)
-    .attr("width", dataBoxWidth * 0.4)
+    .attr("x", -dataBoxWidth * 0.04)
+    .attr("y", dataBoxHeight * 0.2)
+    .attr("width", dataBoxWidth * 0.28)
     .attr("height", 75)
     .append("xhtml:div")
     .attr("class", "data-section-body")
@@ -754,15 +759,17 @@ function displayDataBox() {
     `);
 
   //pokedex count section
+  currentY += dataBoxHeight * 0.23;
+
   const dexStats = dataBoxSVG
     .append("g")
     .attr("transform", `translate(${currentX}, ${currentY})`);
 
   dexStats
     .append("foreignObject")
-    .attr("x", -dataBoxWidth * 0.1)
-    .attr("y", dataBoxWidth * 0.23)
-    .attr("width", dataBoxWidth * 0.4)
+    .attr("x", -dataBoxWidth * 0.04)
+    .attr("y", dataBoxWidth * 0.05)
+    .attr("width", dataBoxWidth * 0.28)
     .attr("height", 75)
     .append("xhtml:div")
     .attr("class", "data-section-body")
