@@ -11,18 +11,14 @@ h1 {
   margin: 0;
 }
 
-/* ===================== */
-/* CONTAINER */
-/* ===================== */
+
 .container {
   width: 80%;
   max-width: 1100px;
   margin: auto;
 }
 
-/* ===================== */
-/* SECTIONS */
-/* ===================== */
+
 .section {
   margin-bottom: 80px;
 }
@@ -38,9 +34,7 @@ h1 {
   line-height: 1.5;
 }
 
-/* ===================== */
-/* BASE VISUALIZATION BOX */
-/* ===================== */
+
 .box {
   background: #1b1b1b;
   border-radius: 12px;
@@ -48,9 +42,7 @@ h1 {
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-/* ===================== */
-/* INDIVIDUAL SIZES */
-/* ===================== */
+
 
 .box.types {
   height: 650px;
