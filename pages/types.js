@@ -273,3 +273,24 @@ function zoomToRoot() {
     .attrTween("d", d => () => arc(d.current))
     .attr("opacity", 1);
 }
+
+function sendHeight() {
+  const height = document.body.scrollHeight;
+
+  window.parent.postMessage({
+    type: "setHeight",
+    height: height-100
+  }, "*");
+}
+
+window.addEventListener("load", sendHeight);
+window.addEventListener("resize", sendHeight);
+
+function sendHeight() {
+  const height = document.body.scrollHeight;
+
+  window.parent.postMessage({
+    type: "setHeight",
+    height: height
+  }, "*");
+}

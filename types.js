@@ -23,3 +23,14 @@ typeButtons.forEach(button => {
     nextBtn.style.display = "inline-block";
   });
 });
+function sendHeight() {
+  const height = document.body.scrollHeight;
+
+  window.parent.postMessage({
+    type: "setHeight",
+    height: height
+  }, "*");
+}
+
+window.addEventListener("load", sendHeight);
+window.addEventListener("resize", sendHeight);

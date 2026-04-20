@@ -89,3 +89,16 @@ const spec = {
 };
 
 vegaEmbed("#vis", spec, { actions: false });
+
+function sendHeight() {
+  const height = document.body.scrollHeight;
+
+  window.parent.postMessage({
+    type: "setHeight",
+    height: 500
+  }, "*");
+}
+
+window.addEventListener("load", sendHeight);
+window.addEventListener("resize", sendHeight);
+

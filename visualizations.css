@@ -1,39 +1,47 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
+
+  background-image: url("../assets/homepage.bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: white;
+}
+nav{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  background:#461111;
+  padding:10px;
+}
+
+nav a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header {
+  
+  background: #461111;
+  color: white;
+  padding: 15px;
   text-align: center;
-  background: #ffffff;
-  padding: 20px;
 }
 
 h1 {
-  margin-bottom: 10px;
-}
-
-.buttons {
-  margin-bottom: 15px;
-}
-
-button {
-  padding: 10px 14px;
-  margin: 5px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: #333;
+  
+  background: transparent;
   color: white;
-  transition: 0.2s;
+  padding: 15px 20px;
+  
 }
 
-button:hover {
-  background: #555;
-}
-
-#vis {
-  max-width: 1100px;
-  margin: auto;
-}
-
-.btn {
+/* .btn {
   display: inline-block;
   background: #461111;
   font-weight: bold;
@@ -43,23 +51,45 @@ button:hover {
   text-decoration: none;
   cursor: pointer;
   margin-top: 20px;
-
-  transition: transform 0.2s;
-}
+} */
 
 .btn:hover {
   transform: scale(0.95);
+  transition: 0.2s;
+}
+
+section {
+  padding: 100px;
+  margin: 20px;
+  background: transparent;
+  
+}
+
+.detail-box {
+  margin-top: 20px;
 }
 
 
+.buttons {
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 14px;
+  margin: 5px;
+
+  cursor: pointer;
   
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-      text-align: center;
-    }
+  color: white;
+  transition: 0.2s;
+}
+
+
+
+#vis {
+  max-width: 1100px;
+  margin: auto;
+}
 
     h1 {
       padding: 20px;
@@ -74,23 +104,27 @@ button:hover {
     }
 
     
-    .box {
-      background: #1b1b1b;
-      border-radius: 12px;
-      padding: 10px;
-      height: 600px; /* adjust if needed */
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
+  .box {
+  display: block;
+  width: 100%;
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-    }
+  margin: 10px 0;        /* reduces vertical space */
+  padding: 5px;          /* tight padding */
 
-    /* responsive */
+  
+
+  overflow: hidden;
+}
+
+  iframe {
+  width: 100%;
+  height: 1000px;   /* increase until full chart fits */
+  
+
+  display: block;
+}
+
+    
     @media (max-width: 1000px) {
       .grid {
         grid-template-columns: 1fr;
@@ -116,7 +150,7 @@ button:hover {
 
 .sunburst-vis #tooltip {
   position: absolute;
-  background: rgba(0,0,0,0.85);
+  background: rgba(8, 7, 7, 0.85);
   color: white;
   padding: 10px;
   border-radius: 8px;
@@ -131,11 +165,11 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(20, 20, 20, 0.95);
+  background: transparent;
   border: 1px solid rgba(255,255,255,0.1);
   padding: 10px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  
   max-width: 260px;
 }
 
@@ -158,4 +192,14 @@ button:hover {
 .sunburst-vis .tooltip-sub {
   font-size: 11px;
   color: #ccc;
+}
+
+
+.sunburst-vis {
+ 
+}
+.sunburst-page {
+  margin: 0;
+    
+  color: white;
 }

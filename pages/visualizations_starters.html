@@ -3,30 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Favourite Starters Bar Chart</title>
-</head>
-
-<body>
 
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
 
   <div id="vis"></div>
 
   <script>
-    // load CSV data + fetch Pokémon images from PokéAPI
+    // send height to parent page
+    function sendHeight() {
+      const height = document.body.scrollHeight;
+
+      window.parent.postMessage({
+        type: "setHeight",
+        height: height
+      }, "*");
+    }
+
+    // load data + images
     async function loadDataWithImages() {
       const csvUrl = "../datasets/Favourite_Pokemon_Survey.csv";
       const csvText = await fetch(csvUrl).then(r => r.text());
 
-      // convert CSV into structured objects
       const rows = csvText.trim().split("\n").slice(1);
+
       const data = rows.map(row => {
         const [Generation, type, starter, dex, votes] = row.split(",");
         return { Generation, type, starter, dex, votes: +votes };
       });
 
-      // get starter names
       const starters = [...new Set(data.map(d => d.starter))];
       const starterImages = {};
 
@@ -35,60 +44,53 @@
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
         const json = await res.json();
 
-        // store image URL
-        starterImages[starter] = json.sprites.other["official-artwork"].front_default;
+        starterImages[starter] =
+          json.sprites.other["official-artwork"].front_default;
       }
 
-      // attach image + ordering
-      data.forEach((d, i) => {
-          d.img = starterImages[d.starter];
+      data.forEach(d => {
+        d.img = starterImages[d.starter];
 
-          // group starters in sets of 3 with spacing
-          const orderMap = {
-            "Bulbasaur": 1, "Charmander": 2, "Squirtle": 3,
-            "Chikorita": 5, "Cyndaquil": 6, "Totodile": 7,
-            "Treecko": 9, "Torchic": 10, "Mudkip": 11,
-            "Turtwig": 13, "Chimchar": 14, "Piplup": 15,
-            "Snivy": 17, "Tepig": 18, "Oshawott": 19,
-            "Chespin": 21, "Fennekin": 22, "Froakie": 23,
-            "Rowlet": 25, "Litten": 26, "Popplio": 27,
-            "Grookey": 29, "Scorbunny": 30, "Sobble": 31,
-            "Sprigatito": 33, "Fuecoco": 34, "Quaxly": 35
-          };
+        const orderMap = {
+          "Bulbasaur": 1, "Charmander": 2, "Squirtle": 3,
+          "Chikorita": 5, "Cyndaquil": 6, "Totodile": 7,
+          "Treecko": 9, "Torchic": 10, "Mudkip": 11,
+          "Turtwig": 13, "Chimchar": 14, "Piplup": 15,
+          "Snivy": 17, "Tepig": 18, "Oshawott": 19,
+          "Chespin": 21, "Fennekin": 22, "Froakie": 23,
+          "Rowlet": 25, "Litten": 26, "Popplio": 27,
+          "Grookey": 29, "Scorbunny": 30, "Sobble": 31,
+          "Sprigatito": 33, "Fuecoco": 34, "Quaxly": 35
+        };
 
-          d.order = orderMap[d.starter];
-        });
+        d.order = orderMap[d.starter];
+      });
 
       return data;
     }
 
     loadDataWithImages().then(data => {
-      console.log("Loaded data:", data);
+
       const spec = {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
         data: { values: data },
 
         encoding: {
-          // x-axis = generations (ordered chronologically)
-          "x": {
-              "field": "Generation",
-              "type": "ordinal",
-              "sort": [
-                "Gen I (Kanto)", "Gen II (Johto)", "Gen III (Hoenn)",
-                "Gen IV (Sinnoh)", "Gen V (Unova)", "Gen VI (Kalos)",
-                "Gen VII (Alola)", "Gen VIII (Galar/Hisui)", "Gen IX (Paldea)"
-              ],
-              "axis": { "labelAngle": 0 },
-              scale: { paddingInner: 0.31, paddingOuter: 0.3 },
-            },
-
-          
-          "xOffset": {
-            "field": "type"
+          x: {
+            field: "Generation",
+            type: "ordinal",
+            sort: [
+              "Gen I (Kanto)", "Gen II (Johto)", "Gen III (Hoenn)",
+              "Gen IV (Sinnoh)", "Gen V (Unova)", "Gen VI (Kalos)",
+              "Gen VII (Alola)", "Gen VIII (Galar/Hisui)", "Gen IX (Paldea)"
+            ],
+            axis: { labelAngle: 0 },
+            scale: { paddingInner: 0.31, paddingOuter: 0.3 }
           },
 
-          // y-axis = number of votes
+          xOffset: { field: "type" },
+
           y: {
             field: "votes",
             type: "quantitative",
@@ -105,7 +107,6 @@
               cornerRadiusTopRight: 5
             },
             encoding: {
-              // color bars by Pokémon type
               color: {
                 field: "type",
                 type: "nominal",
@@ -114,7 +115,6 @@
                   range: ["#78C850", "#F08030", "#6890F0"]
                 }
               },
-              // tooltip info on hover
               tooltip: [
                 { field: "starter", title: "Starter" },
                 { field: "votes", title: "Votes" },
@@ -124,7 +124,6 @@
           },
 
           {
-            // image layer (Pokémon sprites above bars)
             mark: {
               type: "image",
               width: 40,
@@ -137,14 +136,23 @@
           }
         ],
 
-        width: 1000,
+        width: 950,
         height: 600,
         spacing: 10
-        
       };
 
-      // render visualization
-      vegaEmbed("#vis", spec);
+      // render + resize after layout is complete
+      vegaEmbed("#vis", spec).then(() => {
+        setTimeout(sendHeight, 200);
+      });
+      function sendHeight() {
+  const height = document.body.scrollHeight;
+
+  window.parent.postMessage({
+    type: "setHeight",
+    height: height
+  }, "*");
+}
     });
   </script>
 
