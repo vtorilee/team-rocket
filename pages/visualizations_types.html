@@ -2,16 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Favourite Types</title>
+  <title>Pokémon Type Sunburst</title>
+
+  <link rel="stylesheet" href="../visualizations.css">
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
 
-<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <div class="sunburst-vis">
+  <h1>Pokémon Type Sunburst (Gen 1-9)</h1>
 
-<div id="vis"></div>
+  <div id="chart"></div>
+  <div id="tooltip"></div>
+</div>
 
 <script>
 const spec = {
@@ -61,7 +66,7 @@ const spec = {
   }
 ],
 
-  // use images instead of shapes
+
   mark: {
     type: "image",
     width: 38,
@@ -78,7 +83,7 @@ const spec = {
       },
       axis: null
     },
-    // y-axis = percentage popularity
+    
     y: {
       field: "Percentage_num",
       type: "quantitative",
@@ -103,6 +108,7 @@ const spec = {
 
 vegaEmbed("#vis", spec);
 </script>
+  <script src="./types.js"></script>
 
 </body>
 </html>

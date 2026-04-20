@@ -33,7 +33,6 @@ button:hover {
   margin: auto;
 }
 
-
 .btn {
   display: inline-block;
   background: #461111;
@@ -45,7 +44,6 @@ button:hover {
   cursor: pointer;
   margin-top: 20px;
 
-  /* important: smooth animation should be here */
   transition: transform 0.2s;
 }
 
@@ -53,3 +51,111 @@ button:hover {
   transform: scale(0.95);
 }
 
+
+  
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      padding: 20px;
+    }
+
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    
+    .box {
+      background: #1b1b1b;
+      border-radius: 12px;
+      padding: 10px;
+      height: 600px; /* adjust if needed */
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* responsive */
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+.sunburst-vis {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.sunburst-vis h1 {
+  margin-bottom: 10px;
+}
+
+.sunburst-vis #chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.sunburst-vis #tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  pointer-events: none;
+  display: none;
+  max-width: 250px;
+}
+
+/* tooltip card */
+.sunburst-vis .tooltip-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  max-width: 260px;
+}
+
+.sunburst-vis .tooltip-sprite {
+  width: 56px;
+  height: 56px;
+  image-rendering: pixelated;
+}
+
+.sunburst-vis .tooltip-text {
+  text-align: left;
+}
+
+.sunburst-vis .tooltip-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.sunburst-vis .tooltip-sub {
+  font-size: 11px;
+  color: #ccc;
+}
