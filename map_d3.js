@@ -360,7 +360,16 @@ function renderGameCover(container, x, y, height, globalSrc, jpSrc = null) {
   );
 }
 
-function renderFactBox(container, x, y, width, height, funFact, factDetails) {
+function renderFactBox(
+  container,
+  x,
+  y,
+  width,
+  height,
+  funFact,
+  factDetails,
+  imgSrc = null,
+) {
   let isRevealed = false;
 
   const group = container
@@ -383,7 +392,7 @@ function renderFactBox(container, x, y, width, height, funFact, factDetails) {
     .attr("x", 0)
     .attr("y", 0)
     .attr("width", width)
-    .attr("height", "50px")
+    .attr("height", "60px")
     .style("font-size", "19px")
     .style("font-weight", "bold")
     .style("text-align", "center")
@@ -396,12 +405,19 @@ function renderFactBox(container, x, y, width, height, funFact, factDetails) {
     .attr("class", "data-section-detail")
     .attr("x", 20)
     .attr("y", 65)
-    .attr("width", width)
+    .attr("width", width * 0.66)
     .attr("height", height)
     .style("font-size", "18px")
     .style("text-align", "left")
     .append("xhtml:div")
     .html(factDetails);
+
+  textGroup
+    .append("image")
+    .attr("href", imgSrc)
+    .attr("x", width * 0.66)
+    .attr("y", 65)
+    .attr("width", width * 0.33);
 
   const boxGroup = group
     .append("g")
@@ -597,6 +613,109 @@ function gameInfo(gen, container, dim) {
 
       return;
 
+    case 2:
+      const goldSilverGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      goldSilverGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", 10)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Gold & Pokémon Silver");
+
+      renderGameCover(
+        goldSilverGroup,
+        0,
+        30,
+        imgSize,
+        "../assets/games/gen2/gold.png",
+        "../assets/games/gen2/gold-jp.png",
+      );
+
+      renderGameCover(
+        goldSilverGroup,
+        imgSize + 20,
+        30,
+        imgSize,
+        "../assets/games/gen2/silver.png",
+        "../assets/games/gen2/silver-jp.png",
+      );
+
+      goldSilverGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.22)
+        .attr("width", dim * 0.5)
+        .attr("height", dim * 0.2)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">Nov 21, 1999</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy Color</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <a href="">(## Bestselling)</a>
+    `);
+
+      const crystalGroup = gamesGroup
+        .append("g")
+        .attr("class", "games-display");
+
+      crystalGroup
+        .append("text")
+        .attr("class", "data-section-h2")
+        .attr("y", dim * 0.33)
+        .style("text-decoration-line", "underline")
+        .text("Pokémon Crystal");
+
+      renderGameCover(
+        crystalGroup,
+        0,
+        dim * 0.33 + 20,
+        imgSize,
+        "../assets/games/gen2/crystal.png",
+        "../assets/games/gen2/crystal-jp.png",
+      );
+
+      crystalGroup
+        .append("foreignObject")
+        .attr("class", "data-section-stats")
+        .attr("x", 0)
+        .attr("y", dim * 0.54)
+        .attr("width", dim * 0.3)
+        .attr("height", dim * 0.1)
+        .append("xhtml:div")
+        .style("font-size", "21px").html(`
+        > Release (JP): <span class="data-section-body">Dec 14, 2000</span> 
+        <br>
+        > Platform(s): <span class="data-section-body">Game Boy</span> 
+        <br>
+        > Total Sales: <span class="data-section-body">[INSERT # HERE]</span> 
+        <br>
+        <a href="">(## Bestselling)</a>
+      `);
+
+      const factGroup2 = crystalGroup
+        .append("g")
+        .attr("transform", `translate(${imgSize * 1.35},${dim * 0.33})`);
+
+      renderFactBox(
+        factGroup2,
+        0,
+        0,
+        dim * 0.34,
+        dim * 0.2,
+        "Pokémon Crystal was the first game to let you play as a girl!",
+        `> Players could only venture as one of the male protagonists, Red (Gen 1) or Ethan (Gold/Silver), prior
+        <br>
+        > Crystal gave an option to play as Kris, the first female protagonist of the series! `,
+        "../assets/games/gen2/kris.png",
+      );
+
+      return;
     default:
       return;
   }
@@ -615,9 +734,6 @@ function displayDataBox() {
   //coords dimensions for scaling
   const dataBoxWidth = 1200;
   const dataBoxHeight = 1000;
-  // const dataBoxWidth = dataBoxContainer.node().clientWidth;
-  // const dataBoxHeight = dataBoxContainer.node().clientHeight;
-  // console.log("width: ", dataBoxWidth, " height: ", dataBoxHeight);
 
   //create box svg object
   const dataBoxSVG = dataBoxContainer
