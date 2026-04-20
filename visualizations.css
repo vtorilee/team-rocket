@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #ffffff;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 14px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #333;
+  color: white;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #555;
+}
+
+#vis {
+  max-width: 1100px;
+  margin: auto;
+}
+
+
+.btn {
+  display: inline-block;
+  background: #461111;
+  font-weight: bold;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+
+  /* important: smooth animation should be here */
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(0.95);
+}
+
