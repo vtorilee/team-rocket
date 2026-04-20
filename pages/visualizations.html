@@ -2,32 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pokémon Multi-Line Editable Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokémon Visualizations Hub</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <link rel="stylesheet" href="../vis_page.css" />
 
-  <link rel="stylesheet" href="../visualizations.css" />
+ 
 </head>
 
 <body>
 
-  <h1>Pokémon Generations (Editable Lines)</h1>
+  <h1>Pokémon Data Visualizations</h1>
 
-<div class="buttons">
-  <button class="btn" onclick="showAll()">Show All</button>
-  <button class="btn" onclick="hideAll()">Hide All</button>
+  <div class="container">
 
-  <button class="btn" onclick="toggleSeries('base')">Base</button>
-  <button class="btn" onclick="toggleSeries('mega')">Megas</button>
-  <button class="btn" onclick="toggleSeries('gmax')">GMax</button>
-  <button class="btn" onclick="toggleSeries('alola')">Alola</button>
-</div>
+    <!-- TYPES -->
+    <div class="section">
+      <h2>Pokémon Types</h2>
+      <p>
+        This visualization explores the distribution of Pokémon types across generations and how type diversity has evolved over time.
+      </p>
 
-  <div id="vis"></div>
+      <div class="box">
+        <iframe src="../pages/visualizations_types.html"></iframe>
+      </div>
+    </div>
 
-  <script src="../vis_total.js"></script>
+    <div class="divider"></div>
+
+    <!-- TOTAL -->
+    <div class="section">
+      <h2>Total Pokémon by Generation</h2>
+      <p>
+        This chart shows how the total number of Pokémon has increased steadily from Generation 1 to Generation 9.
+      </p>
+
+      <div class="box">
+        <iframe src="../pages/visualizations_total.html"></iframe>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- STARTERS -->
+    <div class="section">
+      <h2>Starter Pokémon Evolution</h2>
+      <p>
+        A breakdown of starter Pokémon across each generation, showing how designs and patterns have changed over time.
+      </p>
+
+      <div class="box">
+        <iframe src="../pages/visualizations_starters.html"></iframe>
+      </div>
+    </div>
+
+  </div>
 
 </body>
 </html>
