@@ -43,11 +43,11 @@ h2 {
   text-align: center;
   color: rgb(255, 242, 0);
   stroke: blue;
-  margin: 10px 0 4px 0;   /* top, right, bottom, left */
+  margin: 10px 0 4px 0;  
   padding: 0;
 
   font-size: 36px;
-  font-weight: 800;   /* bold */
+  font-weight: 800;   
 }
 
 h3 {

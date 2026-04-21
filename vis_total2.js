@@ -13,8 +13,8 @@ const data = [
 const spec = {
   $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
-  width: 1100,
-  height: 650,
+  width: 1000,
+  height: 550,
 
   background: "#2b2b2b",
 
