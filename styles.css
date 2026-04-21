@@ -1,41 +1,85 @@
 body {
+  margin: 0;
 
   background-image: url("assets/homepage.bg.png");
   background-size: cover;
   background-position: center;
-  background-repeat:no-repeat;
-  font-family: Galindo, sans-serif;
-  
+  background-repeat: no-repeat;
+  font-family: "Galindo", sans-serif;
+
+  overflow: hidden;
 }
-nav{
-  display:flex;
+nav {
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
+
   color: white;
-  background:#461111;
-  padding:10px;
+  background: linear-gradient(#a99c9c, #a99c9c63);
+  padding-top: 1%;
+  padding-bottom: 10px;
+  border-top: 10px double #000000;
+
+  box-shadow: 0px 12px 35px 2px #231818;
+  /* border-bottom: 3px solid #1f1f1f; */
 }
 
-nav a{
-  color: white;
+.nav-button {
+  display: flex;
+  min-width: 10%;
+
+  background-color: #4b2121;
+  border: 3.5px ridge #1f1f1f;
+  border-radius: 24px;
+
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+
+  .nav-button a:hover {
+    color: rgb(104, 22, 22);
+  }
+}
+
+.nav-button:hover {
+  scale: 1.05;
+  opacity: 0.7;
+}
+
+.nav-button a {
+  color: #ffcb05ff;
   text-decoration: none;
+  padding: 10px;
+
+  font-size: 20px;
   font-weight: bold;
+  -webkit-text-stroke: 0.5px #3269b2ff;
+
+  text-shadow: 0px 2px 5px #04040452;
+}
+
+.nav-button a:hover {
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.578);
+  text-decoration: underline;
 }
 
 header {
-  
-  background: #461111;
+  background: linear-gradient(#46111174, #461111);
   color: white;
   padding: 15px;
   text-align: center;
 }
 
 h1 {
-  
-  background: transparent;
-  color: white;
-  padding: 15px 20px;
-  
+  font-size: 56px;
+  -webkit-text-stroke: 1px #3269b2ff;
+  color: #ffcb05ff;
+  margin: 0;
+  padding: 0;
+
+  text-shadow: 0px 2px 5px #d0cece76;
 }
 
 .btn {
@@ -84,7 +128,7 @@ section {
 
 .intro-text {
   max-width: 500px;
-  max-height:400px;
+  max-height: 400px;
 }
 
 .intro-text h1 {
@@ -99,7 +143,7 @@ section {
 }
 
 .intro-text button_take_quiz {
-  display:flex;
+  display: flex;
   background: #461111;
   font-weight: bold;
   color: white;
@@ -108,7 +152,7 @@ section {
   border-radius: 30px;
   cursor: pointer;
 }
-.intro-text button{
+.intro-text button {
   background: #461111;
   font-weight: bold;
   color: white;
@@ -156,25 +200,23 @@ section {
 }
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(4, auto); 
-  justify-content: left; 
+  grid-template-columns: repeat(4, auto);
+  justify-content: left;
   margin-left: 2%;
   gap: 15px 30px;
 }
 .genButton {
-  width: 120px;  
+  width: 120px;
   height: 60px;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 20px;
 }
 
-
 .right-side img {
   max-width: 100%;
   height: auto;
   display: block;
-
 }
 .image-container {
   display: flex;
@@ -182,8 +224,8 @@ section {
   align-items: center;
 }
 .image-container img {
-  width: auto;   
-  height: 400px;  
+  width: auto;
+  height: 400px;
 }
 
 .quiz-container {
@@ -194,8 +236,6 @@ section {
   border-radius: 20px;
 }
 
-
-
 .quiz-left {
   display: flex;
   flex-direction: column;
@@ -205,16 +245,12 @@ section {
   margin-left: 0;
 }
 
-
-
-.quiz-right img{
+.quiz-right img {
   width: 600px;
   height: auto;
   margin-top: 50px;
   margin-left: 70px;
 }
-
-
 
 .type-container {
   display: grid;
@@ -229,7 +265,7 @@ section {
   color: white;
   font-weight: bold;
   cursor: pointer;
-  width: 120px;  
+  width: 120px;
   height: 60px;
   font-size: 1rem;
   font-weight: bold;
@@ -242,27 +278,66 @@ section {
 }
 
 /* Pokémon type colors  on types section*/
-.fire { background-color: #F08030; }
-.water { background-color: #6890F0; }
-.grass { background-color: #78C850; }
-.electric { background-color: #F8D030; color: black; }
-.psychic { background-color: #F85888; }
-.normal { background-color: #A8A878; }
-.fighting { background-color: #C03028; }
-.rock { background-color: #B8A038; }
-.ghost { background-color: #705898; }
-.poison { background-color: #A040A0; }
-.flying { background-color: #A890F0; }
-.ground { background-color: #E0C068; color: black; }
-.dragon { background-color: #7038F8; }
-.ice { background-color: #98D8D8; color: black; }
-.bug { background-color: #A8B820; }
-.steel { background-color: #B8B8D0; color: black; }
-.dark { background-color: #705848; }
-.fairy { background-color: #EE99AC; }
+.fire {
+  background-color: #f08030;
+}
+.water {
+  background-color: #6890f0;
+}
+.grass {
+  background-color: #78c850;
+}
+.electric {
+  background-color: #f8d030;
+  color: black;
+}
+.psychic {
+  background-color: #f85888;
+}
+.normal {
+  background-color: #a8a878;
+}
+.fighting {
+  background-color: #c03028;
+}
+.rock {
+  background-color: #b8a038;
+}
+.ghost {
+  background-color: #705898;
+}
+.poison {
+  background-color: #a040a0;
+}
+.flying {
+  background-color: #a890f0;
+}
+.ground {
+  background-color: #e0c068;
+  color: black;
+}
+.dragon {
+  background-color: #7038f8;
+}
+.ice {
+  background-color: #98d8d8;
+  color: black;
+}
+.bug {
+  background-color: #a8b820;
+}
+.steel {
+  background-color: #b8b8d0;
+  color: black;
+}
+.dark {
+  background-color: #705848;
+}
+.fairy {
+  background-color: #ee99ac;
+}
 
-
-#typesImage{
+#typesImage {
   width: 450px;
   height: auto;
 }
@@ -276,7 +351,6 @@ section {
 #trainerImage {
   width: 450px;
   height: auto;
-
 }
 
 .trainer-left {
@@ -284,16 +358,16 @@ section {
   display: flex;
   flex-direction: column;
 
-  justify-content: center;   
-  align-items: center;      
+  justify-content: center;
+  align-items: center;
 
-  min-height: 80vh;         
+  min-height: 80vh;
   gap: 20px;
 }
 
 .card-row {
-  width: 70%;              
-  padding: 15px 20px;     
+  width: 70%;
+  padding: 15px 20px;
   border-radius: 15px;
 
   display: flex;
@@ -335,22 +409,22 @@ section {
 }
 
 @font-face {
-  font-family: 'Fira Mono';
-  src: url('../assets/FiraMono-Regular.ttf') format('truetype');
+  font-family: "Fira Mono";
+  src: url("../assets/FiraMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Fira Mono';
-  src: url('../assets/FiraMono-Medium.ttf') format('truetype');
+  font-family: "Fira Mono";
+  src: url("../assets/FiraMono-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Fira Mono';
-  src: url('../assets/FiraMono-Bold.ttf') format('truetype');
+  font-family: "Fira Mono";
+  src: url("../assets/FiraMono-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
@@ -397,13 +471,13 @@ section {
 .timeline-line-up::before {
   bottom: 50%;
   top: auto;
-  height: 200px; 
+  height: 200px;
 }
 
 .timeline-line-down::before {
   top: 50%;
   bottom: auto;
-  height: 200px; 
+  height: 200px;
 }
 
 .timeline-line-up::after,
@@ -413,7 +487,7 @@ section {
 
   width: 12px;
   height: 12px;
-} 
+}
 
 .timeline-line-up::after {
   border: 2px solid white;
@@ -423,7 +497,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
 
-  top: calc(50% - 215px); 
+  top: calc(50% - 215px);
 }
 
 .timeline-line-down::after {
@@ -434,7 +508,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
 
-  top: calc(50% + 200px); 
+  top: calc(50% + 200px);
 }
 
 .timeline-pokeball {

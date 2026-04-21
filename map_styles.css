@@ -14,22 +14,27 @@ body {
 }
 
 #header {
-  background-color: #641919;
+  background: linear-gradient(#661a1a 10%, #7e1c1c 50%, #541515 100%);
+  border-bottom: 7px double transparent;
 }
 
 #footer {
-  background-color: #641919;
+  background: linear-gradient(#661a1a 10%, #7e1c1c 50%, #541515 100%);
+  border-top: 7px double transparent;
   padding: 3px;
 }
 
 #title {
-  background-color: #641919;
-  -webkit-text-stroke: 1px black;
-  color: white;
+  margin-top: 20px;
+  margin-bottom: 0;
+
+  -webkit-text-stroke: 1px #3269b2ff;
+  color: #ffcb05ff;
+  text-shadow: 0px 2px 5px #d0cece76;
+
   text-align: center;
   font-family: "Galindo", sans-serif;
-  font-size: 42px;
-  margin-bottom: 0;
+  font-size: 52px;
 }
 
 #credits {
