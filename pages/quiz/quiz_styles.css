@@ -1,0 +1,239 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  margin: 0;
+
+  background-image: url("../../assets/homepage.bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Galindo", sans-serif;
+
+  overflow: hidden;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  color: white;
+  background: linear-gradient(#a99c9c, #a99c9c63);
+  padding-top: 1%;
+  padding-bottom: 10px;
+  border-top: 10px double #000000;
+
+  box-shadow: 0px 12px 35px 2px #231818;
+  /* border-bottom: 3px solid #1f1f1f; */
+}
+
+.nav-button {
+  display: flex;
+  min-width: 10%;
+
+  background-color: #4b2121;
+  border: 3.5px ridge #1f1f1f;
+  border-radius: 24px;
+
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+
+  .nav-button a:hover {
+    color: rgb(104, 22, 22);
+  }
+}
+
+.nav-button:hover {
+  scale: 1.05;
+  opacity: 0.7;
+}
+
+.nav-button a {
+  color: rgb(255, 204, 1);
+  text-decoration: none;
+  padding: 10px;
+
+  font-size: 20px;
+  font-weight: bold;
+  -webkit-text-stroke: 0.2px #3269b2ff;
+
+  text-shadow: -1px 3px 8px #040404c0;
+}
+
+.nav-button a:hover {
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.578);
+  text-decoration: underline;
+}
+
+header {
+  background: linear-gradient(#661a1a 10%, #7e1c1c 50%, #541515 100%);
+  border-bottom: 7px double transparent;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 56px;
+  -webkit-text-stroke: 1px #3269b2ff;
+  color: #ffcb05ff;
+  margin: 0;
+  padding: 0;
+
+  text-shadow: 0px 1px 5px #d0cece76;
+}
+
+.genButton:hover {
+  transform: scale(0.95);
+  transition: 0.2s;
+}
+.result-box {
+  margin-top: 20px;
+  margin-left: 2%;
+  padding: 20px;
+  background: white;
+  color: #461111;
+  border-radius: 10px;
+  text-align: center;
+
+  width: 600px;
+  height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.genButton {
+  width: 120px;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.type-container {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 10px 30px;
+}
+
+.type {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 120px;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.type:hover {
+  transform: scale(0.95);
+  transition: 0.2s;
+}
+
+/* Pokémon type colors on types section*/
+
+#typesImage {
+  width: 450px;
+  height: auto;
+}
+
+.trainer-layout {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  color: white;
+}
+#trainerImage {
+  width: 450px;
+  height: auto;
+}
+
+.trainer-left {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  min-height: 80vh;
+  gap: 20px;
+}
+
+.card-row {
+  width: 70%;
+  padding: 15px 20px;
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: white;
+  color: #461111;
+}
+
+.label-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.value-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+#starterImage {
+  width: 120px;
+  height: auto;
+}
+
+.trainer-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trainer-right img {
+  width: 300px;
+  height: auto;
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  src: url("../assets/FiraMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  src: url("../assets/FiraMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  src: url("../assets/FiraMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}

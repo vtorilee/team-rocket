@@ -249,7 +249,7 @@ function renderMarks() {
     if (selectedGen === d) {
       // https://stackoverflow.com/questions/20086884/add-image-inside-a-circle-d3
       g.append("image")
-        .attr("xlink:href", "../assets/pokeball-pixel.png")
+        .attr("xlink:href", "../../assets/pokeball-pixel.png")
         .attr("class", "pb-icon");
     } else if (selectedGen !== null) {
       g.append("circle").attr("r", 25).attr("class", "bg-circle unselected");
@@ -559,7 +559,7 @@ function renderSpoilerBox(container, x, y, width, height) {
 
   imageGroup
     .append("image")
-    .attr("href", "../assets/games/gen9/winds.png")
+    .attr("href", "../../assets/games/gen9/winds.png")
     .attr("x", -90)
     .attr("y", 55)
     .attr("width", width * 0.5)
@@ -567,7 +567,7 @@ function renderSpoilerBox(container, x, y, width, height) {
 
   imageGroup
     .append("image")
-    .attr("href", "../assets/games/gen9/winds-jp.png")
+    .attr("href", "../../assets/games/gen9/winds-jp.png")
     .attr("x", 70)
     .attr("y", 55)
     .attr("width", width * 0.5)
@@ -575,7 +575,7 @@ function renderSpoilerBox(container, x, y, width, height) {
 
   imageGroup
     .append("image")
-    .attr("href", "../assets/games/gen9/waves.png")
+    .attr("href", "../../assets/games/gen9/waves.png")
     .attr("x", 260)
     .attr("y", 55)
     .attr("width", width * 0.5)
@@ -583,7 +583,7 @@ function renderSpoilerBox(container, x, y, width, height) {
 
   imageGroup
     .append("image")
-    .attr("href", "../assets/games/gen9/waves-jp.png")
+    .attr("href", "../../assets/games/gen9/waves-jp.png")
     .attr("x", 430)
     .attr("y", 55)
     .attr("width", width * 0.5)
@@ -700,8 +700,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSize,
-        "../assets/games/gen1/red.png",
-        "../assets/games/gen1/red-jp.png",
+        "../../assets/games/gen1/red.png",
+        "../../assets/games/gen1/red-jp.png",
       );
 
       renderGameCover(
@@ -709,7 +709,7 @@ function gameInfo(gen, container, dim) {
         imgSize,
         30,
         imgSize,
-        "../assets/games/gen1/green-jp.png",
+        "../../assets/games/gen1/green-jp.png",
       );
 
       redGreenGroup
@@ -743,8 +743,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.33 + 20,
         imgSize,
-        "../assets/games/gen1/blue.png",
-        "../assets/games/gen1/blue-jp.png",
+        "../../assets/games/gen1/blue.png",
+        "../../assets/games/gen1/blue-jp.png",
       );
 
       blueGroup
@@ -780,8 +780,8 @@ function gameInfo(gen, container, dim) {
         dim * 0.33,
         dim * 0.33 + 20,
         imgSize,
-        "../assets/games/gen1/yellow.png",
-        "../assets/games/gen1/yellow-jp.png",
+        "../../assets/games/gen1/yellow.png",
+        "../../assets/games/gen1/yellow-jp.png",
       );
 
       yellowGroup
@@ -838,8 +838,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSize,
-        "../assets/games/gen2/gold.png",
-        "../assets/games/gen2/gold-jp.png",
+        "../../assets/games/gen2/gold.png",
+        "../../assets/games/gen2/gold-jp.png",
       );
 
       renderGameCover(
@@ -847,8 +847,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         30,
         imgSize,
-        "../assets/games/gen2/silver.png",
-        "../assets/games/gen2/silver-jp.png",
+        "../../assets/games/gen2/silver.png",
+        "../../assets/games/gen2/silver-jp.png",
       );
 
       goldSilverGroup
@@ -884,8 +884,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.355 + 20,
         imgSize,
-        "../assets/games/gen2/crystal.png",
-        "../assets/games/gen2/crystal-jp.png",
+        "../../assets/games/gen2/crystal.png",
+        "../../assets/games/gen2/crystal-jp.png",
       );
 
       crystalGroup
@@ -919,7 +919,7 @@ function gameInfo(gen, container, dim) {
         `> Players could only venture as one of the male protagonists, Red (Gen 1) or Ethan (Gold/Silver), prior
         <br>
         > Crystal gave an option to play as Kris, the first female protagonist of the series! `,
-        "../assets/games/gen2/kris.png",
+        "../../assets/games/gen2/kris.png",
       );
 
       return;
@@ -941,8 +941,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSize,
-        "../assets/games/gen3/ruby.png",
-        "../assets/games/gen3/ruby-jp.png",
+        "../../assets/games/gen3/ruby.png",
+        "../../assets/games/gen3/ruby-jp.png",
       );
 
       renderGameCover(
@@ -950,8 +950,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         30,
         imgSize,
-        "../assets/games/gen3/sapphire.png",
-        "../assets/games/gen3/sapphire-jp.png",
+        "../../assets/games/gen3/sapphire.png",
+        "../../assets/games/gen3/sapphire-jp.png",
       );
 
       rubySapphireGroup
@@ -989,8 +989,8 @@ function gameInfo(gen, container, dim) {
         imgSize * 2.2,
         30,
         imgSize,
-        "../assets/games/gen3/emerald.png",
-        "../assets/games/gen3/emerald-jp.png",
+        "../../assets/games/gen3/emerald.png",
+        "../../assets/games/gen3/emerald-jp.png",
       );
 
       emeraldGroup
@@ -1027,8 +1027,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen3/firered.png",
-        "../assets/games/gen3/firered-jp.png",
+        "../../assets/games/gen3/firered.png",
+        "../../assets/games/gen3/firered-jp.png",
       );
 
       renderGameCover(
@@ -1036,8 +1036,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen3/leafgreen.png",
-        "../assets/games/gen3/leafgreen-jp.png",
+        "../../assets/games/gen3/leafgreen.png",
+        "../../assets/games/gen3/leafgreen-jp.png",
       );
 
       fireRedLeafGreenGroup
@@ -1090,8 +1090,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSize,
-        "../assets/games/gen4/diamond.png",
-        "../assets/games/gen4/diamond-jp.png",
+        "../../assets/games/gen4/diamond.png",
+        "../../assets/games/gen4/diamond-jp.png",
       );
 
       renderGameCover(
@@ -1099,8 +1099,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         30,
         imgSize,
-        "../assets/games/gen4/pearl.png",
-        "../assets/games/gen4/pearl-jp.png",
+        "../../assets/games/gen4/pearl.png",
+        "../../assets/games/gen4/pearl-jp.png",
       );
 
       diamondPearlGroup
@@ -1138,8 +1138,8 @@ function gameInfo(gen, container, dim) {
         imgSize * 2.2,
         30,
         imgSize,
-        "../assets/games/gen4/platinum.png",
-        "../assets/games/gen4/platinum-jp.png",
+        "../../assets/games/gen4/platinum.png",
+        "../../assets/games/gen4/platinum-jp.png",
       );
 
       platinumGroup
@@ -1176,8 +1176,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen4/heartgold.png",
-        "../assets/games/gen4/heartgold-jp.png",
+        "../../assets/games/gen4/heartgold.png",
+        "../../assets/games/gen4/heartgold-jp.png",
       );
 
       renderGameCover(
@@ -1185,8 +1185,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen4/soulsilver.png",
-        "../assets/games/gen4/soulsilver-jp.png",
+        "../../assets/games/gen4/soulsilver.png",
+        "../../assets/games/gen4/soulsilver-jp.png",
       );
 
       heartGoldSoulSilverGroup
@@ -1238,8 +1238,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSize,
-        "../assets/games/gen5/black.png",
-        "../assets/games/gen5/black-jp.png",
+        "../../assets/games/gen5/black.png",
+        "../../assets/games/gen5/black-jp.png",
       );
 
       renderGameCover(
@@ -1247,8 +1247,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         30,
         imgSize,
-        "../assets/games/gen5/white.png",
-        "../assets/games/gen5/white-jp.png",
+        "../../assets/games/gen5/white.png",
+        "../../assets/games/gen5/white-jp.png",
       );
 
       blackWhiteGroup
@@ -1284,8 +1284,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen5/black2.png",
-        "../assets/games/gen5/black2-jp.png",
+        "../../assets/games/gen5/black2.png",
+        "../../assets/games/gen5/black2-jp.png",
       );
 
       renderGameCover(
@@ -1293,8 +1293,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen5/white2.png",
-        "../assets/games/gen5/white2-jp.png",
+        "../../assets/games/gen5/white2.png",
+        "../../assets/games/gen5/white2-jp.png",
       );
 
       blackWhite2Group
@@ -1344,8 +1344,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSize,
-        "../assets/games/gen6/x.png",
-        "../assets/games/gen6/x-jp.png",
+        "../../assets/games/gen6/x.png",
+        "../../assets/games/gen6/x-jp.png",
       );
 
       renderGameCover(
@@ -1353,8 +1353,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         30,
         imgSize,
-        "../assets/games/gen6/y.png",
-        "../assets/games/gen6/y-jp.png",
+        "../../assets/games/gen6/y.png",
+        "../../assets/games/gen6/y-jp.png",
       );
 
       xYGroup
@@ -1388,8 +1388,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen6/omegaruby.png",
-        "../assets/games/gen6/omegaruby-jp.png",
+        "../../assets/games/gen6/omegaruby.png",
+        "../../assets/games/gen6/omegaruby-jp.png",
       );
 
       renderGameCover(
@@ -1397,8 +1397,8 @@ function gameInfo(gen, container, dim) {
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
-        "../assets/games/gen6/alphasapphire.png",
-        "../assets/games/gen6/alphasapphire-jp.png",
+        "../../assets/games/gen6/alphasapphire.png",
+        "../../assets/games/gen6/alphasapphire-jp.png",
       );
 
       orasGroup
@@ -1463,8 +1463,8 @@ function gameInfo(gen, container, dim) {
         0,
         30,
         imgSizeSmall,
-        "../assets/games/gen7/sun.png",
-        "../assets/games/gen7/sun-jp.png",
+        "../../assets/games/gen7/sun.png",
+        "../../assets/games/gen7/sun-jp.png",
       );
 
       renderGameCover(
@@ -1472,8 +1472,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall + 7,
         30,
         imgSizeSmall,
-        "../assets/games/gen7/moon.png",
-        "../assets/games/gen7/moon-jp.png",
+        "../../assets/games/gen7/moon.png",
+        "../../assets/games/gen7/moon-jp.png",
       );
 
       renderGameCover(
@@ -1481,8 +1481,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall * 2 + 14,
         30,
         imgSizeSmall,
-        "../assets/games/gen7/ultrasun.png",
-        "../assets/games/gen7/ultrasun-jp.png",
+        "../../assets/games/gen7/ultrasun.png",
+        "../../assets/games/gen7/ultrasun-jp.png",
       );
 
       renderGameCover(
@@ -1490,8 +1490,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall * 3 + 21,
         30,
         imgSizeSmall,
-        "../assets/games/gen7/ultramoon.png",
-        "../assets/games/gen7/ultramoon-jp.png",
+        "../../assets/games/gen7/ultramoon.png",
+        "../../assets/games/gen7/ultramoon-jp.png",
       );
 
       sunMoonGroup
@@ -1546,8 +1546,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.34 + 30,
         imgSizeTall,
-        "../assets/games/gen7/lgpikachu.png",
-        "../assets/games/gen7/lgpikachu-jp.png",
+        "../../assets/games/gen7/lgpikachu.png",
+        "../../assets/games/gen7/lgpikachu-jp.png",
       );
 
       renderGameCover(
@@ -1555,8 +1555,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall,
         dim * 0.34 + 30,
         imgSizeTall,
-        "../assets/games/gen7/lgeevee.png",
-        "../assets/games/gen7/lgeevee-jp.png",
+        "../../assets/games/gen7/lgeevee.png",
+        "../../assets/games/gen7/lgeevee-jp.png",
       );
 
       pikachuEeveeGroup
@@ -1609,8 +1609,8 @@ function gameInfo(gen, container, dim) {
         -10,
         30,
         imgSizeTall * 0.85,
-        "../assets/games/gen8/sword.png",
-        "../assets/games/gen8/sword-jp.png",
+        "../../assets/games/gen8/sword.png",
+        "../../assets/games/gen8/sword-jp.png",
       );
 
       renderGameCover(
@@ -1618,8 +1618,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall * 0.8,
         30,
         imgSizeTall * 0.85,
-        "../assets/games/gen8/shield.png",
-        "../assets/games/gen8/shield-jp.png",
+        "../../assets/games/gen8/shield.png",
+        "../../assets/games/gen8/shield-jp.png",
       );
 
       swordShieldGroup
@@ -1657,8 +1657,8 @@ function gameInfo(gen, container, dim) {
         dim * 0.38,
         30,
         imgSizeTall * 0.85,
-        "../assets/games/gen8/legendsarceus.png",
-        "../assets/games/gen8/legendsarceus-jp.png",
+        "../../assets/games/gen8/legendsarceus.png",
+        "../../assets/games/gen8/legendsarceus-jp.png",
       );
 
       legendsArceusGroup
@@ -1693,8 +1693,8 @@ function gameInfo(gen, container, dim) {
         0,
         dim * 0.34 + 30,
         imgSizeTall,
-        "../assets/games/gen8/brilliantdiamond.png",
-        "../assets/games/gen8/brilliantdiamond-jp.png",
+        "../../assets/games/gen8/brilliantdiamond.png",
+        "../../assets/games/gen8/brilliantdiamond-jp.png",
       );
 
       renderGameCover(
@@ -1702,8 +1702,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall,
         dim * 0.34 + 30,
         imgSizeTall,
-        "../assets/games/gen8/shiningpearl.png",
-        "../assets/games/gen8/shiningpearl-jp.png",
+        "../../assets/games/gen8/shiningpearl.png",
+        "../../assets/games/gen8/shiningpearl-jp.png",
       );
 
       bdspGroup
@@ -1755,8 +1755,8 @@ function gameInfo(gen, container, dim) {
         -50,
         30,
         imgSizeTall,
-        "../assets/games/gen9/scarlet.png",
-        "../assets/games/gen9/scarlet-jp.png",
+        "../../assets/games/gen9/scarlet.png",
+        "../../assets/games/gen9/scarlet-jp.png",
       );
 
       renderGameCover(
@@ -1764,8 +1764,8 @@ function gameInfo(gen, container, dim) {
         imgSizeSmall * 0.65,
         30,
         imgSizeTall,
-        "../assets/games/gen9/violet.png",
-        "../assets/games/gen9/violet-jp.png",
+        "../../assets/games/gen9/violet.png",
+        "../../assets/games/gen9/violet-jp.png",
       );
 
       scarletVioletGroup
@@ -1801,8 +1801,8 @@ function gameInfo(gen, container, dim) {
         dim * 0.35,
         30,
         imgSizeTall,
-        "../assets/games/gen9/legendsza.png",
-        "../assets/games/gen9/legendsza-ns2.png",
+        "../../assets/games/gen9/legendsza.png",
+        "../../assets/games/gen9/legendsza-ns2.png",
       );
 
       legendsZA
@@ -1935,7 +1935,7 @@ function displayDataBox() {
 
   mascotGroup
     .append("image")
-    .attr("xlink:href", `../assets/mascots/${selectedGen.mascot.name}.png`)
+    .attr("xlink:href", `../../assets/mascots/${selectedGen.mascot.name}.png`)
     .attr("width", dataBoxWidth * 0.2)
     .attr("x", 0)
     .attr("y", 40);
@@ -1969,7 +1969,7 @@ function displayDataBox() {
 
   startersGroup
     .append("image")
-    .attr("xlink:href", `../assets/starters/gen${selectedGen.number}.png`)
+    .attr("xlink:href", `../../assets/starters/gen${selectedGen.number}.png`)
     .attr("width", dataBoxWidth * 0.25)
     .attr("height", dataBoxHeight * 0.15)
     .attr("x", -dataBoxWidth * 0.02)
@@ -2082,7 +2082,7 @@ function updateUI(gen) {
 const mapContainer = d3.select("#map-container");
 
 //load map svg image: https://stackoverflow.com/questions/12975929/how-to-use-svg-file-for-image-source-in-d3#:~:text=Sorted%20by:,%2C%20100)
-d3.xml("../assets/world-map-by-nstav13.svg")
+d3.xml("../../assets/world-map-by-nstav13.svg")
   .then((xml) => {
     const mapSVG = xml.documentElement;
     mapContainer.node().appendChild(mapSVG);
