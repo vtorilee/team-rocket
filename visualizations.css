@@ -41,10 +41,11 @@ h1 {
 
 h2 {
   text-align: center;
-  color: white;
+  color: rgb(255, 242, 0);
+  stroke: blue;
   margin: 10px 0 4px 0;   /* top, right, bottom, left */
   padding: 0;
- background: #461111;  /* red */
+
   font-size: 36px;
   font-weight: 800;   /* bold */
 }
