@@ -1984,7 +1984,7 @@ function displayDataBox() {
     .append("xhtml:div")
     .attr("class", "data-section-body")
     .style("font-size", "22px").html(`
-        <a href="">
+        <a href="../pages/visualizations.html#starters">
             Starter Pokémon:
         </a>
         <br>
@@ -2007,7 +2007,7 @@ function displayDataBox() {
     .append("xhtml:div")
     .attr("class", "data-section-body")
     .style("font-size", "22px").html(`
-        <a href="">
+        <a href="../pages/visualizations.html#total">
             Pokédex Count:
         </a>
         <br>

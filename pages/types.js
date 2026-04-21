@@ -1,4 +1,4 @@
-const width = 800;
+const width = window.innerWidth > 0 ? window.innerWidth : 600;
 const radius = width / 10; 
 let currentRoot;
 let path;
@@ -62,10 +62,7 @@ function formatNameForAPI(name) {
     "zygarde" : "zygarde-50",
     "oricorio": "oricorio-baile",
     "mimikyu": "mimikyu-disguised",
-    "urshifu": "urshifu-single-strike",
     "squawkabilly": "squawkabilly-blue",
-    "palafin": "palafin-zero",
-    "tatsugiri": "tatsugiri-curly",
   };
 
   if (specialCases[lowerName]) {
@@ -186,7 +183,7 @@ function render() {
   // Clears the SVG
   svg.selectAll("*").remove();
 
-  // Re-draw the legend so it isn't lost
+  // Re-draw the legend
   drawLegend();
 
   // Create paths for ALL levels
@@ -223,15 +220,6 @@ function render() {
     })
     .on("mouseout", () => tooltip.style("display", "none"));
 }
-  // center button to return
-  svg.append("circle")
-    .attr("r", radius)
-    .attr("fill", "white")
-    .style("cursor", "pointer")
-    .on("click", (event) => clicked(event, root))
-    .on("mouseover", () => {
-        tooltip.style("display", "block").html("<b>Center:</b> Click to zoom out");
-    });
 
 // tooltip content based on hovered segment
 async function handleMouseOver(event, d) {

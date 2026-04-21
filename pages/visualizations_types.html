@@ -6,8 +6,18 @@
   <link rel="stylesheet" href="../visualizations.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
-    #chart { display: flex; justify-content: center; align-items: center; height: 120vh; }
-    .type-display { text-align: center; font-size: 24px; font-family: sans-serif; margin-top: 20px; font-weight: bold; }
+
+    #chart { 
+      display: flex; 
+      justify-content: center;
+      align-items: flex-start;  
+      height: auto;
+      min-height: 0;
+      padding: 0;
+      width: 100%;
+      overflow: hidden; 
+    }
+        .type-display { text-align: center; font-size: 24px; font-family: sans-serif; margin-top: 20px; font-weight: bold; }
     #tooltip {
       position: absolute;
       padding: 10px;
@@ -23,8 +33,6 @@
   </style>
 </head>
 <body class="sunburst-page">
-
-  <div id="currentType" class="type-display">Viewing: All Types</div>
   
   <div class="sunburst-vis">
     <div id="chart"></div>

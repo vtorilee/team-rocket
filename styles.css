@@ -546,3 +546,17 @@ section {
   display: block;
   margin-top: 5px;
 }
+.timeline-content p {
+  text-align: left;
+  font-size: 7px;   
+  line-height: 1.4;  
+  margin: 10px 10px;     
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 1200px;
+  margin-left: -143px;  
+  margin-right: auto; 
+  padding: 180px 20px;
+}
