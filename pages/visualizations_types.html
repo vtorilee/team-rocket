@@ -3,117 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Pokémon Type Sunburst</title>
-
   <link rel="stylesheet" href="../visualizations.css">
-
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    #chart { display: flex; justify-content: center; align-items: center; height: 120vh; }
+    .type-display { text-align: center; font-size: 24px; font-family: sans-serif; margin-top: 20px; font-weight: bold; }
+    #tooltip {
+      position: absolute;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .tooltip-card { min-width: 120px; }
+  </style>
 </head>
+<body class="sunburst-page">
 
-<body class="sunburst-page"></body>
-
+  <div id="currentType" class="type-display">Viewing: All Types</div>
+  
   <div class="sunburst-vis">
-  <div id="currentType" class="type-display">
-  Viewing: All Types
-</div>
-  <div class="sunburst-panel">
     <div id="chart"></div>
+    <div id="tooltip"></div>
   </div>
 
-  <div id="tooltip"></div>
-
-</div>
-
-<script>
-const spec = {
-  $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-
-  // load CSV data
-  data: {
-    url: "../datasets/Favourite_Types.csv",
-    format: { type: "csv" }
-  },
-
-  transform: [
-  {
-    // convert percentage from string to number (fixes sorting issues)
-    calculate: "toNumber(datum.Percentage)",
-    as: "Percentage_num"
-  },
-  {
-    // attach icon images to each Pokémon type
-    lookup: "Type",
-    from: {
-      data: {
-        values: [
-          { Type: "Water", img: "../assets/types/water.png" },
-          { Type: "Fire", img: "../assets/types/fire.png" },
-          { Type: "Grass", img: "../assets/types/grass.png" },
-          { Type: "Ghost", img: "../assets/types/ghost.png" },
-          { Type: "Flying", img: "../assets/types/flying.png" },
-          { Type: "Psychic", img: "../assets/types/psychic.png" },
-          { Type: "Normal", img: "../assets/types/normal.png" },
-          { Type: "Dragon", img: "../assets/types/dragon.png" },
-          { Type: "Fairy", img: "../assets/types/fairy.png" },
-          { Type: "Dark", img: "../assets/types/dark.png" },
-          { Type: "Ground", img: "../assets/types/ground.png" },
-          { Type: "Electric", img: "../assets/types/electric.png" },
-          { Type: "Steel", img: "../assets/types/steel.png" },
-          { Type: "Poison", img: "../assets/types/poison.png" },
-          { Type: "Fighting", img: "../assets/types/fighting.png" },
-          { Type: "Bug", img: "../assets/types/bug.png" },
-          { Type: "Ice", img: "../assets/types/ice.png" },
-          { Type: "Rock", img: "../assets/types/rock.png" }
-        ]
-      },
-      key: "Type",
-      fields: ["img"]
-    }
-  }
-],
-
-
-  mark: {
-    type: "image",
-    width: 38,
-    height: 38
-  },
-
-  encoding: {
-    x: {
-      field: "Type",
-      type: "nominal",
-      sort: {
-        field: "Percentage_num",
-        order: "descending"
-      },
-      axis: null
-    },
-    
-    y: {
-      field: "Percentage_num",
-      type: "quantitative",
-      title: "Popularity (%)"
-    },
-
-    url: {
-      field: "img"
-    },
-
-    // tooltip on hover
-    tooltip: [
-      { field: "Type" },
-      { field: "Votes" },
-      { field: "Percentage" }
-    ]
-  },
-
-  width: 700,
-  height: 500
-};
-
-vegaEmbed("#vis", spec);
-</script>
   <script src="./types.js"></script>
-
 </body>
 </html>
