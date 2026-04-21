@@ -1903,11 +1903,24 @@ function displayDataBox() {
     .append("g")
     .attr("transform", `translate(${currentX}, ${currentY})`);
 
+  // releaseGroup
+  //   .append("text")
+  //   .attr("class", "data-section-h1")
+  //   .style("dominant-baseline", "hanging")
+  //   .text("Main Series Releases:");
+
   releaseGroup
-    .append("text")
+    .append("foreignObject")
     .attr("class", "data-section-h1")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", dataBoxWidth * 0.3)
+    .attr("height", 45)
     .style("dominant-baseline", "hanging")
-    .text("Main Series Releases:");
+    .append("xhtml:div")
+    .html(
+      `<a href="../../pages/visualizations.html#timeline">Main Series Releases:</a>`,
+    );
 
   currentY += 70;
 
@@ -1984,7 +1997,7 @@ function displayDataBox() {
     .append("xhtml:div")
     .attr("class", "data-section-body")
     .style("font-size", "22px").html(`
-        <a href="../pages/visualizations.html#starters">
+        <a href="../../pages/visualizations.html#starters">
             Starter Pokémon:
         </a>
         <br>
@@ -2007,7 +2020,7 @@ function displayDataBox() {
     .append("xhtml:div")
     .attr("class", "data-section-body")
     .style("font-size", "22px").html(`
-        <a href="../pages/visualizations.html#total">
+        <a href="../../pages/visualizations.html#total">
             Pokédex Count:
         </a>
         <br>
