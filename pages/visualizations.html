@@ -6,8 +6,7 @@
   <title>Pokémon Visualizations Hub</title>
 
   <link rel="stylesheet" href="../vis_page.css" />
-  <link rel="stylesheet" href="./visualizations.css" />
-
+  <link rel="stylesheet" href="../visualizations.css" />
  
 </head>
 
@@ -16,9 +15,9 @@
       <h1>PokeScope</h1>
     </header>
     <nav>
-      <a href="index.html">HomePage</a>
-      <a href="./pages/quiz.html">Quiz</a>
-      <a href="./pages/map.html">Poke Map</a>
+      <a href="../index.html">HomePage</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="map.html">Poke Map</a>
       <a href="../pages/visualizations.html">Visualizations</a>
     </nav>
 
@@ -29,13 +28,17 @@
     <!-- TYPES -->
     <div class="section">
       <h2>Pokémon Types</h2>
-      <p>
-        This visualization explores the distribution of Pokémon types across generations and how type diversity has evolved over time.
-      </p>
+      
 
       <div class="box">
-        <iframe src="../pages/visualizations_types.html"></iframe>
+        <iframe src="../pages/visualizations_types.html" height="900"></iframe>
+
       </div>
+
+      <p>Every Pokémon has a type — and sometimes even two! From pure Fire or Water types to unique dual-type combinations like Grass/Poison or Steel/Fairy, typing plays a huge role in how Pokémon behave, battle, and are categorized. </p>
+      <p>This sunburst visualization explores the breakdown of Pokémon types, starting with primary (first) types at the core and expanding outward to show how those types combine with secondary types. It reveals both the most common type pairings and the rarer combinations that make certain Pokémon stand out.</p>
+      <p>Data from: https://www.kaggle.com/datasets/guavocado/pokemon-stats-1025-pokemons?resource=download </p>
+      
     </div>
 
     <div class="divider"></div>
@@ -43,17 +46,15 @@
     <!-- TOTAL -->
     <div class="section">
       <h2>Total Pokémon by Generation</h2>
-      <p>
-        Every generation brings a new wave of Pokémon into the world! From the original 151 in Gen 1 to the most recent additions in Gen 9, each region introduces its own unique mix of new species for trainers to discover and catch.
-
-This visualization shows the total number of Pokémon introduced in each generation, highlighting how the franchise has grown and evolved over time with both large expansions and smaller, more focused additions.
-
-These values are based on official Pokémon generation data across all nine regions.
-      </p>
-
+     
       <div class="box">
-        <iframe src="../pages/visualizations_total.html"></iframe>
+        <iframe src="../pages/visualizations_total.html" height="500"></iframe>
       </div>
+
+       <p>Every generation brings a new wave of Pokémon into the world! From the original 151 in Gen 1 to the most recent additions in Gen 9, each region introduces its own unique mix of new species for trainers to discover and catch.</p>
+      <p>This visualization shows the total number of Pokémon introduced in each generation, highlighting how the franchise has grown and evolved over time with both large expansions and smaller, more focused additions.</p>
+      <p>These values are based on official Pokémon generation data across all nine regions.</p>
+
     </div>
 
     <div class="divider"></div>
@@ -61,21 +62,32 @@ These values are based on official Pokémon generation data across all nine regi
     <!-- STARTERS -->
     <div class="section">
       <h2>Starter Pokémon Evolution</h2>
-      <p>
-        Every journey starts somewhere! For many trainers, the first Pokemon on their journey is chosen from one of 3 starter Pokemon. Varying on the region, trainers can choose from a fire, water or grass starter to accompany them along their journey!
-
-This visualizations reveals the popularity of the starters overall from the 9 generations.
-
-These votes were taken from: https://www.reddit.com/r/pokemon/comments/1o7nb3l/results_is_every_pok%C3%A9mon_someones_favourite/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-
-      </p>
-
+     
       <div class="box">
-        <iframe src="../pages/visualizations_starters.html"></iframe>
+        <iframe src="../pages/visualizations_starters.html" height="700"></iframe>
       </div>
+
+       <p>Every journey starts somewhere! For many trainers, the first Pokemon on their journey is chosen from one of 3 starter Pokemon. Varying on the region, trainers can choose from a fire, water or grass starter to accompany them along their journey!</p>
+      <p>This visualizations reveals the popularity of the starters overall from the 9 generations.</p>
+      <p>These votes were taken from: https://www.reddit.com/r/pokemon/comments/1o7nb3l/results_is_every_pok%C3%A9mon_someones_favourite/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button</p>
+
     </div>
 
   </div>
+<script>
+window.addEventListener("message", function (event) {
+  if (event.data.type === "setHeight") {
 
+    const iframes = document.querySelectorAll("iframe");
+
+    iframes.forEach(frame => {
+      if (frame.contentWindow === event.source) {
+        frame.style.height = event.data.height + "px";
+      }
+    });
+
+  }
+});
+</script>
 </body>
 </html>
