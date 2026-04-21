@@ -405,13 +405,7 @@ function displayResults(container) {
       .style("text-shadow", "0 0 2px black, 0 0 7px white")
       .text(`Gen ${roman}`);
 
-    drawButton(
-      genGroup,
-      0,
-      25,
-      "View Generation Data",
-      "../visualizations.html",
-    );
+    drawButton(genGroup, 0, 25, "View Generation Timeline", "../map/map.html");
 
     //type results
     const typeGroup = group
@@ -433,7 +427,13 @@ function displayResults(container) {
       .style("font-size", "28px")
       .text(userResult.type);
 
-    drawButton(typeGroup, 0, 15, "View Type Data", "../visualizations.html");
+    drawButton(
+      typeGroup,
+      0,
+      15,
+      "View Type Data",
+      "../visualizations.html#types",
+    );
 
     //starter results
     const starterGroup = group
@@ -461,7 +461,7 @@ function displayResults(container) {
       0,
       60,
       "View Starter Data",
-      "../visualizations.html",
+      "../visualizations.html#starters",
     );
 
     //trainer image
