@@ -13,8 +13,28 @@ const data = [
 const spec = {
   $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
-  width: 900,
-  height: 500,
+  width: 1100,
+  height: 650,
+
+  background: "#2b2b2b",
+
+  config: {
+    style: {
+      "guide-label": { fill: "white" },
+      "guide-title": { fill: "white" }
+    },
+    axis: {
+      domainColor: "white",
+      tickColor: "white",
+      gridColor: "#555",
+      labelColor: "white",
+      titleColor: "white"
+    },
+    legend: {
+      labelColor: "white",
+      titleColor: "white"
+    }
+  },
 
   data: {
     values: data
@@ -22,7 +42,6 @@ const spec = {
 
   transform: [
     { sort: [{ field: "Gen" }] },
-
     {
       window: [
         {
@@ -32,7 +51,6 @@ const spec = {
         }
       ]
     },
-
     {
       calculate: "isValid(datum.prevCount) ? datum.Count - datum.prevCount : 0",
       as: "increase"
@@ -41,29 +59,29 @@ const spec = {
 
   mark: {
     type: "line",
+    stroke: "red",
     strokeWidth: 4,
     point: {
-      size: 120,
-      filled: true
+      size: 140,
+      filled: true,
+      fill: "red",
+      stroke: "white",
+      strokeWidth: 1.5
     }
   },
 
   encoding: {
-
     x: {
       field: "Gen",
       type: "ordinal",
       title: "Generation",
-
       axis: {
         labelExpr: "'Gen ' + datum.value",
-        labelAngle: -45,   
+        labelAngle: -45,
         labelPadding: 10,
-
         grid: true,
-        gridColor: "#666",
-        gridOpacity: 0.15   
-
+        gridColor: "#555",
+        gridOpacity: 0.3
       }
     },
 
@@ -71,19 +89,18 @@ const spec = {
       field: "Count",
       type: "quantitative",
       title: "Amount of Pokémon",
-
       axis: {
         grid: true,
-        gridColor: "#666",
-        gridOpacity: 0.15  
+        gridColor: "#555",
+        gridOpacity: 0.3
       }
     },
 
     tooltip: [
       { field: "Gen", type: "ordinal", title: "Generation" },
       { field: "Region", type: "nominal" },
-      { field: "Count", type: "quantitative", title: "Amount" },
-      { field: "increase", type: "quantitative", title: "Increase" }
+      { field: "Count", type: "quantitative", title: "Total Amount of Pokemon" },
+      { field: "increase", type: "quantitative", title: "Added # of Pokemon" }
     ]
   }
 };
@@ -91,14 +108,14 @@ const spec = {
 vegaEmbed("#vis", spec, { actions: false });
 
 function sendHeight() {
-  const height = document.body.scrollHeight;
-
-  window.parent.postMessage({
-    type: "setHeight",
-    height: 500
-  }, "*");
+  window.parent.postMessage(
+    {
+      type: "setHeight",
+      height: 650
+    },
+    "*"
+  );
 }
 
 window.addEventListener("load", sendHeight);
 window.addEventListener("resize", sendHeight);
-

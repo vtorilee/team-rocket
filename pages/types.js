@@ -88,6 +88,44 @@ d3.csv("../datasets/Pokemon_Types.csv").then(data => {
   });
 
   render();
+  const legendData = Object.keys(typeColors);
+
+
+const cols = 6; 
+const boxSize = 14;
+const spacingX = 110;
+const spacingY = 25;
+
+
+const legendWidth = (cols - 1) * spacingX;
+const startX = -legendWidth / 2;
+const startY = radius + 230;
+
+const legend = svg.append("g")
+  .attr("class", "legend")
+  .attr("transform", `translate(${startX}, ${startY})`);
+
+legendData.forEach((type, i) => {
+
+  const row = Math.floor(i / cols);
+  const col = i % cols;
+
+  const g = legend.append("g")
+    .attr("transform", `translate(${col * spacingX}, ${row * spacingY})`);
+
+  g.append("rect")
+    .attr("width", boxSize)
+    .attr("height", boxSize)
+    .attr("fill", typeColors[type] || "#999");
+
+  g.append("text")
+    .attr("x", boxSize + 8)
+    .attr("y", boxSize - 2)
+    .text(capitalize(type))
+    .attr("fill", "white")
+    .style("font-size", "12px")
+    .style("alignment-baseline", "middle");
+});
 });
 
 function buildHierarchy() {

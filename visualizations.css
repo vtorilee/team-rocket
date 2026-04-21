@@ -1,19 +1,11 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-
-  background-image: url("../assets/homepage.bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-
+  background-color: #2b2b2b;
   color: white;
 }
 .type-display {
-  font-size: 18px;
+  font-size: 30px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 100px;
   text-align: center;
 }
 nav{
@@ -40,11 +32,32 @@ header {
 }
 
 h1 {
-  
+  text-align: center;
   background: transparent;
   color: white;
   padding: 15px 20px;
   
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  margin: 10px 0 4px 0;   /* top, right, bottom, left */
+  padding: 0;
+ background: #461111;  /* red */
+  font-size: 36px;
+  font-weight: 800;   /* bold */
+}
+
+h3 {
+  text-align: center;
+  color: white;
+   margin: 2px 0 10px 0;
+  padding: 0;
+
+  font-size: 18px;
+  font-weight: 300;   /* skinny/light */
+  opacity: 0.8;       /* makes it softer than h2 */
 }
 
 /* .btn {
