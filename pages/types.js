@@ -1,4 +1,4 @@
-const width = window.innerWidth > 0 ? window.innerWidth : 600;
+const width = 800;
 const radius = width / 10; 
 let currentRoot;
 let path;
@@ -6,7 +6,9 @@ let arc;
 
 const svg = d3.select("#chart")
   .append("svg")
-  .attr("viewBox", [-width / 2, -width / 2, width, width]);
+  .attr("viewBox", [-width / 2, -width / 2 + 100, width, width - 50])
+  .attr("width", "100%")  
+  .attr("height", "100%");
 
 const tooltip = d3.select("#tooltip");
 
@@ -120,8 +122,7 @@ function drawLegend() {
 
   const legendWidth = (cols - 1) * spacingX;
   const startX = -legendWidth / 2;
-  // Adjusted startY slightly to make sure it doesn't overlap with zoomed rings
-  const startY = (3 * radius) + 50; 
+  const startY = (3 * radius) + 50;
 
   const legend = svg.append("g")
     .attr("class", "legend")
@@ -219,6 +220,14 @@ function render() {
         tooltip.style("display", "block").html("<b>Center:</b> Click to zoom out");
     })
     .on("mouseout", () => tooltip.style("display", "none"));
+
+  setTimeout(() => {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({
+      type: "setHeight",
+      height: height
+    }, "*");
+  }, 500); 
 }
 
 // tooltip content based on hovered segment
