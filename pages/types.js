@@ -65,6 +65,7 @@ function formatNameForAPI(name) {
     "urshifu": "urshifu-single-strike",
     "squawkabilly": "squawkabilly-blue",
     "palafin": "palafin-zero",
+    "tatsugiri": "tatsugiri-curly",
   };
 
   if (specialCases[lowerName]) {
