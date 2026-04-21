@@ -48,7 +48,23 @@ function formatNameForAPI(name) {
     "tatsugiri": "tatsugiri-curly",
     "gimmighoul": "gimmighoul-chest",
     "gourgeist": "gourgeist-average",
-    "pumpkaboo": "pumpkaboo-average"
+    "pumpkaboo": "pumpkaboo-average",
+    "keldeo" : "keldeo-ordinary",
+    "meowstic" :"meowstic-female",
+    "deoxys": "deoxys-normal",
+    "wormadam": "wormadam-plant",
+    "darmanitan" : "darmanitan-standard",
+    "tornadus": "tornadus-incarnate",
+    "thundurus": "thundurus-incarnate",
+    "landorus": "landorus-incarnate",
+    "meloetta": "meloetta-aria",
+    "aegislash": "aegislash-blade",
+    "zygarde" : "zygarde-50",
+    "oricorio": "oricorio-baile",
+    "mimikyu": "mimikyu-disguised",
+    "urshifu": "urshifu-single-strike",
+    "squawkabilly": "squawkabilly-blue",
+    "palafin": "palafin-zero",
   };
 
   if (specialCases[lowerName]) {
