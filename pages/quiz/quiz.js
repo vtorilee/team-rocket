@@ -330,7 +330,178 @@ function drawImagesSection(group, data) {
     .attr("preserveAspectRatio", "xMidYMid meet");
 }
 
-function drawResults(container, x, y, width, height) {}
+function displayResults(container) {
+  const layoutWidth = 1300;
+  const layoutHeight = 1000;
+
+  container.select("svg").remove();
+
+  const svg = container
+    .append("svg")
+    .attr("viewBox", `0 0 ${layoutWidth} ${layoutHeight}`)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .style("width", "100%")
+    .style("height", "auto");
+
+  function drawResults(svg, x, y, width, height) {
+    const group = svg.append("g").attr("transform", `translate(${x}, ${y})`);
+
+    //title text
+    group
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .style("fill", "white")
+      .style("font-size", "42px")
+      .style("font-weight", "bold")
+      .text("Your Trainer Profile");
+
+    const romanMap = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+
+    function drawButton(parent, x, y, label, link) {
+      const button = parent
+        .append("g")
+        .attr("transform", `translate(${x}, ${y})`)
+        .style("cursor", "pointer")
+        .on("click", () => {
+          window.location.href = link;
+        });
+
+      button
+        .append("rect")
+        .attr("width", 200)
+        .attr("height", 35)
+        .attr("rx", 6)
+        .attr("fill", "#1f1f1f");
+
+      button
+        .append("text")
+        .attr("x", 100)
+        .attr("y", 23)
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .style("font-size", "14px")
+        .text(label);
+    }
+
+    //layout start coords
+    const startY = 65;
+    const rowGap = 120;
+
+    //gen results
+    const genGroup = group
+      .append("g")
+      .attr("transform", `translate(0, ${startY})`);
+
+    const roman = romanMap[userResult.gen - 1] || userResult.gen;
+
+    genGroup
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .style("fill", "white")
+      .style("font-size", "32px")
+      .style("font-weight", "bold")
+      .style("text-shadow", "0 0 2px black, 0 0 7px white")
+      .text(`Gen ${roman}`);
+
+    drawButton(
+      genGroup,
+      0,
+      25,
+      "View Generation Data",
+      "../visualizations.html",
+    );
+
+    //type results
+    const typeGroup = group
+      .append("g")
+      .attr("transform", `translate(0, ${startY + rowGap})`);
+
+    typeGroup
+      .append("image")
+      .attr("href", `../../assets/types/${userResult.type.toLowerCase()}.png`)
+      .attr("x", 95)
+      .attr("y", -45)
+      .attr("width", 60)
+      .attr("height", 60);
+
+    typeGroup
+      .append("text")
+      .attr("y", -5)
+      .style("fill", "white")
+      .style("font-size", "28px")
+      .text(userResult.type);
+
+    drawButton(typeGroup, 0, 15, "View Type Data", "../visualizations.html");
+
+    //starter results
+    const starterGroup = group
+      .append("g")
+      .attr("transform", `translate(0, ${startY + rowGap * 1.5})`);
+
+    starterGroup
+      .append("image")
+      .attr("href", `../../assets/starters/${userResult.starter}.png`)
+      .attr("x", 130)
+      .attr("y", -10)
+      .attr("width", 65)
+      .attr("height", 65);
+
+    starterGroup
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 45)
+      .style("fill", "white")
+      .style("font-size", "26px")
+      .text(userResult.starter);
+
+    drawButton(
+      starterGroup,
+      0,
+      60,
+      "View Starter Data",
+      "../visualizations.html",
+    );
+
+    //trainer image
+    group
+      .append("image")
+      .attr("href", "../../assets/trainer.png")
+      .attr("x", 500)
+      .attr("y", 35)
+      .attr("width", 300)
+      .attr("height", 400);
+
+    // restart button
+    const restart = group
+      .append("g")
+      .attr("transform", "translate(0, 375)")
+      .style("cursor", "pointer")
+      .on("click", () => {
+        userResult = { gen: null, type: null, starter: null };
+        currentQuestion = 0;
+        displayQuiz(layoutContainer);
+      });
+
+    restart
+      .append("rect")
+      .attr("width", 180)
+      .attr("height", 45)
+      .attr("rx", 8)
+      .attr("fill", "#461111");
+
+    restart
+      .append("text")
+      .attr("x", 90)
+      .attr("y", 28)
+      .attr("text-anchor", "middle")
+      .attr("fill", "white")
+      .text("Restart Quiz");
+  }
+
+  drawResults(svg, 120, 80, layoutWidth - 100, layoutHeight - 100);
+}
 
 function displayQuiz(container) {
   //coords for scaling view
@@ -427,7 +598,7 @@ function displayQuiz(container) {
         .attr("transform", "translate(140, 0)")
         .style("cursor", "pointer")
         .on("click", () => {
-          console.log("Final Result:", userResult);
+          displayResults(layoutContainer);
         });
 
       finish
