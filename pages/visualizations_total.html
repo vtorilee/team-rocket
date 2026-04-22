@@ -1,20 +1,100 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pokémon Growth Line Chart</title>
 
-  <!-- Vega libraries -->
+ 
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- your shared stylesheet -->
+
   <link rel="stylesheet" href="../visualizations.css">
 </head>
 
 <body class="linechart-page">
+
+  <div id="vis"></div>
+
+  <script src="../vis_total2.js"></script>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokémon Stacked Chart</title>
+
+  <!-- Vega -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #1e1e1e;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(0.95);
+    }
+
+    /* ACTIVE = GREEN */
+    button.active {
+      background: #2ecc71;
+    }
+
+    /* RESET ALWAYS GREY */
+    #resetBtn {
+      background: #777;
+    }
+
+    #vis {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="buttons">
+    <button id="btnMega" onclick="toggle('Mega')">Mega</button>
+    <button id="btnGMax" onclick="toggle('GMax')">GMax</button>
+    <button id="btnAlolan" onclick="toggle('Alolan')">Alolan</button>
+    <button id="btnHisuian" onclick="toggle('Hisuian')">Hisuian</button>
+    <button id="resetBtn" onclick="resetChart()">Reset</button>
+  </div>
 
   <div id="vis"></div>
 
