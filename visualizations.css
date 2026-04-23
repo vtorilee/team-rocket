@@ -1,5 +1,4 @@
 body {
-  
   color: white;
 }
 .type-display {
@@ -8,57 +7,27 @@ body {
   margin-top: 100px;
   text-align: center;
 }
-nav{
-  display:flex;
-  justify-content: space-evenly;
-  align-items: center;
-  color: white;
-  background:#461111;
-  padding:10px;
-}
-
-nav a{
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-header {
-  
-  background: #461111;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-
-h1 {
-  text-align: center;
-  background: transparent;
-  color: white;
-  padding: 15px 20px;
-  
-}
 
 h2 {
   text-align: center;
   color: rgb(255, 242, 0);
   stroke: blue;
-  margin: 10px 0 4px 0;  
+  margin: 10px 0 4px 0;
   padding: 0;
 
   font-size: 60px;
-  font-weight: 800;   
+  font-weight: 800;
 }
 
 h3 {
   text-align: center;
   color: white;
-   margin: 2px 0 10px 0;
+  margin: 2px 0 10px 0;
   padding: 0;
 
   font-size: 18px;
-  font-weight: 300;   /* skinny/light */
-  opacity: 0.8;       /* makes it softer than h2 */
+  font-weight: 300; /* skinny/light */
+  opacity: 0.8; /* makes it softer than h2 */
 }
 
 /* .btn {
@@ -82,13 +51,11 @@ section {
   padding: 100px;
   margin: 20px;
   background: transparent;
-  
 }
 
 .detail-box {
   margin-top: 20px;
 }
-
 
 .buttons {
   margin-bottom: 15px;
@@ -99,43 +66,35 @@ button {
   margin: 5px;
 
   cursor: pointer;
-  
+
   color: white;
   transition: 0.2s;
 }
-
-
 
 #vis {
   max-width: 1100px;
   margin: auto;
 }
 
-    h1 {
-      padding: 20px;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
 
-    
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 20px;
-    }
-
-    
-  .box {
+.box {
   height: auto;
   min-height: 200px;
   overflow: visible;
 }
 .box iframe {
   width: 100%;
-  height: auto;      /* let JS control it */
+  height: auto; /* let JS control it */
   border: none;
   display: block;
 }
-  iframe {
+iframe {
   width: 100%;
   height: auto;
   min-height: 400px;
@@ -143,13 +102,12 @@ button {
   display: block;
 }
 
-    
-    @media (max-width: 1000px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .sunburst-vis {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -179,16 +137,15 @@ button {
   max-width: 250px;
 }
 
-
 .sunburst-vis .tooltip-card {
   display: flex;
   align-items: center;
   gap: 10px;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px;
   border-radius: 12px;
-  
+
   max-width: 260px;
 }
 

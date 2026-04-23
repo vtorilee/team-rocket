@@ -1,131 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pokémon Visualizations Hub</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Galindo&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="../vis_page.css" />
-  <link rel="stylesheet" href="../visualizations.css" />
- 
-</head>
+    <title>Pokémon Visualizations Hub</title>
 
-<body>
-   <header>
-      <h1>PokeScope</h1>
+    <link rel="stylesheet" href="../vis_page.css" />
+    <link rel="stylesheet" href="../visualizations.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Data Visualization Hub</h1>
     </header>
     <nav>
-      <a href="../index.html">HomePage</a>
-      <a href="quiz.html">Quiz</a>
-      <a href="map.html">Poke Map</a>
-      <a href="../pages/visualizations.html">Visualizations</a>
+      <div class="nav-button"><a href="../index.html">Homepage</a></div>
+      <div class="nav-button"><a href="quiz/quiz.html">Trainer's Quiz</a></div>
+      <div class="nav-button"><a href="map/map.html">PokéMap</a></div>
+      <div class="nav-button">
+        <a href="visualizations.html">Explore Data</a>
+      </div>
     </nav>
 
- 
+    <div class="container">
+      <!-- TYPES -->
+      <div class="section" id="types">
+        <h2>What are Pokemon Made of?</h2>
+        <h3>The Breakdown of Pokemon Types</h3>
 
-  <div class="container">
+        <div class="vis-guide">
+          <p>[ How to use this chart ]</p>
+          <ul>
+            <li>
+              <strong>The "Chunks":</strong> The wider a slice is, the more
+              Pokémon exist with that type.
+            </li>
+            <li>
+              <strong>The Rings:</strong> The inner ring is the 1st type. The
+              outer ring shows its 2nd type combinations.
+            </li>
+            <li>
+              <strong>The Outer Grey Option:</strong> This represents "Pure"
+              Pokémon that do not have a second type.
+            </li>
+            <li>
+              <strong>Interaction:</strong> Click a color to zoom in. Click the
+              center circle to zoom back out.
+            </li>
+          </ul>
+        </div>
 
-    <!-- TYPES -->
-    <div class="section" id="types">
-      <h2>What are Pokemon Made of?</h2>
-      <h3>The Breakdown of Pokemon Types</h3>
-      
-      <div class="vis-guide">
-        <p>[ How to use this chart ]</p>
-        <ul>
-          <li><strong>The "Chunks":</strong> The wider a slice is, the more Pokémon exist with that type.</li>
-          <li><strong>The Rings:</strong> The inner ring is the 1st type. The outer ring shows its 2nd type combinations.</li>
-          <li><strong>The Outer Grey Option:</strong> This represents "Pure" Pokémon that do not have a second type.</li>
-          <li><strong>Interaction:</strong> Click a color to zoom in. Click the center circle to zoom back out.</li>
-        </ul>
+        <div class="box">
+          <iframe
+            src="../pages/visualizations_types.html"
+            height="900"
+          ></iframe>
+        </div>
+
+        <p>
+          Every Pokémon has a type — and sometimes even two! From pure Fire or
+          Water types to unique dual-type combinations like Grass/Poison or
+          Steel/Fairy, typing plays a huge role in how Pokémon behave, battle,
+          and are categorized.
+        </p>
+        <p>
+          This sunburst visualization explores the breakdown of Pokémon types,
+          starting with primary (first) types at the core and expanding outward
+          to show how those types combine with secondary types. It reveals both
+          the most common type pairings and the rarer combinations that make
+          certain Pokémon stand out.
+        </p>
+        <p>
+          Data from:
+          https://www.kaggle.com/datasets/guavocado/pokemon-stats-1025-pokemons?resource=download
+        </p>
       </div>
 
-      <div class="box">
-        <iframe src="../pages/visualizations_types.html" height="900"></iframe>
+      <div class="divider"></div>
+
+      <!-- TOTAL -->
+      <div class="section" id="total">
+        <h2>Expanding the Pokedex!</h2>
+        <h3>The Growth of the Number of Pokemon Over the 9 Generations</h3>
+
+        <p>
+          The Pokédex currently contains 1,025 Pokémon species, but that number
+          doesn’t tell the full story. Many Pokémon also exist in multiple
+          forms, such as Mega Evolutions, Gigantamax forms, and regional
+          variants like Alolan or Hisuian forms. These forms are not separate
+          species, but alternate versions of the same Pokémon that change in
+          appearance, type, or strength depending on their environment or battle
+          conditions.
+        </p>
+
+        <!-- INFO CARDS -->
+        <div class="box">
+          <iframe src="../pages/total_cards.html" height="200"></iframe>
+        </div>
+
+        <h2>Why it’s important:</h2>
+        <p>
+          This visualization shows that Pokémon growth is not only about adding
+          new species each generation, but also about evolving and reimagining
+          existing ones through new forms and mechanics. It highlights how the
+          franchise continues to build on its past while keeping the experience
+          fresh, diverse, and increasingly complex.
+        </p>
+
+        <!-- CHART -->
+        <div class="box">
+          <iframe
+            src="../pages/visualizations_total.html"
+            height="650"
+          ></iframe>
+        </div>
+
+        <p>
+          Disclaimer: This data does not include shinies, seasonal, gendered, or
+          Alcremie's forms of Pokemon.
+        </p>
       </div>
 
-      <p>Every Pokémon has a type — and sometimes even two! From pure Fire or Water types to unique dual-type combinations like Grass/Poison or Steel/Fairy, typing plays a huge role in how Pokémon behave, battle, and are categorized. </p>
-      <p>This sunburst visualization explores the breakdown of Pokémon types, starting with primary (first) types at the core and expanding outward to show how those types combine with secondary types. It reveals both the most common type pairings and the rarer combinations that make certain Pokémon stand out.</p>
-      <p>Data from: https://www.kaggle.com/datasets/guavocado/pokemon-stats-1025-pokemons?resource=download </p>
+      <div class="divider"></div>
+
+      <!-- TIMELINE -->
+      <div class="section" id="timeline">
+        <h2>A Journey Through Time</h2>
+        <h3>A Timeline of Pokemon Games</h3>
+
+        <div class="box">
+          <iframe
+            src="../pages/timeline.html"
+            style="height: 600px; overflow: auto"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- STARTERS -->
+      <div class="section" id="starters">
+        <h2>Pokemon Showdown!</h2>
+        <h3>Which Starters do Fans Love the Most?</h3>
+
+        <div class="box">
+          <iframe
+            src="../pages/visualizations_starters.html"
+            height="700"
+          ></iframe>
+        </div>
+
+        <p>
+          Every Pokémon has a type — and sometimes even two! From pure Fire or
+          Water types to unique dual-type combinations like Grass/Poison or
+          Steel/Fairy, typing plays a huge role in how Pokémon behave, battle,
+          and are categorized.
+        </p>
+        <p></p>
+
+        <p>
+          This sunburst visualization explores the breakdown of Pokémon types,
+          starting with primary (first) types at the core and expanding outward
+          to show how those types combine with secondary types. It reveals both
+          the most common type pairings and the rarer combinations that make
+          certain Pokémon stand out. These values are based on official Pokémon
+          type data across all generations, showing how type diversity has
+          expanded and evolved over time.
+        </p>
+
+        <p>
+          Data from:
+          https://www.kaggle.com/datasets/guavocado/pokemon-stats-1025-pokemons?resource=download
+        </p>
+      </div>
     </div>
+    <script>
+      window.addEventListener("message", function (event) {
+        if (event.data.type === "setHeight") {
+          const iframes = document.querySelectorAll("iframe");
 
-    <div class="divider"></div>
-
-    <!-- TOTAL -->
-    <div class="section" id="total">
-  <h2>Expanding the Pokedex!</h2>
-  <h3>The Growth of the Number of Pokemon Over the 9 Generations</h3>
- 
-  <p>
-   The Pokédex currently contains 1,025 Pokémon species, but that number doesn’t tell the full story. Many Pokémon also exist in multiple forms, such as Mega Evolutions, Gigantamax forms, and regional variants like Alolan or Hisuian forms. These forms are not separate species, but alternate versions of the same Pokémon that change in appearance, type, or strength depending on their environment or battle conditions.</p>
-
- 
-
-  <!-- INFO CARDS -->
-<div class="box">
-  <iframe src="../pages/total_cards.html" height="200"></iframe>
-</div>
-
- <h2>Why it’s important:</h2>
-  <p> This visualization shows that Pokémon growth is not only about adding new species each generation, but also about evolving and reimagining existing ones through new forms and mechanics. It highlights how the franchise continues to build on its past while keeping the experience fresh, diverse, and increasingly complex.
-  </p>
-
-<!-- CHART -->
-<div class="box">
-  <iframe src="../pages/visualizations_total.html" height="650"></iframe>
-</div>
-
-
-<p>Disclaimer: This data does not include shinies, seasonal, gendered, or Alcremie's forms of Pokemon.</p>
-  </div>
-
-<div class="divider"></div>
-
-    <!-- TIMELINE -->
-    <div class="section"id="timeline">
-      <h2>A Journey Through Time</h2>
-      <h3>A Timeline of Pokemon Games</h3>
-     
-      <div class="box">
-        <iframe src="../pages/timeline.html" style="height:600px; overflow:auto;"></iframe>
-      </div>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- STARTERS -->
-    <div class="section"id="starters">
-      <h2> Pokemon Showdown! </h2>
-      <h3>Which Starters do Fans Love the Most?</h3>
-     
-      <div class="box">
-        <iframe src="../pages/visualizations_starters.html" height="700"></iframe>
-      </div>
-
-       <p>Every Pokémon has a type — and sometimes even two! From pure Fire or Water types to unique dual-type combinations like Grass/Poison or Steel/Fairy, typing plays a huge role in how Pokémon behave, battle, and are categorized.<p>
-
-<p>This sunburst visualization explores the breakdown of Pokémon types, starting with primary (first) types at the core and expanding outward to show how those types combine with secondary types. It reveals both the most common type pairings and the rarer combinations that make certain Pokémon stand out.
-These values are based on official Pokémon type data across all generations, showing how type diversity has expanded and evolved over time.</p>
-
-<p>Data from: https://www.kaggle.com/datasets/guavocado/pokemon-stats-1025-pokemons?resource=download</p>
-    </div>
-
-  </div>
-<script>
-window.addEventListener("message", function (event) {
-  if (event.data.type === "setHeight") {
-
-    const iframes = document.querySelectorAll("iframe");
-
-    iframes.forEach(frame => {
-      if (frame.contentWindow === event.source) {
-        frame.style.height = event.data.height + "px";
-      }
-    });
-
-  }
-});
-</script>
-</body>
+          iframes.forEach((frame) => {
+            if (frame.contentWindow === event.source) {
+              frame.style.height = event.data.height + "px";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
