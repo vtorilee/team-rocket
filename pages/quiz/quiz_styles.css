@@ -41,10 +41,6 @@ nav {
   justify-content: center;
 
   transition: all 0.3s ease;
-
-  .nav-button a:hover {
-    color: rgb(104, 22, 22);
-  }
 }
 
 .nav-button:hover {
@@ -88,152 +84,195 @@ h1 {
   text-shadow: 0px 1px 5px #d0cece76;
 }
 
-.genButton:hover {
-  transform: scale(0.95);
-  transition: 0.2s;
+.quiz-h1 {
+  font-size: 28px;
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1.3px;
+
+  text-shadow: -0.5px 3px 7px #04040481;
 }
+
+.option-button {
+  rx: 24;
+  stroke: #936f6b;
+  stroke-width: 3px;
+}
+
+.button-group:hover .option-button {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.94);
+  transition: 0.2s ease;
+}
+
+.option-text {
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-size: 16px;
+
+  fill: #ffffff;
+  stroke: #000000;
+  stroke-width: 0.7px;
+  text-shadow: -0.5px 2px 3px #04040481;
+}
+
+.button-group:hover .option-text {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.94);
+  transition: 0.2s ease;
+}
+
+.selected-button {
+  stroke: #a74a37b3;
+  stroke-width: 7px;
+}
+
+.button-group:hover .selected-button {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(1);
+}
+
+.selected-button-text {
+  fill: #622f21;
+  stroke: #ffffff8c;
+  stroke-width: 0.7px;
+  text-shadow: -0.5px 2px 5px #ffffff81;
+}
+
+.button-group:hover .selected-button-text {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(1);
+}
+
+.unselected-button {
+  opacity: 0.5;
+  stroke: #1f1f1f;
+
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.9);
+}
+
+.button-group:hover .unselected-button {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.86);
+  transition: 0.2s ease;
+}
+
+.unselected-button-text {
+  font-size: 14px;
+  fill: #1f1f1f;
+  stroke: #ffffff3f;
+  text-shadow: none;
+  opacity: 0.9;
+}
+
 .result-box {
-  margin-top: 20px;
-  margin-left: 2%;
-  padding: 20px;
-  background: white;
-  color: #461111;
-  border-radius: 10px;
+  fill: #ffffffe0;
+  stroke: #000000c3;
+  stroke-width: 5px;
+
+  rx: 15;
+}
+
+.result-text {
+  font-size: 24px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+
+  fill: #ffcc01;
+  stroke: #3269b2ff;
+  text-shadow: -0.5px 1px 3px #03030381;
+}
+
+.result-card {
+  fill: #b4995a;
+  stroke: #000000;
+  stroke-width: 3px;
+
+  rx: 15;
+}
+
+.result-h1 {
+  text-anchor: middle;
+  dominant-baseline: middle;
+
+  font-size: 30px;
+  fill: #ffffff;
+  stroke: #000;
+  stroke-width: 1.3px;
+  text-shadow: -0.5px 1.5px 4px #04040481;
+}
+
+.result-h2 {
+  text-anchor: middle;
   text-align: center;
 
-  width: 600px;
-  height: 120px;
+  color: #6c0505;
+  -webkit-text-stroke: 0.7px #817a7a;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 0.5px;
 
-  overflow: hidden;
+  text-shadow: -0.5px 1px 1px #04040481;
 }
 
-.genButton {
-  width: 120px;
-  height: 60px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 20px;
+.result-caption {
+  text-anchor: middle;
+  dominant-baseline: middle;
+
+  font-size: 14px;
+  font-style: italic;
+  fill: #3f3b3c;
+
+  stroke-width: 1.3px;
 }
 
-.type-container {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  gap: 10px 30px;
+.result-body {
+  font-size: 11px;
+  color: #323232;
 }
 
-.type {
-  padding: 15px 25px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  width: 120px;
-  height: 60px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 20px;
+.bg-rect {
+  fill: #d9caab;
 }
 
-.type:hover {
-  transform: scale(0.95);
-  transition: 0.2s;
+.result-button rect {
+  rx: 5;
+  fill: #1f1f1f;
 }
 
-/* Pokémon type colors on types section*/
-
-#typesImage {
-  width: 450px;
-  height: auto;
+.result-button:hover {
+  opacity: 0.9;
 }
 
-.trainer-layout {
-  display: flex;
-  justify-content: space-between;
-  padding: 50px;
-  color: white;
-}
-#trainerImage {
-  width: 450px;
-  height: auto;
+.result-button:hover rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.99);
+
+  transition: all 0.1s ease;
 }
 
-.trainer-left {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
+.result-button:hover text {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.99);
 
-  justify-content: center;
-  align-items: center;
-
-  min-height: 80vh;
-  gap: 20px;
+  text-decoration: underline;
+  transition: all 0.1s ease;
 }
 
-.card-row {
-  width: 70%;
-  padding: 15px 20px;
-  border-radius: 15px;
+.result-button-text {
+  text-anchor: middle;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: white;
-  color: #461111;
-}
-
-.label-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.value-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-end;
-}
-
-#starterImage {
-  width: 120px;
-  height: auto;
-}
-
-.trainer-right {
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.trainer-right img {
-  width: 300px;
-  height: auto;
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  src: url("../assets/FiraMono-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  src: url("../assets/FiraMono-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  src: url("../assets/FiraMono-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
+  fill: #ffcc01;
+  stroke: #3269b2ff;
+  stroke-width: 0.7px;
 }
