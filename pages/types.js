@@ -65,6 +65,8 @@ function formatNameForAPI(name) {
     "oricorio": "oricorio-baile",
     "mimikyu": "mimikyu-disguised",
     "squawkabilly": "squawkabilly-blue",
+    "frillish" : "frillish-male",
+    "jellicent" : "jellicent-male",
   };
 
   if (specialCases[lowerName]) {
@@ -210,38 +212,45 @@ function render() {
     })
     .on("mouseout", () => tooltip.style("display", "none"));
 
-  // Center button
-  svg.append("circle")
-    .attr("r", radius)
-    .attr("fill", "white")
+  // FEEDBACK FIX: Explanatory Center Button
+  const centerGroup = svg.append("g")
     .style("cursor", "pointer")
-    .on("click", (event) => clicked(event, root))
-    .on("mouseover", () => {
-        tooltip.style("display", "block").html("<b>Center:</b> Click to zoom out");
-    })
-    .on("mouseout", () => tooltip.style("display", "none"));
+    .on("click", (event) => clicked(event, root));
 
-  setTimeout(() => {
-    const height = document.body.scrollHeight;
-    window.parent.postMessage({
-      type: "setHeight",
-      height: height
-    }, "*");
-  }, 500); 
-}
+  centerGroup.append("circle")
+    .attr("r", radius)
+    .attr("fill", "#1f1f1f")
+    .attr("stroke", "white");
+
+  centerGroup.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", 0) 
+    .attr("dy", "0.35em") 
+    .attr("fill", "white")
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
+    .style("pointer-events", "none") 
+    .text("CLICK TO EXPLORE");
+  }
 
 // tooltip content based on hovered segment
 async function handleMouseOver(event, d) {
   let pokemonList = [];
-  let title = capitalize(d.data.name);
+  let name = d.data.name === "none" ? "Pure (No Second Type)" : capitalize(d.data.name);
+  let title = name;
 
   if (d.depth === 1) {
     pokemonList = d.children.flatMap(c => c.children.map(p => p.data.name));
+    title = `Primary Type: ${name}`;
   } else if (d.depth === 2) {
     pokemonList = d.children.map(c => c.data.name);
-    title = `${capitalize(d.parent.data.name)} / ${capitalize(d.data.name)}`;
-  } else {
+    const parentName = capitalize(d.parent.data.name);
+    title = d.data.name === "none" ? `Pure ${parentName} Type` : `${parentName} + ${name}`;
+  }
+  else if (d.depth === 3) {
+    // Individual Pokemon: Just this specific one
     pokemonList = [d.data.name];
+    title = capitalize(d.data.name);
   }
 
   const spriteURL = await getSprite(pokemonList[0]);
