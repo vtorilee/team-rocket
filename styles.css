@@ -548,7 +548,12 @@ section {
   color: rgb(226, 226, 226);
   bottom: 90px;
 }
-
+.button-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap; 
+}
 .timeline-content.bottom {
   font-family: "Fira Mono", monospace;
   font-weight: 700;

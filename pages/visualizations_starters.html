@@ -14,7 +14,7 @@
   <div id="vis"></div>
 
   <script>
-    // send height to parent page
+    
     function sendHeight() {
       const height = document.body.scrollHeight;
 
@@ -24,7 +24,7 @@
       }, "*");
     }
 
-    // load data + images
+   
     async function loadDataWithImages() {
       const csvUrl = "../datasets/Favourite_Pokemon_Survey.csv";
       const csvText = await fetch(csvUrl).then(r => r.text());

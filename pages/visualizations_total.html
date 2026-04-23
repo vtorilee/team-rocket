@@ -1,27 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pokémon Growth Line Chart</title>
 
- 
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-
-
-  <link rel="stylesheet" href="../visualizations.css">
-</head>
-
-<body class="linechart-page">
-
-  <div id="vis"></div>
-
-  <script src="../vis_total2.js"></script>
-
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +72,7 @@
     <button id="btnHisuian" onclick="toggle('Hisuian')">Hisuian</button>
     <button id="resetBtn" onclick="resetChart()">Reset</button>
   </div>
-
+<div id="tooltip" class="tooltip-card" style="display:none; position:absolute;"></div>
   <div id="vis"></div>
 
   <script src="../vis_total2.js"></script>

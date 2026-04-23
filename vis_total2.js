@@ -1,115 +1,3 @@
-// const data = [
-//   { Gen: 1, Count: 151, Region: "Kanto" },
-//   { Gen: 2, Count: 251, Region: "Johto" },
-//   { Gen: 3, Count: 386, Region: "Hoenn" },
-//   { Gen: 4, Count: 493, Region: "Sinnoh" },
-//   { Gen: 5, Count: 649, Region: "Unova" },
-//   { Gen: 6, Count: 721, Region: "Kalos" },
-//   { Gen: 7, Count: 809, Region: "Alola" },
-//   { Gen: 8, Count: 905, Region: "Galar" },
-//   { Gen: 9, Count: 1025, Region: "Paldea" }
-// ];
-
-// const spec = {
-//   $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-
-//   width: 1000,
-//   height: 550,
-
-//   background: "#2b2b2b",
-
-//   config: {
-//     style: {
-//       "guide-label": { fill: "white" },
-//       "guide-title": { fill: "white" }
-//     },
-//     axis: {
-//       domainColor: "white",
-//       tickColor: "white",
-//       gridColor: "#555",
-//       labelColor: "white",
-//       titleColor: "white"
-//     },
-//     legend: {
-//       labelColor: "white",
-//       titleColor: "white"
-//     }
-//   },
-
-//   data: {
-//     values: data
-//   },
-
-//   transform: [
-//     { sort: [{ field: "Gen" }] },
-//     {
-//       window: [
-//         {
-//           op: "lag",
-//           field: "Count",
-//           as: "prevCount"
-//         }
-//       ]
-//     },
-//     {
-//       calculate: "isValid(datum.prevCount) ? datum.Count - datum.prevCount : 0",
-//       as: "increase"
-//     }
-//   ],
-
-//   mark: {
-//     type: "line",
-//     stroke: "red",
-//     strokeWidth: 4,
-//     point: {
-//       size: 140,
-//       filled: true,
-//       fill: "red",
-//       stroke: "white",
-//       strokeWidth: 1.5
-//     }
-//   },
-
-//   encoding: {
-//     x: {
-//       field: "Gen",
-//       type: "ordinal",
-//       title: "Generation",
-//       axis: {
-//         labelExpr: "'Gen ' + datum.value",
-//         labelAngle: -45,
-//         labelPadding: 10,
-//         grid: true,
-//         gridColor: "#555",
-//         gridOpacity: 0.3
-//       }
-//     },
-
-//     y: {
-//       field: "Count",
-//       type: "quantitative",
-//       title: "Amount of Pokémon",
-//       axis: {
-//         grid: true,
-//         gridColor: "#555",
-//         gridOpacity: 0.3
-//       }
-//     },
-
-//     tooltip: [
-//       { field: "Gen", type: "ordinal", title: "Generation" },
-//       { field: "Region", type: "nominal" },
-//       { field: "Count", type: "quantitative", title: "Total Amount of Pokemon" },
-//       { field: "increase", type: "quantitative", title: "Added # of Pokemon" }
-//     ]
-//   }
-// };
-/* ===================== */
-/* START IN RESET STATE */
-/* ===================== */
-/* ===================== */
-/* START IN RESET STATE */
-/* ===================== */
 
 let selected = {
   Mega: false,
@@ -117,22 +5,14 @@ let selected = {
   Alolan: false,
   Hisuian: false
 };
-
-/* ===================== */
-/* STACK ORDER */
-/* ===================== */
-
+let selectedGen = null;
 const stackOrder = {
   Base: 0,
   Mega: 1,
-  GMax: 2,
+  GMax:2,
   Alolan: 3,
   Hisuian: 4
 };
-
-/* ===================== */
-/* DATA */
-/* ===================== */
 
 const base = [
   { Gen: 1, Type: "Base", Count: 151 },
@@ -235,20 +115,24 @@ function getBreakdown(gen, data) {
     .join("\n");
 }
 
-/* ===================== */
-/* RENDER */
-/* ===================== */
-
+function getGrandTotal(data) {
+  return data.reduce((sum, d) => sum + d.Count, 0);
+}
 function render() {
 
   const data = buildData();
   const totals = getTotals(data);
 
+const grandTotal = getGrandTotal(data);
+
   const spec = {
+    selection: {
+  
+},
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
     width: 850,
-    height: 500,
+    height: 420,
 
     config: {
       background: "#1e1e1e",
@@ -268,17 +152,41 @@ function render() {
     },
 
     layer: [
+      
+      
       {
         data: { values: data },
+transform: [
+  {
+    calculate: `
+      'Base/Mega/GMax/Alolan/Hisuian per Gen ' + datum.Gen + '\\n' +
+      'See full breakdown in selection'
+    `,
+    as: "breakdown"
+  }
+],
         mark: "bar",
 
         encoding: {
+
+         tooltip: [
+  { field: "Gen", title: "Generation" },
+  { field: "Type", title: "Category" },
+  { field: "Count", title: "Amount" },
+
+  {
+    title: "Breakdown",
+    field: "Gen",
+    type: "nominal",
+    format: ""
+  }
+],
           x: {
             field: "Gen",
             type: "ordinal",
             axis: {
               labelExpr: "'Gen ' + datum.value",
-              labelAngle: -45,
+              labelAngle: 0,
               grid: false
             }
             
@@ -320,25 +228,30 @@ function render() {
           color: "white"
         },
         encoding: {
-          x: { field: "Gen", type: "ordinal" },
-          y: { field: "Total", type: "quantitative" },
+          x: { field: "Generation", type: "ordinal" },
+          y: { field: "Total # of Pokemon", type: "quantitative" },
           text: { field: "Total" }
         }
       }
     ]
   };
 
-  vegaEmbed("#vis", spec, { actions: false }).then(result => {
-    result.view.addEventListener("click", function (event, item) {
-      if (!item || !item.datum) return;
-      alert("Gen " + item.datum.Gen + "\n\n" + getBreakdown(item.datum.Gen, data));
-    });
+ vegaEmbed("#vis", spec, { actions: false }).then(result => {
+
+  result.view.addEventListener("click", function (event, item) {
+    if (!item || !item.datum) return;
+
+    const gen = item.datum.Gen;
+
+    selectedGen = (selectedGen === gen) ? null : gen;
+
+    render();
   });
+
+});
 }
 
-/* ===================== */
-/* BUTTON LOGIC */
-/* ===================== */
+
 
 function toggle(type) {
   selected[type] = !selected[type];
@@ -369,15 +282,15 @@ function resetChart() {
   render();
 }
 
-/* INIT */
 
-vegaEmbed("#vis", spec, { actions: true });
+
+
 
 function sendHeight() {
   window.parent.postMessage(
     {
       type: "setHeight",
-      height: 650
+      height: document.body.scrollHeight
     },
     "*"
   );
