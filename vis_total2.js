@@ -228,8 +228,8 @@ transform: [
           color: "white"
         },
         encoding: {
-          x: { field: "Generation", type: "ordinal" },
-          y: { field: "Total # of Pokemon", type: "quantitative" },
+          x: { field: "Gen", type: "ordinal" },
+          y: { field: "Total", type: "quantitative" },
           text: { field: "Total" }
         }
       }
