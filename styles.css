@@ -406,27 +406,6 @@ section {
   height: auto;
 }
 
-@font-face {
-  font-family: "Fira Mono";
-  src: url("../assets/FiraMono-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  src: url("../assets/FiraMono-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  src: url("../assets/FiraMono-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
 .timeline-page {
   background: #1f1f1f;
   color: white;
@@ -530,7 +509,6 @@ section {
 }
 
 .timeline-content {
-  font-family: "Fira Mono", monospace;
   font-weight: 400;
   left: 50%;
   position: absolute;
@@ -539,7 +517,6 @@ section {
 }
 
 .timeline-content.top {
-  font-family: "Fira Mono", monospace;
   font-weight: 700;
   color: rgb(226, 226, 226);
   bottom: 90px;
@@ -551,14 +528,12 @@ section {
   flex-wrap: wrap;
 }
 .timeline-content.bottom {
-  font-family: "Fira Mono", monospace;
   font-weight: 700;
   color: rgb(226, 226, 226);
   top: 90px;
 }
 
 .timeline-content span {
-  font-family: "Fira Mono", monospace;
   font-weight: 700;
   display: block;
   margin-bottom: 20px;
@@ -568,7 +543,7 @@ section {
   text-align: left;
   font-size: 10px;
   line-height: 1.4;
-  margin: 10px 10px;
+  margin: 20px 10px;
 }
 
 .timeline-content h3 {
@@ -630,6 +605,6 @@ section {
 }
 
 .timeline-item:nth-child(10) h3 {
-  bottom: -135px;
+  bottom: -155px;
   left: 0px;
 }

@@ -1,4 +1,3 @@
-
 let selected = {
   Mega: false,
   GMax: false,
@@ -123,6 +122,9 @@ function render() {
   const data = buildData();
   const totals = getTotals(data);
 
+  const maxTotal = Math.max(...totals.map(d => d.Total));
+  const domainMax = maxTotal + 10;  
+
 const grandTotal = getGrandTotal(data);
 
   const spec = {
@@ -195,7 +197,8 @@ transform: [
           y: {
             field: "Count",
             type: "quantitative",
-            stack: "zero"
+            stack: "zero",
+            scale: { domain: [0, domainMax] }
           },
 
           color: {
