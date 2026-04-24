@@ -1,3 +1,6 @@
+import { initSidebar } from "../../sidebar.js";
+initSidebar();
+
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 //for tracking generations
@@ -158,7 +161,7 @@ function zoomToRegion(regionID) {
   const width = container.clientWidth;
   const height = container.clientHeight;
   const scale = Math.min(
-    8,
+    3.5,
     0.75 / Math.max(bounds.width / width, bounds.height / height),
   );
   const x = bounds.x + bounds.width / 6;
@@ -274,18 +277,25 @@ function renderMarks() {
 function drawTimeline() {
   //select container, define dimensions of timeline
   const timelineContainer = d3.select("#timeline-container");
-  const width = window.innerWidth - 100;
-  const height = 100;
+  const width = 1500;
+  const height = 120;
+
+  timelineContainer.html("");
 
   //add svg into container, define svg dimensions
   const timelineSVG = timelineContainer
     .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("viewBox", `0 0 ${width} ${height}`) // This is the magic line
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .attr("width", "100%")
+    .attr("height", "100%");
 
   //define mapping for the marks positions, domain and range for start-end of line
   //https://d3js.org/d3-scale/linear
-  const x = d3.scaleLinear().domain([1, 9]).range([100, width]);
+  const x = d3
+    .scaleLinear()
+    .domain([1, 9])
+    .range([80, width - 80]);
 
   //draw the Line
   timelineSVG
@@ -1903,12 +1913,6 @@ function displayDataBox() {
     .append("g")
     .attr("transform", `translate(${currentX}, ${currentY})`);
 
-  // releaseGroup
-  //   .append("text")
-  //   .attr("class", "data-section-h1")
-  //   .style("dominant-baseline", "hanging")
-  //   .text("Main Series Releases:");
-
   releaseGroup
     .append("foreignObject")
     .attr("class", "data-section-h1")
@@ -2123,3 +2127,7 @@ d3.xml("../../assets/world-map-by-nstav13.svg")
   });
 
 drawTimeline();
+
+window.addEventListener("resize", () => {
+  drawTimeline();
+});

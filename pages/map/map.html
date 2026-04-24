@@ -14,27 +14,124 @@
     <link rel="stylesheet" href="./map_styles.css" />
   </head>
   <body>
-    <div id="page-container">
-      <div id="header">
-        <h1 id="title">Regions and Generations Map</h1>
-        <p id="credits">
+    <!-- <header>
+        <h1 id="title">Regions and Generations Map</h1> -->
+    <!-- <p id="credits">
           (Special thanks to u/nstav13 for lending the
           <a
             href="https://www.reddit.com/r/PokemonMaps/comments/z82a94/pokemon_world_map_now_with_paldea_and_lental/"
             target="_blank"
             >map!</a
           >)
-        </p>
-      </div>
+        </p> -->
+    <!-- </header> -->
+    <!-- <nav>
+        <div class="nav-button"><a href="../../index.html">Homepage</a></div>
+        <div class="nav-button">
+          <a href="../quiz/quiz.html">Trainer's Quiz</a>
+        </div>
+        <div class="nav-button"><a href="map.html">PokéMap</a></div>
+        <div class="nav-button">
+          <a href="../visualizations.html">Explore Data</a>
+        </div>
+      </nav> -->
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <span class="logo">PokéScope</span>
+          <button id="toggle-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"
+              />
+            </svg>
+          </button>
+        </li>
+        <li>
+          <a href="../../index.html">
+            <img
+              src="../../assets/icons/meowth.head.png"
+              width="28px"
+              alt="Homepage"
+            />
+            <span class="menu-text">Homepage</span>
+          </a>
+        </li>
+        <li>
+          <a href="../../pages/quiz/quiz.html">
+            <img
+              src="../../assets/icons/hat-icon.png"
+              width="28px"
+              alt="Quiz"
+            />
+            <span class="menu-text">Trainer's Quiz</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="map.html">
+            <img src="../../assets/icons/map-icon.png" width="28px" alt="Map" />
+            <span class="menu-text">PokéMap</span>
+          </a>
+        </li>
+        <li>
+          <button class="dropdown-button">
+            <img
+              src="../../assets/icons/pokeball-icon.png"
+              width="24px"
+              alt="Data Hub"
+            />
+            <span class="menu-text">Explore</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+            >
+              <path d="M480-360 280-560h400L480-360Z" />
+            </svg>
+          </button>
+          <ul class="sub-menu">
+            <div>
+              <li>
+                <a href="../../pages/visualizations.html">All Data</a>
+              </li>
+              <li>
+                <a href="../../pages/visualizations.html#types"
+                  >Pokémon Types Wheel</a
+                >
+              </li>
+              <li>
+                <a href="../../pages/visualizations.html#total">Total Count</a>
+              </li>
+              <li>
+                <a href="../../pages/visualizations.html#timeline"
+                  >Main Games Timeline</a
+                >
+              </li>
+              <li>
+                <a href="../../pages/visualizations.html#starters"
+                  >Starter Rankings</a
+                >
+              </li>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </nav>
 
+    <main id="map-area">
       <div id="map-container">
         <button id="reset-button">Back to World Map</button>
-        <div id="data-container"></div>
       </div>
-
-      <div id="footer">
-        <div id="timeline-container"></div>
-      </div>
-    </div>
+      <div id="timeline-container"></div>
+      <div id="data-container"></div>
+    </main>
   </body>
 </html>

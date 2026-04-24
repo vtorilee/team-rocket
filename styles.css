@@ -9,7 +9,7 @@ body {
 
   overflow: hidden;
 }
-nav {
+/* nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -60,9 +60,9 @@ nav {
 
 .nav-button a:hover {
   text-decoration: underline;
-}
+} */
 
-header {
+/* header {
   background: linear-gradient(#661a1a 10%, #7e1c1c 50%, #541515 100%);
   border-bottom: 7px double transparent;
   color: white;
@@ -78,7 +78,7 @@ h1 {
   padding: 0;
 
   text-shadow: 0px 1px 5px #d0cece76;
-}
+} */
 
 .btn {
   display: inline-block;
