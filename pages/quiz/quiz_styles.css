@@ -185,6 +185,19 @@ body {
 
 /* quiz styles */
 
+#quiz-container {
+  min-width: 0;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
 .page-heading {
   font-size: 42px;
   text-anchor: middle;
