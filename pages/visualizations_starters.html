@@ -80,6 +80,25 @@
       const spec = {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
+        background: "#1e1e1e",
+
+        config: {
+          background: "#1e1e1e",
+          axis: {
+            labelColor: "white",
+            titleColor: "white",
+            domainColor: "white",
+            tickColor: "white",
+
+            gridColor: "white",
+            gridOpacity: 0.1
+          },
+          legend: {
+          labelColor: "white",
+          titleColor: "white"
+        }
+        },
+
         data: { values: data },
 
         encoding: {
@@ -100,8 +119,11 @@
           y: {
             field: "votes",
             type: "quantitative",
-            title: "Number of Votes"
+            title: "Number of Votes",
+            scale: {
+            domain: [0, 260]  
           }
+        }
         },
 
         layer: [
@@ -114,7 +136,7 @@
             },
             encoding: {
               color: {
-                field: "type",
+                field: "type", title: "Type",
                 type: "nominal",
                 scale: {
                   domain: ["Grass", "Fire", "Water"],
