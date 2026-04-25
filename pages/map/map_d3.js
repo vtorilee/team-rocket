@@ -304,7 +304,7 @@ function drawTimeline() {
     .attr("y1", height / 2)
     .attr("x2", x(9))
     .attr("y2", height / 2)
-    .attr("stroke", "#ffffffc3")
+    .attr("stroke", "#000000ae")
     .attr("stroke-width", 9);
 
   //create the container groups for each mark's components

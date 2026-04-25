@@ -488,6 +488,13 @@ function displayResults(container) {
     .style("width", "100%")
     .style("height", "auto");
 
+  const heading = svg
+    .append("text")
+    .attr("class", "page-heading")
+    .attr("x", 650)
+    .attr("y", 50)
+    .text("Your Trainer Profile");
+
   const genNumber = userResult.gen;
 
   function drawResults(svg, x, y, width, height) {
@@ -505,7 +512,7 @@ function displayResults(container) {
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", 400)
-        .attr("height", 450);
+        .attr("height", 535);
 
       const nameBox = group
         .append("g")
@@ -519,7 +526,7 @@ function displayResults(container) {
         .attr("width", 365)
         .attr("height", 90)
         .attr("rx", 5)
-        .style("stroke", "#000")
+        .style("stroke", "#1f1f1f")
         .style("stroke-width", "4px");
 
       nameBox
@@ -529,7 +536,7 @@ function displayResults(container) {
         .attr("width", 350)
         .attr("height", 76)
         .style("fill", "transparent")
-        .style("stroke", "#000")
+        .style("stroke", "#1f1f1f")
         .style("stroke-width", "2.5px");
 
       nameBox
@@ -556,9 +563,9 @@ function displayResults(container) {
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", 365)
-        .attr("height", 205)
+        .attr("height", 205 + 85)
         .attr("rx", "5")
-        .style("stroke", "#000")
+        .style("stroke", "#1f1f1f")
         .style("stroke-width", "4px");
 
       imageBox
@@ -566,7 +573,7 @@ function displayResults(container) {
         .attr("x", 7.5)
         .attr("y", 7)
         .attr("width", 350)
-        .attr("height", 191)
+        .attr("height", 191 + 85)
         .style("fill", "transparent")
         .style("stroke", "#000")
         .style("stroke-width", "2.5px");
@@ -577,8 +584,8 @@ function displayResults(container) {
         .append("foreignObject")
         .attr("x", 9)
         .attr("y", 7)
-        .attr("width", 352.5)
-        .attr("height", 190.5)
+        .attr("width", 348)
+        .attr("height", 190 + 85)
         .append("xhtml:div")
         .style("width", "100%")
         .style("height", "100%")
@@ -595,7 +602,7 @@ function displayResults(container) {
 
       const dialogueBox = group
         .append("g")
-        .attr("transform", `translate(15, 325)`);
+        .attr("transform", `translate(15, 410)`);
 
       dialogueBox
         .append("rect")
@@ -627,6 +634,7 @@ function displayResults(container) {
     drawTrainerCard(trainerCard);
 
     function drawChoicesCard(group) {
+      //helper for drawing redirect buttons
       function drawButton(parent, x, y, width, height, label, link) {
         const button = parent
           .append("g")
@@ -658,46 +666,39 @@ function displayResults(container) {
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", 500)
-        .attr("height", 450);
+        .attr("height", 535);
 
-      group
-        //title text
-        .append("text")
-        .attr("class", "result-h1")
-        .attr("x", 143)
-        .attr("y", 27)
-        .text("Trainer Profile");
-
+      group;
       //gen results
-      const genGroup = group.append("g").attr("transform", `translate(0, 52)`);
+      const genGroup = group.append("g").attr("transform", `translate(22, 20)`);
       const roman = romanMap[userResult.gen - 1] || userResult.gen;
 
       genGroup
         .append("rect")
-        .attr("class", "bg-rect")
-        .attr("x", 22.5)
+        .attr("class", "sub-rect")
+        .attr("x", 0.5)
         .attr("y", 89)
         .attr("width", 455)
         .attr("height", 65)
         .attr("rx", 5)
-        .style("stroke", "#000")
+        .style("stroke", "#1f1f1f")
         .style("stroke-width", "2px");
 
       genGroup
         .append("rect")
         .attr("class", "bg-rect")
-        .attr("x", 22)
+        .attr("x", 0)
         .attr("y", -5)
         .attr("width", 456)
         .attr("height", 100)
         .attr("rx", 5)
-        .style("stroke", "#000")
+        .style("stroke", "#1f1f1f")
         .style("stroke-width", "2px");
 
       genGroup
         .append("text")
         .attr("class", "result-h2")
-        .attr("x", 125)
+        .attr("x", 103)
         .attr("y", 55)
         .style("font-size", "32px")
         .style("text-decoration", "underline")
@@ -708,7 +709,7 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen1/red.png")
-            .attr("x", 225)
+            .attr("x", 203)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -716,7 +717,7 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen1/green-jp.png")
-            .attr("x", 309)
+            .attr("x", 287)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -724,7 +725,7 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen1/blue.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -735,14 +736,14 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen2/gold.png")
-            .attr("x", 304)
+            .attr("x", 282)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen2/silver.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -753,14 +754,14 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen3/ruby.png")
-            .attr("x", 304)
+            .attr("x", 282)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen3/sapphire.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -771,14 +772,14 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen4/diamond.png")
-            .attr("x", 304)
+            .attr("x", 282)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen4/pearl.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -789,14 +790,14 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen5/black.png")
-            .attr("x", 304)
+            .attr("x", 282)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen5/white.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -807,14 +808,14 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen6/x.png")
-            .attr("x", 304)
+            .attr("x", 282)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen6/y.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -825,14 +826,14 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen7/sun.png")
-            .attr("x", 304)
+            .attr("x", 282)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen7/moon.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("width", 75)
             .attr("height", 75);
@@ -843,13 +844,13 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen8/sword.png")
-            .attr("x", 314)
+            .attr("x", 292)
             .attr("y", 10)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen8/shield.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("height", 75);
 
@@ -859,13 +860,13 @@ function displayResults(container) {
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen9/scarlet.png")
-            .attr("x", 314)
+            .attr("x", 292)
             .attr("y", 10)
             .attr("height", 75);
           genGroup
             .append("image")
             .attr("href", "../../assets/games/gen9/violet.png")
-            .attr("x", 387)
+            .attr("x", 365)
             .attr("y", 10)
             .attr("height", 75);
           break;
@@ -876,20 +877,20 @@ function displayResults(container) {
 
       genGroup
         .append("foreignObject")
-        .attr("x", 29.5)
+        .attr("x", 7.5)
         .attr("y", 100)
         .attr("width", 450)
-        .attr("height", 75)
+        .attr("height", 65)
         .append("xhtml:div")
         .attr("class", "result-body").html(`
             Each generation introduced a new region with many new Pokémon to catch and collect during your adventures through the main series games.
             <br>
-            <span style="text-decoration: underline"}> Gen ${roman} took players to the ${generations[userResult.gen - 1].region} Region in ${generations[userResult.gen - 1].main_games}!</span>
+            <span class="result-body-feature"}> Gen ${roman} took players to the ${generations[userResult.gen - 1].region} Region in ${generations[userResult.gen - 1].main_games}!</span>
           `);
 
       drawButton(
         genGroup,
-        22,
+        0,
         160,
         456,
         35,
@@ -900,16 +901,27 @@ function displayResults(container) {
       //type results
       const typeGroup = choicesCard
         .append("g")
-        .attr("transform", `translate(22, 260.5)`);
+        .attr("transform", `translate(22, 225)`);
+
+      typeGroup
+        .append("rect")
+        .attr("class", "sub-rect")
+        .attr("x", 0.5)
+        .attr("y", 163)
+        .attr("width", 222)
+        .attr("height", 90)
+        .attr("rx", 5)
+        .style("stroke", "#1f1f1f")
+        .style("stroke-width", "2px");
 
       typeGroup
         .append("rect")
         .attr("class", "bg-rect")
         .attr("y", 0)
         .attr("width", 223)
-        .attr("height", 135)
+        .attr("height", 169)
         .attr("rx", 5)
-        .style("stroke", "#000")
+        .style("stroke", "#1f1f1f")
         .style("stroke-width", "2px");
 
       typeGroup
@@ -924,15 +936,29 @@ function displayResults(container) {
       typeGroup
         .append("image")
         .attr("href", `../../assets/types/${userResult.type.toLowerCase()}.png`)
-        .attr("x", 60)
+        .attr("x", 45)
         .attr("y", 25)
-        .attr("width", 100)
-        .attr("height", 100);
+        .attr("width", 135)
+        .attr("height", 135);
+
+      typeGroup
+        .append("foreignObject")
+        .attr("x", 7.5)
+        .attr("y", 175)
+        .attr("width", 212)
+        .attr("height", 90)
+        .append("xhtml:div")
+        .attr("class", "result-body")
+        .style("font-size", "10px").html(`
+            Type defines an intrinsic attunement, determining moveset and combat utility. Some Pokémon have more than one!
+            <br>
+            <span class="result-body-feature"}> There are currently 18 official types, and 1 exclusive type.</span>
+          `);
 
       drawButton(
         typeGroup,
         0,
-        140,
+        260,
         223,
         35,
         "Explore Type Combos!",
@@ -942,16 +968,35 @@ function displayResults(container) {
       //starter results
       const starterGroup = group
         .append("g")
-        .attr("transform", `translate(256, 260.5)`);
+        .attr("transform", `translate(256, 225)`);
+
+      starterGroup
+        .append("rect")
+        .attr("class", "sub-rect")
+        .attr("x", 0.5)
+        .attr("y", 163)
+        .attr("width", 222)
+        .attr("height", 90)
+        .attr("rx", 5)
+        .style("stroke", "#1f1f1f")
+        .style("stroke-width", "2px");
 
       starterGroup
         .append("rect")
         .attr("class", "bg-rect")
         .attr("width", 223)
-        .attr("height", 135)
+        .attr("height", 169)
         .attr("rx", 5)
         .style("stroke", "#000")
         .style("stroke-width", "2px");
+
+      starterGroup
+        .append("image")
+        .attr("href", `../../assets/starters/${userResult.starter}.png`)
+        .attr("x", 45)
+        .attr("y", 35)
+        .attr("width", 120)
+        .attr("height", 120);
 
       starterGroup
         .append("text")
@@ -960,20 +1005,26 @@ function displayResults(container) {
         .attr("y", 25)
         .style("font-size", "18px")
         .style("text-decoration", "underline")
-        .text(`Starter: ${userResult.starter}`);
+        .text(`${userResult.starter} Starter`);
 
       starterGroup
-        .append("image")
-        .attr("href", `../../assets/starters/${userResult.starter}.png`)
-        .attr("x", 55)
-        .attr("y", 30)
-        .attr("width", 100)
-        .attr("height", 100);
+        .append("foreignObject")
+        .attr("x", 7.5)
+        .attr("y", 175)
+        .attr("width", 212)
+        .attr("height", 90)
+        .append("xhtml:div")
+        .attr("class", "result-body")
+        .style("font-size", "10px").html(`
+            A Trainer's starter Pokémon is their very first companion, received upon beginning their journey. 
+            <br>
+            <span class="result-body-feature"}> Starters types are always one of: Grass, Fire, Water.</span>
+          `);
 
       drawButton(
         starterGroup,
         0,
-        140,
+        260,
         223,
         35,
         "Check Popularity!",
@@ -986,6 +1037,7 @@ function displayResults(container) {
     const restart = svg
       .append("g")
       .attr("class", "result-button")
+      .attr("transform", `translate(390, 650)`)
       .style("cursor", "pointer")
       .on("click", () => {
         userResult = { gen: null, type: null, starter: null };
@@ -995,24 +1047,23 @@ function displayResults(container) {
 
     restart
       .append("rect")
-      .attr("x", 75)
-      .attr("y", 40)
-      .attr("width", 100)
-      .attr("height", 45)
-      .style("rx", 6)
-      .style("fill", "#1f1f1f")
-      .style("stroke", "#ffffffab")
-      .style("stroke-width", "2.5px");
+      .attr("class", "result-button")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 450)
+      .attr("height", 40);
 
     restart
       .append("text")
       .attr("class", "result-button-text")
-      .attr("x", 125)
-      .attr("y", 68)
-      .text("Restart");
+      .attr("x", 225)
+      .attr("y", 20)
+      .style("font-size", 22)
+      .style("dominant-baseline", "middle")
+      .text("Restart Quiz");
   }
 
-  drawResults(svg, 200, 40, layoutWidth - 100, layoutHeight - 100);
+  drawResults(svg, 175, 90, layoutWidth - 100, layoutHeight - 100);
 }
 
 function displayQuiz(container) {

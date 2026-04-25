@@ -1,159 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Pokémon Timeline</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pokémon Timeline</title>
 
-  <link rel="stylesheet" href="../styles.css">
-</head>
+    <link rel="stylesheet" href="../vis_styles.css" />
+  </head>
 
-<body class="timeline-page">
+  <body class="timeline-page">
+    <!-- timeline section -->
+    <section class="timeline-section">
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
 
-  <!-- timeline section -->
-  <section class="timeline-section">
-
-    <div class="timeline-container">
-
-      <div class="timeline-line"></div>
-
-      <!-- pokeball 1 -->
-      <div class="timeline-item timeline-line-up">
-        <div class="timeline-content top">
-          <h3>Red & Green & Yellow </h3>
-          <p>Pokemon Red and Green were released in Japan in 1996, followed by an improved Pokemon Blue the same year. Internationally, Pokémon Red and Blue launched in 1998 in North America and 1999 in Europe. Pokemon Yellow (1998 Japan, 1999 international) is a special anime-inspired edition where Pikachu is your starter and characters like Jessie and James appear.</p>
-          <span>1996 - 1999</span>
+        <!-- pokeball 1 -->
+        <div class="timeline-item timeline-line-up">
+          <div class="timeline-content top">
+            <h3>Red & Green & Yellow</h3>
+            <p>
+              Pokemon Red and Green were released in Japan in 1996, followed by
+              an improved Pokemon Blue the same year. Internationally, Pokémon
+              Red and Blue launched in 1998 in North America and 1999 in Europe.
+              Pokemon Yellow (1998 Japan, 1999 international) is a special
+              anime-inspired edition where Pikachu is your starter and
+              characters like Jessie and James appear.
+            </p>
+            <span>1996 - 1999</span>
+          </div>
+          <img
+            src="../assets/pokeballs/pokeball.png"
+            class="timeline-pokeball"
+          />
         </div>
-        <img src="../assets/pokeballs/pokeball.png" class="timeline-pokeball">
+
+        <!-- pokeball 2 -->
+        <div class="timeline-item timeline-line-down">
+          <div class="timeline-content top"></div>
+
+          <img
+            src="../assets/pokeballs/greatball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom">
+            <h3>Gold & Silver</h3>
+            <p>
+              Pokemon Gold and Silver made for the Game Boy color was released
+              in Japan in 1999, then a year later in North American in 2000.
+              This introduced the Johoto Region (Gen 2) as well as new types
+              such as Steel and Dark to balance against psychic types. It also
+              introduced day and night mechanics which debuted the eeveeloutions
+              Espeon & Umbreon.
+            </p>
+            <span>1999 - 2001</span>
+          </div>
+        </div>
+
+        <!-- pokeball 3 -->
+        <div class="timeline-item timeline-line-up">
+          <div class="timeline-content top">
+            <h3>Ruby & Saphire & Emerald</h3>
+            <p>
+              Released in 2002 on the Game Boy Advance, Ruby/Sapphire allows
+              players to fight Team Magma or Aqua. Emerald features both teams
+              and lets you catch Groudon and Kyogre, and is an enhanced 'third
+              version' combining elements from the two games. Emerald also
+              brought back animated Pokémon sprites during battles, a feature
+              missing in Ruby/Sapphire.
+            </p>
+            <span>2002 - 2006</span>
+          </div>
+
+          <img
+            src="../assets/pokeballs/ultraball.png"
+            class="timeline-pokeball"
+          />
+        </div>
+
+        <!-- pokeball 4 -->
+        <div class="timeline-item timeline-line-down">
+          <div class="timeline-content top"></div>
+
+          <img
+            src="../assets/pokeballs/healball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom">
+            <h3>Diamond & Pearl</h3>
+            <p>
+              First released on the Nintendo DS in Japan 2006 and a year later
+              in North America, introduced the Sinnoh region (Gen 4). Both
+              games’ storylines, maps and gameplay or identical to each other,
+              while the only difference is the preference in legendary pokemon.
+              Pokemon Diamond contained Dialga, while Pearl contained Palkia.
+            </p>
+            <span>2006 - 2010</span>
+          </div>
+        </div>
+
+        <!-- pokeball 5 -->
+        <div class="timeline-item timeline-line-up">
+          <div class="timeline-content top">
+            <h3>Black & White</h3>
+
+            <p>
+              Released in 2010 on the Nintendo DS, Pokémon Black and White only
+              feature Pokémon from the Unova region (Gen 5), offering a fresh
+              start with no returning species in the main story. The games
+              introduced new mechanics such as seasonal cycles, which change the
+              environment and available Pokémon depending on the time of year.
+            </p>
+            <span>2010 - 2013</span>
+          </div>
+
+          <img
+            src="../assets/pokeballs/masterball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom"></div>
+        </div>
+
+        <!-- pokeball 6 -->
+        <div class="timeline-item timeline-line-down">
+          <div class="timeline-content top"></div>
+
+          <img
+            src="../assets/pokeballs/quickball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom">
+            <h3>X&Y</h3>
+            <p>
+              Pokémon X & Y was released for the Nintendo 3DS and introduced
+              Fairy-type Pokémon for the very first time, reshaping battle
+              balance across the series. It also debuted fan-favourite Sylveon
+              as part of the Eevee evolutions and introduced Mega Evolutions,
+              allowing certain Pokémon to temporarily transform and gain
+              powerful new forms during battle.
+            </p>
+            <span>2010 - 2013</span>
+          </div>
+        </div>
+
+        <!-- pokeball 7 -->
+        <div class="timeline-item timeline-line-up">
+          <div class="timeline-content top">
+            <h3>Sun & Moon</h3>
+            <p>
+              Released on the Nintendo 3DS, Sun & Moon replaced traditional gym
+              battles with Island Challenges, giving a new structure to
+              progression. This generation introduced Z-Moves and the Battle
+              Royal format, adding more dynamic combat options. It also featured
+              regional variants of classic Pokémon, introducing Alolan forms
+              with new typings and designs.
+            </p>
+            <span>2016 - 2019</span>
+          </div>
+
+          <img
+            src="../assets/pokeballs/safariball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom"></div>
+        </div>
+
+        <!-- pokeball 8 -->
+        <div class="timeline-item timeline-line-down">
+          <div class="timeline-content top"></div>
+
+          <img
+            src="../assets/pokeballs/moonball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom">
+            <h3>Sword & Shield</h3>
+            <p>
+              Pokémon Sword and Shield were released in 2019 for the Nintendo
+              Switch and introduced the Galar region, inspired by the United
+              Kingdom. They added new features like Dynamax and Gigantamax,
+              which temporarily make Pokémon huge and change their battle
+              abilities. The games also introduced Wild Areas, open spaces where
+              players can freely explore and encounter Pokémon.
+            </p>
+            <span>2019 - 2022</span>
+          </div>
+        </div>
+
+        <!-- pokeball 9 -->
+        <div class="timeline-item timeline-line-up">
+          <div class="timeline-content top">
+            <h3>Scarlet & Violet</h3>
+            <p>
+              Pokemon Scarlet and Violet were released in 2022 for the Nintendo
+              Switch and take place in the open-world Paldea region. They
+              introduced non-linear exploration, allowing players to complete
+              gyms and story paths in any order. A major new mechanic is the
+              Terastal Phenomenon, which changes a Pokemon’s type and boosts its
+              battle power.
+            </p>
+            <span>2022 - 2026</span>
+          </div>
+
+          <img
+            src="../assets/pokeballs/premierball.png"
+            class="timeline-pokeball"
+          />
+
+          <div class="timeline-content bottom"></div>
+        </div>
       </div>
+    </section>
+    <script>
+      function sendHeight() {
+        window.parent.postMessage(
+          {
+            type: "setHeight",
+            height: 800,
+          },
+          "*",
+        );
+      }
 
-      <!-- pokeball 2 -->
-      <div class="timeline-item timeline-line-down">
-        <div class="timeline-content top">
-        </div>
-
-        <img src="../assets/pokeballs/greatball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-          <h3>Gold & Silver</h3>
-          <p>Pokemon Gold and Silver made for the Game Boy color was released in Japan in 1999, then a year later in North American in 2000. This introduced the Johoto Region (Gen 2) as well as new types such as Steel and Dark to balance  against psychic types. It also introduced day and night mechanics which debuted the eeveeloutions Espeon & Umbreon.</p>
-          <span>1999 - 2001</span>         
-        </div>
-      </div>
-
-      <!-- pokeball 3 -->
-      <div class="timeline-item timeline-line-up">
-        <div class="timeline-content top">
-          <h3>Ruby & Saphire & Emerald</h3>
-          <p>Released in 2002 on the Game Boy Advance, Ruby/Sapphire allows players to fight Team Magma or Aqua. Emerald features both teams and lets you catch Groudon and Kyogre, and is an enhanced 'third version' combining elements from the two games. Emerald also brought back animated Pokémon sprites during battles, a feature missing in Ruby/Sapphire.
-          </p>
-        <span>2002 - 2006</span>
-        </div>
-
-        <img src="../assets/pokeballs/ultraball.png" class="timeline-pokeball">
-      </div>
-
-      <!-- pokeball 4 -->
-      <div class="timeline-item timeline-line-down">
-        <div class="timeline-content top">
-        </div>
-
-        <img src="../assets/pokeballs/healball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-          <h3>Diamond & Pearl</h3>
-          <p>First released on the Nintendo DS in Japan 2006 and a year later in North America, introduced the Sinnoh region (Gen 4). Both games’ storylines, maps and gameplay or identical to each other, while the only difference is the preference in legendary pokemon. Pokemon Diamond contained Dialga, while Pearl contained Palkia.</p>
-          <span>2006 - 2010</span>
-        </div>
-      </div>
-
-      <!-- pokeball 5 -->
-      <div class="timeline-item timeline-line-up">
-        <div class="timeline-content top">
-          <h3> Black & White</h3>
-          
-          <p>Released in 2010 on the Nintendo DS, Pokémon Black and White only feature Pokémon from the Unova region (Gen 5), offering a fresh start with no returning species in the main story. The games introduced new mechanics such as seasonal cycles, which change the environment and available Pokémon depending on the time of year.</p>
-          <span>2010 - 2013</span>
-        </div>
-
-        <img src="../assets/pokeballs/masterball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-        </div>
-      </div>
-
-      <!-- pokeball 6 -->
-      <div class="timeline-item timeline-line-down">
-        <div class="timeline-content top">
-        </div>
-
-        <img src="../assets/pokeballs/quickball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-          <h3>X&Y</h3>
-          <p>Pokémon X & Y was released for the Nintendo 3DS and introduced Fairy-type Pokémon for the very first time, reshaping battle balance across the series. It also debuted fan-favourite Sylveon as part of the Eevee evolutions and introduced Mega Evolutions, allowing certain Pokémon to temporarily transform and gain powerful new forms during battle.</p>
-          <span>2010 - 2013</span>
-        </div>
-      </div>
-
-      <!-- pokeball 7 -->
-      <div class="timeline-item timeline-line-up">
-        <div class="timeline-content top">
-          <h3>Sun & Moon</h3>
-          <p>Released on the Nintendo 3DS, Sun & Moon replaced traditional gym battles with Island Challenges, giving a new structure to progression. This generation introduced Z-Moves and the Battle Royal format, adding more dynamic combat options. It also featured regional variants of classic Pokémon, introducing Alolan forms with new typings and designs.</p>
-          <span>2016 - 2019</span>
-        </div>
-
-        <img src="../assets/pokeballs/safariball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-
-        </div>
-      </div>
-
-      <!-- pokeball 8 -->
-      <div class="timeline-item timeline-line-down">
-        <div class="timeline-content top">
-        </div>
-
-        <img src="../assets/pokeballs/moonball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-          <h3>Sword & Shield</h3>
-          <p>Pokémon Sword and Shield were released in 2019 for the Nintendo Switch and introduced the Galar region, inspired by the United Kingdom. They added new features like Dynamax and Gigantamax, which temporarily make Pokémon huge and change their battle abilities. The games also introduced Wild Areas, open spaces where players can freely explore and encounter Pokémon.</p>
-          <span>2019 - 2022</span>         
-        </div>
-      </div>
-
-      <!-- pokeball 9 -->
-      <div class="timeline-item timeline-line-up">
-        <div class="timeline-content top">
-          <h3>Scarlet & Violet</h3>
-          <p>Pokemon Scarlet and Violet were released in 2022 for the Nintendo Switch and take place in the open-world Paldea region. They introduced non-linear exploration, allowing players to complete gyms and story paths in any order. A major new mechanic is the Terastal Phenomenon, which changes a Pokemon’s type and boosts its battle power.</p>
-          <span>2022 - 2026</span>
-        </div>
-
-        <img src="../assets/pokeballs/premierball.png" class="timeline-pokeball">
-
-        <div class="timeline-content bottom">
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-<script>
-function sendHeight() {
-  window.parent.postMessage(
-    {
-      type: "setHeight",
-      height: 800
-    },
-    "*"
-  );
-}
-
-window.addEventListener("load", sendHeight);
-window.addEventListener("resize", sendHeight);
-</script>
-</body>
+      window.addEventListener("load", sendHeight);
+      window.addEventListener("resize", sendHeight);
+    </script>
+  </body>
 </html>

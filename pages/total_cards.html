@@ -1,163 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pokémon Forms Explained</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Forms Explained</title>
 
-  <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../vis_styles.css" />
 
-  <style>
-    body {
-  background: #1e1e1e;
-  color: white;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-}
+    <style>
+      body {
+        background: #1e1e1e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
 
+      .info-section {
+        max-width: 900px;
+        margin: auto;
+        text-align: left;
+      }
+      h2 {
+        text-align: center;
+        color: rgb(255, 255, 255);
+        stroke: blue;
+        margin: 10px 0 20px 0;
+        padding: 0;
 
-.info-section {
-  max-width: 900px;
-  margin: auto;
-  text-align: left;
-}
-h2 {
-  text-align: center;
-  color: rgb(255, 255, 255);
-  stroke: blue;
-  margin: 10px 0 20px 0;  
-  padding: 0;
+        font-size: 28px;
+        font-weight: 800;
+      }
+      h3 {
+        text-align: center;
+        color: rgb(182, 198, 8);
 
-  font-size: 28px;
-  font-weight: 800;   
-}
-h3 {
-  text-align: center;
-  color: rgb(182, 198, 8);
-  
-  
-  margin: 10px 0 20px 0;  
-  padding: 0;
+        margin: 10px 0 20px 0;
+        padding: 0;
 
-  font-size: 15px;
-  font-weight: 20;   
-}
-.info-card {
-  background: #1b1b1b;
-  border-radius: 16px;
-  margin-bottom: 18px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.3s;
-  border: 1px solid rgba(255,255,255,0.05);
-}
+        font-size: 15px;
+        font-weight: 20;
+      }
+      .info-card {
+        background: #1b1b1b;
+        border-radius: 16px;
+        margin-bottom: 18px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
 
+      .info-header {
+        padding: 18px;
+        font-weight: bold;
+        font-size: 18px;
+        background: #2a2a2a;
+      }
 
-.info-header {
-  padding: 18px;
-  font-weight: bold;
-  font-size: 18px;
-  background: #2a2a2a;
-}
+      .info-content {
+        display: flex;
+        gap: 20px;
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+      }
 
+      .info-card.active .info-content {
+        max-height: 400px;
+        padding: 18px;
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-.info-content {
-  display: flex;
-  gap: 20px;
-  padding: 0 18px;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.4s ease;
-}
+      .info-content img {
+        width: 340px;
+        height: 340px;
+        object-fit: contain;
 
+        border-radius: 0;
+        background: none;
+        padding: 0;
 
-.info-card.active .info-content {
-  max-height: 400px;
-  padding: 18px;
-  opacity: 1;
-  transform: translateY(0);
-}
+        flex-shrink: 0;
+      }
 
+      .info-content p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #ddd;
+        margin: 0;
+      }
 
-.info-content img {
-  width: 340px;
-  height: 340px;
-  object-fit: contain;
+      .info-content {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
 
-  border-radius: 0;
-  background: none;
-  padding: 0;
+  <body>
+    <h2>What do these forms mean?</h2>
+    <h3>click below to learn more about each category!</h3>
 
-  flex-shrink: 0;
-}
+    <div class="info-section">
+      <div class="info-card" onclick="toggleInfo(this)">
+        <div class="info-header">What is Mega Evolution (Mega)?</div>
+        <div class="info-content">
+          <img src="../assets/forms/mega.png" alt="Mega Evolution" />
+          <p>
+            Mega Evolution is a special transformation that temporarily makes a
+            Pokémon stronger during battle. It changes the Pokémon’s appearance
+            and boosts its abilities, but it only lasts for the duration of that
+            fight. This feature was introduced in Generation 6 and represents a
+            strong bond between a trainer and their Pokémon.
+          </p>
+        </div>
+      </div>
 
+      <div class="info-card" onclick="toggleInfo(this)">
+        <div class="info-header">What is Gigantamax (Gmax)?</div>
+        <div class="info-content">
+          <img src="../assets/forms/gmax.png" alt="GMax" />
+          <p>
+            Gigantamax is a transformation where certain Pokémon grow to an
+            enormous size and take on a new appearance. While in this form, they
+            gain powerful, unique moves that can turn the tide of a battle.
+            Unlike regular size changes, only specific Pokémon can Gigantamax,
+            and it was introduced in Generation 8.
+          </p>
+        </div>
+      </div>
 
-.info-content p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #ddd;
-  margin: 0;
-}
+      <div class="info-card" onclick="toggleInfo(this)">
+        <div class="info-header">What are Alolan Forms?</div>
+        <div class="info-content">
+          <img src="../assets/forms/alolan.png" alt="Alolan" />
+          <p>
+            Alolan forms are alternate versions of familiar Pokémon that adapted
+            to a different environment. In the tropical Alola region (Generation
+            7), some Pokémon changed their appearance, abilities, and even their
+            elemental types to better survive. These forms show how Pokémon can
+            evolve differently depending on where they live.
+          </p>
+        </div>
+      </div>
 
-.info-content {
-  display: flex;
-  align-items: center;
-}
-  </style>
-</head>
-
-<body>
-
-  <h2>What do these forms mean?</h2>
-  <h3>click below to learn more about each category!</h3>
-
-  <div class="info-section">
-
-    <div class="info-card" onclick="toggleInfo(this)">
-      <div class="info-header">What is Mega Evolution (Mega)?</div>
-      <div class="info-content">
-        <img src="../assets/forms/mega.png" alt="Mega Evolution">
-        <p>
-          Mega Evolution is a special transformation that temporarily makes a Pokémon stronger during battle. It changes the Pokémon’s appearance and boosts its abilities, but it only lasts for the duration of that fight. This feature was introduced in Generation 6 and represents a strong bond between a trainer and their Pokémon.
-        </p>
+      <div class="info-card" onclick="toggleInfo(this)">
+        <div class="info-header">What are Hisuian Forms?</div>
+        <div class="info-content">
+          <img src="../assets/forms/hisuian.png" alt="Hisuian" />
+          <p>
+            Hisuian forms are ancient versions of Pokémon from the Hisui region
+            (Generatiom 8), which represents an earlier time in the Pokémon
+            world. These Pokémon look and behave differently from their modern
+            counterparts, offering a glimpse into how they may have existed in
+            the past.
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="info-card" onclick="toggleInfo(this)">
-      <div class="info-header">What is Gigantamax (Gmax)?</div>
-      <div class="info-content">
-        <img src="../assets/forms/gmax.png" alt="GMax">
-        <p>
-         Gigantamax is a transformation where certain Pokémon grow to an enormous size and take on a new appearance. While in this form, they gain powerful, unique moves that can turn the tide of a battle. Unlike regular size changes, only specific Pokémon can Gigantamax, and it was introduced in Generation 8.
-        </p>
-      </div>
-    </div>
-
-    <div class="info-card" onclick="toggleInfo(this)">
-      <div class="info-header">What are Alolan Forms?</div>
-      <div class="info-content">
-        <img src="../assets/forms/alolan.png" alt="Alolan">
-        <p>
-          Alolan forms are alternate versions of familiar Pokémon that adapted to a different environment. In the tropical Alola region (Generation 7), some Pokémon changed their appearance, abilities, and even their elemental types to better survive. These forms show how Pokémon can evolve differently depending on where they live. </p>
-      </div>
-    </div>
-
-    <div class="info-card" onclick="toggleInfo(this)">
-      <div class="info-header">What are Hisuian Forms?</div>
-      <div class="info-content">
-        <img src="../assets/forms/hisuian.png" alt="Hisuian">
-        <p>
-         Hisuian forms are ancient versions of Pokémon from the Hisui region (Generatiom 8), which represents an earlier time in the Pokémon world. These Pokémon look and behave differently from their modern counterparts, offering a glimpse into how they may have existed in the past.</p>
-      </div>
-    </div>
-
-  </div>
-
-  
-  <script src="./total_cards.js"></script>
-
-</body>
+    <script src="./total_cards.js"></script>
+  </body>
 </html>
