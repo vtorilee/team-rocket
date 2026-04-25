@@ -1,14 +1,15 @@
-const width = 800;
+const width = 750;
 const radius = width / 10; 
 let currentRoot;
 let path;
 let arc;
 
+// FEEDBACK: Make visualization smaller
 const svg = d3.select("#chart")
   .append("svg")
-  .attr("viewBox", [-width / 2, -width / 2 + 100, width, width - 50])
+  .attr("viewBox", [-width / 2, -width / 2 + 140, width, width - 120])
   .attr("width", "100%")  
-  .attr("height", "100%");
+  .attr("height", "auto");
 
 const tooltip = d3.select("#tooltip");
 
@@ -145,7 +146,7 @@ function drawLegend() {
     g.append("text")
       .attr("x", boxSize + 8)
       .attr("y", boxSize / 2) // Centered vertically relative to box
-      .text(capitalize(type))
+      .text(type === "none" ? "Pure" : capitalize(type))
       .attr("fill", "white")
       .style("font-size", "12px")
       .style("alignment-baseline", "middle");
@@ -234,6 +235,7 @@ function render() {
   }
 
 // tooltip content based on hovered segment
+// FEEDBACK FIX: reclarify "none" option
 async function handleMouseOver(event, d) {
   let pokemonList = [];
   let name = d.data.name === "none" ? "Pure (No Second Type)" : capitalize(d.data.name);
