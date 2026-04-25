@@ -10,37 +10,23 @@ body {
 
 h2 {
   text-align: center;
-  color: rgb(255, 242, 0);
-  stroke: blue;
-  margin: 10px 0 4px 0;
-  padding: 0;
+  margin: 30px 0 15px 0;
+  padding: 10px;
 
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 800;
 }
 
 h3 {
   text-align: center;
-  color: white;
-  margin: 2px 0 10px 0;
+  color: #efefef;
+  -webkit-text-stroke: 1px #1f1f1f;
+  margin: 2px 0 15px 0;
   padding: 0;
 
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 300; /* skinny/light */
-  opacity: 0.8; /* makes it softer than h2 */
 }
-
-/* .btn {
-  display: inline-block;
-  background: #461111;
-  font-weight: bold;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 30px;
-  text-decoration: none;
-  cursor: pointer;
-  margin-top: 20px;
-} */
 
 .btn:hover {
   transform: scale(0.95);
@@ -87,6 +73,7 @@ button {
   height: auto;
   min-height: 200px;
   overflow: visible;
+  margin-bottom: 20px;
 }
 .box iframe {
   width: 100%;

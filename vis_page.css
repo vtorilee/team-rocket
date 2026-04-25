@@ -1,82 +1,3 @@
-/* body {
-  margin: 0;
-  font-family: "Galindo", sans-serif;
-  background: #111;
-  color: white;
-}
-
-nav {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  color: white;
-  background: linear-gradient(#a99c9c, #a99c9c63);
-  padding-top: 1%;
-  padding-bottom: 10px;
-  border-top: 10px double #000000;
-
-  margin-bottom: 20px;
-
-  box-shadow: 0px 12px 35px 2px #231818;
-}
-
-.nav-button {
-  display: flex;
-  min-width: 10%;
-
-  background-color: #ffffffa0;
-  border: 3.5px ridge #1f1f1f;
-  border-radius: 24px;
-
-  align-items: center;
-  justify-content: center;
-
-  transition: all 0.3s ease;
-
-  .nav-button a:hover {
-    color: rgb(104, 22, 22);
-  }
-}
-
-.nav-button:hover {
-  scale: 1.05;
-  background-color: #fff;
-}
-
-.nav-button a {
-  color: rgb(255, 204, 1);
-  text-decoration: none;
-  padding: 10px;
-
-  font-size: 20px;
-  font-weight: bold;
-  -webkit-text-stroke: 0.2px #3269b2ff;
-
-  text-shadow: -1px 1px 2px #040404c0;
-}
-
-.nav-button a:hover {
-  text-decoration: underline;
-}
-
-header {
-  background: linear-gradient(#661a1a 10%, #7e1c1c 50%, #541515 100%);
-  border-bottom: 7px double transparent;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-
-h1 {
-  font-size: 56px;
-  -webkit-text-stroke: 1px #3269b2ff;
-  color: #ffcb05ff;
-  margin: 0;
-  padding: 0;
-
-  text-shadow: 0px 1px 5px #d0cece76;
-} */
 :root {
   --base-color: #510f0f;
   --line-color: #9f8f8f;
@@ -266,7 +187,7 @@ body {
   width: 80%;
   max-width: 1100px;
   margin: auto;
-  padding-top: 5%;
+  padding-top: 2%;
 }
 
 .section {
@@ -274,14 +195,19 @@ body {
 }
 
 .section h2 {
-  margin-bottom: 10px;
-  font-size: 28px;
+  color: var(--poketext-color);
+  -webkit-text-stroke: 0.6px var(--pokestroke-color);
 }
 
 .section p {
   margin-bottom: 20px;
   color: #ccc;
   line-height: 1.5;
+}
+
+li > strong {
+  font-size: 19px;
+  font-weight: lighter;
 }
 
 .box {
@@ -341,8 +267,10 @@ iframe {
 
 .vis-guide p {
   margin: 0 0 15px 0 !important;
+  font-size: 24px;
   font-weight: bold;
-  color: #fffb05;
+  color: var(--poketext-color);
+  -webkit-text-stroke: 0.1px #ffffff96;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -352,6 +280,10 @@ iframe {
   margin: 0;
   padding-left: 20px;
   list-style-type: "▸ ";
+}
+
+.vis-guide {
+  color: #f9f8f8b5;
 }
 
 .vis-guide strong {
