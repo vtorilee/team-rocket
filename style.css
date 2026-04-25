@@ -130,6 +130,7 @@ body {
 /* dropdown menu styles */
 
 .dropdown-button {
+  width: 100%;
   text-align: left;
   background: none;
   border: none;

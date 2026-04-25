@@ -93,7 +93,7 @@ const types = [
 const quizData = [
   {
     number: 1,
-    question: "Which Pokémon generation is your favourite?",
+    question: "Which generation was your favourite?",
     options: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
     defaultImage: "../../assets/pokedex-device.png",
   },
@@ -125,7 +125,7 @@ const quizData = [
   },
   {
     number: 3,
-    question: "Which starter Pokémon is your favourite?",
+    question: "Which starter is your favourite?",
     options: [
       "Bulbasaur",
       "Charmander",
@@ -155,7 +155,7 @@ const quizData = [
       "Fuecoco",
       "Quaxly",
     ],
-    defaultImage: "../../assets/all.starters.png",
+    defaultImage: "../../assets/allstarters-2.png",
   },
 ];
 
@@ -315,22 +315,50 @@ function drawOptionsSection(group, data) {
   const resultKeys = ["gen", "type", "starter"];
   const currentKey = resultKeys[currentQuestion];
   const selectedValue = userResult[currentKey];
+  const teamIcons = [
+    "zorua-shuffle.png",
+    "pachirisu-shuffle.png",
+    "lucario-shuffle.png",
+  ];
 
   //reset
   group.selectAll("*").remove();
 
   //display the question first
-  group
+  const questionBubble = group.append("g").attr("transform", "translate(0,0)");
+
+  questionBubble
+    .append("rect")
+    .attr("x", 13.5)
+    .attr("y", 5)
+    .attr("width", 763)
+    .attr("height", 125)
+    .style("fill", "#e6e2e2");
+
+  questionBubble
+    .append("image")
+    .attr("href", "../../assets/dialoguebox.png")
+    .attr("transform", "scale(0.53, 0.3)");
+
+  questionBubble
+    .append("image")
+    .attr("href", `../../assets/icons/${teamIcons[currentQuestion]}`)
+    .attr("x", 40)
+    .attr("y", 18)
+    .attr("width", 90);
+
+  questionBubble
     .append("text")
     .attr("class", "quiz-h1")
-    .attr("y", 20)
+    .attr("x", 150)
+    .attr("y", 75)
     .text(`${data.number}.) ${data.question}`);
 
   //button layout constants
   const buttonsPerRow = 5;
-  const buttonWidth = 115;
-  const buttonHeight = 50;
-  const gap = 15;
+  const buttonWidth = 135;
+  const buttonHeight = 65;
+  const gap = 20;
 
   data.options.forEach((option, i) => {
     //grid pos calcs
@@ -344,7 +372,7 @@ function drawOptionsSection(group, data) {
     const buttonGroup = group
       .append("g")
       .attr("class", "button-group")
-      .attr("transform", `translate(${xPos}, ${60 + yPos})`)
+      .attr("transform", `translate(${15 + xPos}, ${160 + yPos})`)
       .style("cursor", "pointer")
       .on("click", (event) => {
         handleSelection(option);
@@ -404,58 +432,36 @@ function drawSelectedSection(group, data) {
   const selectedValue = userResult[currentKey];
 
   let resultText = "Please select one.";
-  let imagePath;
+  let imagePath = data.defaultImage;
+
+  let imgConfig = { x: 190, y: 150, width: 350 };
 
   // default
-  if (!selectedValue) {
-    imagePath = data.defaultImage;
-  } else {
-    //gen
+
+  if (selectedValue) {
     if (currentKey === "gen") {
       imagePath = `../../assets/trainers/${selectedValue}_trainers.png`;
-
-      group
-        .append("image")
-        .attr("href", imagePath)
-        .attr("height", 325)
-        .attr("x", 235)
-        .attr("y", 125)
-        .attr("preserveAspectRatio", "xMidYMid meet");
-
       resultText = `Generation ${romanMap[selectedValue - 1]}`;
-    }
-
-    //type
-    else if (currentKey === "type") {
+      imgConfig = { x: 210, y: 160, height: 400 };
+    } else if (currentKey === "type") {
       imagePath = `../../assets/types/${selectedValue.toLowerCase()}.png`;
-
-      group
-        .append("image")
-        .attr("href", imagePath)
-        .attr("height", 325)
-        .attr("x", 200)
-        .attr("y", 120)
-        .attr("preserveAspectRatio", "xMidYMid meet");
-
       resultText = `I am a ${selectedValue} Type trainer.`;
-    }
-
-    //starter
-    else if (currentKey === "starter") {
+      imgConfig = { x: 210, y: 165, height: 325 };
+    } else if (currentKey === "starter") {
       imagePath = `../../assets/starters/${selectedValue}.png`;
-
-      group
-        .append("image")
-        .attr("href", imagePath)
-        .attr("width", 375)
-        .attr("height", 325)
-        .attr("x", 160)
-        .attr("y", 130)
-        .attr("preserveAspectRatio", "xMidYMid meet");
-
       resultText = `${selectedValue}, I choose you!`;
+      imgConfig = { x: 160, y: 165, width: 375, height: 325 };
     }
   }
+  const img = group
+    .append("image")
+    .attr("href", imagePath)
+    .attr("x", imgConfig.x)
+    .attr("y", imgConfig.y)
+    .attr("preserveAspectRatio", "xMidYMid meet");
+
+  if (imgConfig.width) img.attr("width", imgConfig.width);
+  if (imgConfig.height) img.attr("height", imgConfig.height);
 
   const resultBox = group.append("g");
 
@@ -1090,7 +1096,7 @@ function displayQuiz(container) {
   const optionsGroup = quizLayoutSVG
     .append("g")
     .attr("id", "options-section")
-    .attr("transform", "translate(50, 50)");
+    .attr("transform", "translate(50, 25)");
 
   const currentData = quizData[currentQuestion];
 
@@ -1098,7 +1104,7 @@ function displayQuiz(container) {
   drawSelectedSection(selectedGroup, currentData);
 
   function drawNavButtons(svg, width, height) {
-    const navGroup = svg.append("g").attr("transform", `translate(945, 460)`);
+    const navGroup = svg.append("g").attr("transform", `translate(945, 600)`);
 
     const resultKeys = ["gen", "type", "starter"];
     const hasSelection = userResult[resultKeys[currentQuestion]] !== null;

@@ -102,10 +102,10 @@ function drawStartup(group) {
   teamIcons
     .append("image")
     .attr("href", "./assets/icons/pachirisu-shuffle.png")
-    .attr("x", -62.5)
-    .attr("y", -62.5 + 80)
-    .attr("width", 150)
-    .attr("height", 150);
+    .attr("x", -62.5 + 15)
+    .attr("y", -62.5 + 90)
+    .attr("width", 115)
+    .attr("height", 115);
 
   teamIcons
     .append("image")
@@ -122,7 +122,7 @@ function drawIntro(group) {
     .append("image")
     .attr("href", "./assets/meowth.png")
     .attr("x", -500)
-    .attr("y", -105)
+    .attr("y", -105 - 30)
     .attr("width", 500);
 
   //intro speech section
@@ -138,7 +138,7 @@ function drawIntro(group) {
     .append("image")
     .attr("href", "./assets/speech-bubble.png")
     .attr("x", -185)
-    .attr("y", -235)
+    .attr("y", -235 - 30)
     .attr("transform", "scale(1.2, 0.75)");
 
   const textLayer = group.append("g").attr("class", "meowth-intro-layer");
@@ -153,7 +153,7 @@ function drawIntro(group) {
         .append("foreignObject")
         .attr("class", "meowth-intro-text")
         .attr("x", -190)
-        .attr("y", -147)
+        .attr("y", -147 - 22.5)
         .attr("width", 395)
         .attr("height", 90);
 
@@ -185,7 +185,7 @@ function drawIntro(group) {
     const text = group
       .append("foreignObject")
       .attr("x", -50)
-      .attr("y", -10)
+      .attr("y", -10 - 30)
       .attr("width", 450)
       .attr("height", 300)
       .style("opacity", 0);
@@ -209,7 +209,7 @@ function drawIntro(group) {
   function displayStartingButtons() {
     const buttonGroup = group
       .append("g")
-      .attr("transform", "translate(-5, 250)")
+      .attr("transform", "translate(-5, 225)")
       .style("opacity", 0);
 
     // Example Button
