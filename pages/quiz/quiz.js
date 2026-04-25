@@ -707,7 +707,6 @@ function displayResults(container) {
         .attr("x", 103)
         .attr("y", 55)
         .style("font-size", "32px")
-        .style("text-decoration", "underline")
         .text(`Gen ${roman}`);
 
       switch (Number(userResult.gen)) {
@@ -936,7 +935,6 @@ function displayResults(container) {
         .attr("x", 111.5)
         .attr("y", 25)
         .style("font-size", "18px")
-        .style("text-decoration", "underline")
         .text(`${userResult.type} Type`);
 
       typeGroup
@@ -1010,7 +1008,6 @@ function displayResults(container) {
         .attr("x", 111.5)
         .attr("y", 25)
         .style("font-size", "18px")
-        .style("text-decoration", "underline")
         .text(`${userResult.starter} Starter`);
 
       starterGroup
@@ -1086,7 +1083,7 @@ function displayQuiz(container) {
     .attr("viewBox", `0,0,${layoutWidth}, ${layoutHeight}`)
     .attr("preserveAspectRatio", "xMinYMin meet")
     .style("width", "100%")
-    .style("height", "auto");
+    .style("height", "100%");
 
   //create groups for each section
   const selectedGroup = quizLayoutSVG

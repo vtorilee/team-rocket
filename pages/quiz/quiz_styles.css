@@ -331,11 +331,10 @@ body {
   color: #2d2626;
   -webkit-text-stroke: 0.5px #c6b9b9;
 
-  fill: #fff;
-  stroke: #000;
-  stroke-width: 0.5px;
-
-  text-shadow: -0.5px 1px 1px #04040481;
+  fill: #30fbf1;
+  stroke: #00000058;
+  stroke-width: 1px;
+  text-shadow: -0.5px 1.5px 2px #04040481;
 }
 
 .result-caption {
