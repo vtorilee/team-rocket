@@ -1,6 +1,15 @@
 import { initSidebar } from "../../sidebar.js";
 initSidebar();
 
+const attrBox = document.getElementById("attribution-box");
+const attrButton = document.getElementById("attr-icon");
+
+attrButton.addEventListener("click", (e) => {
+  // Prevent the click from triggering map zoom/pan if necessary
+  e.stopPropagation();
+  attrBox.classList.toggle("attr-collapsed");
+});
+
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 //for tracking generations
@@ -117,6 +126,9 @@ function hoverRegion(element, sections) {
 
       hovered.interrupt().classed("highlighted", true);
 
+      //hide location icon
+      d3.select(`#icon-${regionID}`).style("opacity", 0);
+
       //get selected region area
       const bounds = this.getBBox();
       const centerX = bounds.x + bounds.width / 2;
@@ -139,7 +151,18 @@ function hoverRegion(element, sections) {
       hoverArea.transition().duration(300).style("opacity", 1);
     })
     .on("mouseleave", function () {
-      d3.select(this).classed("highlighted", false);
+      const hovered = d3.select(this);
+      const regionID = hovered.attr("id");
+
+      hovered.classed("highlighted", false);
+
+      //check if currently in zoom mode via reset button
+      const isZoomed = d3.select("#reset-button").style("display") === "block";
+
+      if (!isZoomed) {
+        d3.select(`#icon-${regionID}`).style("opacity", 1);
+      }
+
       d3.selectAll(".hover-group")
         .transition()
         .duration(200)
@@ -152,6 +175,9 @@ function hoverRegion(element, sections) {
 function zoomToRegion(regionID) {
   const regionPath = d3.select(`path#${regionID}`);
   if (regionPath.empty()) return;
+
+  //hide location icons
+  d3.selectAll(".location-icon").transition().duration(400).style("opacity", 0);
 
   //upon click, set selected svg region path as bounding box
   const bounds = regionPath.node().getBBox();
@@ -694,19 +720,21 @@ function gameInfo(gen, container, dim) {
 
   switch (Number(gen)) {
     case 1:
-      const redGreenGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      redGreenGroup
+      const redGreenHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Red & Pokémon Green");
+        .style("text-decoration-line", "underline");
+
+      const redGreenContent = gamesGroup.append("g");
+
+      handleCollapse(redGreenHeader, redGreenContent, "Pokémon Red & Green", {
+        centerX: dim * 0.25,
+        centerY: dim * 0.15,
+      });
 
       renderGameCover(
-        redGreenGroup,
+        redGreenContent,
         0,
         30,
         imgSize,
@@ -715,14 +743,14 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        redGreenGroup,
+        redGreenContent,
         imgSize,
         30,
         imgSize,
         "../../assets/games/gen1/green-jp.png",
       );
 
-      redGreenGroup
+      redGreenContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -736,20 +764,23 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Game Boy</span> 
         <br>
         > Sales (Units): <span class="data-section-body">31.38 mil</span> 
-        <a href="">(## Bestselling)</a>
     `);
 
-      const blueGroup = gamesGroup.append("g").attr("class", "games-display");
-
-      blueGroup
+      const blueHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.33)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Blue");
+        .style("text-decoration-line", "underline");
+
+      const blueContent = gamesGroup.append("g");
+
+      handleCollapse(blueHeader, blueContent, "Pokémon Blue", {
+        centerX: dim * 0.1,
+        centerY: dim * 0.48,
+      });
 
       renderGameCover(
-        blueGroup,
+        blueContent,
         0,
         dim * 0.33 + 20,
         imgSize,
@@ -757,7 +788,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen1/blue-jp.png",
       );
 
-      blueGroup
+      blueContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -772,21 +803,25 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">31.38 mil (with Red/Green)</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const yellowGroup = gamesGroup.append("g").attr("class", "games-display");
-
-      yellowGroup
+      const yellowHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("x", dim * 0.33)
         .attr("y", dim * 0.33)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Yellow");
+        .style("text-decoration-line", "underline");
+
+      const yellowContent = gamesGroup.append("g");
+
+      handleCollapse(yellowHeader, yellowContent, "Pokémon Yellow", {
+        centerX: dim * 0.43,
+        centerY: dim * 0.48,
+      });
 
       renderGameCover(
-        yellowGroup,
+        yellowContent,
         dim * 0.33,
         dim * 0.33 + 20,
         imgSize,
@@ -794,7 +829,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen1/yellow-jp.png",
       );
 
-      yellowGroup
+      yellowContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", dim * 0.33)
@@ -809,11 +844,11 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">14.64 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
       //fun fact box
-      const factGroup = redGreenGroup
+      const factGroup = redGreenContent
         .append("g")
         .attr("transform", `translate(${imgSize * 2}, 40)`);
 
@@ -832,19 +867,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 2:
-      const goldSilverGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      goldSilverGroup
+      const goldSilverHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Gold & Pokémon Silver");
+        .style("text-decoration-line", "underline");
+
+      const goldSilverContent = gamesGroup.append("g");
+
+      handleCollapse(
+        goldSilverHeader,
+        goldSilverContent,
+        "Pokémon Gold & Silver",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        goldSilverGroup,
+        goldSilverContent,
         0,
         30,
         imgSize,
@@ -853,7 +895,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        goldSilverGroup,
+        goldSilverContent,
         imgSize + 20,
         30,
         imgSize,
@@ -861,7 +903,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen2/silver-jp.png",
       );
 
-      goldSilverGroup
+      goldSilverContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -875,22 +917,24 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Game Boy Color</span> 
         <br>
         > Sales (Units): <span class="data-section-body">23.7 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const crystalGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      crystalGroup
+      const crystalHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.355)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Crystal");
+        .style("text-decoration-line", "underline");
+
+      const crystalContent = gamesGroup.append("g");
+
+      handleCollapse(crystalHeader, crystalContent, "Pokémon Crystal", {
+        centerX: dim * 0.25,
+        centerY: dim * 0.5,
+      });
 
       renderGameCover(
-        crystalGroup,
+        crystalContent,
         0,
         dim * 0.355 + 20,
         imgSize,
@@ -898,7 +942,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen2/crystal-jp.png",
       );
 
-      crystalGroup
+      crystalContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -912,10 +956,10 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Game Boy</span> 
         <br>
         > Sales (Units): <span class="data-section-body">6.3 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
       `);
 
-      const factGroup2 = crystalGroup
+      const factGroup2 = crystalContent
         .append("g")
         .attr("transform", `translate(${imgSize * 1.35},${dim * 0.35})`);
 
@@ -928,6 +972,7 @@ function gameInfo(gen, container, dim) {
         "Pokémon Crystal was the first game to let you play as a girl!",
         `> Players could only venture as one of the male protagonists, Red (Gen 1) or Ethan (Gold/Silver), prior
         <br>
+        <br>
         > Crystal gave an option to play as Kris, the first female protagonist of the series! `,
         "../../assets/games/gen2/kris.png",
       );
@@ -935,19 +980,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 3:
-      const rubySapphireGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      rubySapphireGroup
+      const rubySapphireHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Ruby & Pokémon Sapphire");
+        .style("text-decoration-line", "underline");
+
+      const rubySapphireContent = gamesGroup.append("g");
+
+      handleCollapse(
+        rubySapphireHeader,
+        rubySapphireContent,
+        "Pokémon Ruby & Sapphire",
+        {
+          centerX: dim * 0.15,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        rubySapphireGroup,
+        rubySapphireContent,
         0,
         30,
         imgSize,
@@ -956,7 +1008,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        rubySapphireGroup,
+        rubySapphireContent,
         imgSize + 20,
         30,
         imgSize,
@@ -964,7 +1016,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen3/sapphire-jp.png",
       );
 
-      rubySapphireGroup
+      rubySapphireContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -979,23 +1031,25 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">16.22 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const emeraldGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      emeraldGroup
+      const emeraldHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
-        .attr("x", imgSize * 2.2)
+        .attr("x", imgSize * 2.2) // Maintain your right-side alignment
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Emerald");
+        .style("text-decoration-line", "underline");
+
+      const emeraldContent = gamesGroup.append("g");
+
+      handleCollapse(emeraldHeader, emeraldContent, "Pokémon Emerald", {
+        centerX: imgSize * 2.8,
+        centerY: dim * 0.15,
+      });
 
       renderGameCover(
-        emeraldGroup,
+        emeraldContent,
         imgSize * 2.2,
         30,
         imgSize,
@@ -1003,7 +1057,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen3/emerald-jp.png",
       );
 
-      emeraldGroup
+      emeraldContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", imgSize * 2.2)
@@ -1018,22 +1072,29 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">7.06 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
       `);
 
-      const fireRedLeafGreenGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      fireRedLeafGreenGroup
+      const fireRedLeafGreenHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.375)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon FireRed & Pokémon LeafGreen");
+        .style("text-decoration-line", "underline");
+
+      const fireRedLeafGreenContent = gamesGroup.append("g");
+
+      handleCollapse(
+        fireRedLeafGreenHeader,
+        fireRedLeafGreenContent,
+        "Pokémon FireRed & LeafGreen",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.52,
+        },
+      );
 
       renderGameCover(
-        fireRedLeafGreenGroup,
+        fireRedLeafGreenContent,
         0,
         dim * 0.375 + 20,
         imgSize,
@@ -1042,7 +1103,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        fireRedLeafGreenGroup,
+        fireRedLeafGreenContent,
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
@@ -1050,7 +1111,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen3/leafgreen-jp.png",
       );
 
-      fireRedLeafGreenGroup
+      fireRedLeafGreenContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1064,10 +1125,10 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Game Boy Advance</span> 
         <br>
         > Sales (Units): <span class="data-section-body">12 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      fireRedLeafGreenGroup
+      fireRedLeafGreenContent
         .append("foreignObject")
         .attr("class", "data-section-body")
         .attr("x", imgSize * 2.25)
@@ -1084,19 +1145,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 4:
-      const diamondPearlGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      diamondPearlGroup
+      const diamondPearlHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Diamond & Pokémon Pearl");
+        .style("text-decoration-line", "underline");
+
+      const diamondPearlContent = gamesGroup.append("g");
+
+      handleCollapse(
+        diamondPearlHeader,
+        diamondPearlContent,
+        "Pokémon Diamond & Pearl",
+        {
+          centerX: dim * 0.15,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        diamondPearlGroup,
+        diamondPearlContent,
         0,
         30,
         imgSize,
@@ -1105,7 +1173,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        diamondPearlGroup,
+        diamondPearlContent,
         imgSize + 20,
         30,
         imgSize,
@@ -1113,7 +1181,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen4/pearl-jp.png",
       );
 
-      diamondPearlGroup
+      diamondPearlContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1128,23 +1196,25 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">17.67 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const platinumGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      platinumGroup
+      const platinumHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("x", imgSize * 2.2)
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Platinum");
+        .style("text-decoration-line", "underline");
+
+      const platinumContent = gamesGroup.append("g");
+
+      handleCollapse(platinumHeader, platinumContent, "Pokémon Platinum", {
+        centerX: imgSize * 2.8,
+        centerY: dim * 0.15,
+      });
 
       renderGameCover(
-        platinumGroup,
+        platinumContent,
         imgSize * 2.2,
         30,
         imgSize,
@@ -1152,7 +1222,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen4/platinum-jp.png",
       );
 
-      platinumGroup
+      platinumContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", imgSize * 2.2)
@@ -1167,22 +1237,29 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">7.69 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
       `);
 
-      const heartGoldSoulSilverGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      heartGoldSoulSilverGroup
+      const heartGoldSoulSilverHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.375)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon HeartGold & Pokémon SoulSilver");
+        .style("text-decoration-line", "underline");
+
+      const heartGoldSoulSilverContent = gamesGroup.append("g");
+
+      handleCollapse(
+        heartGoldSoulSilverHeader,
+        heartGoldSoulSilverContent,
+        "Pokémon HeartGold & SoulSilver",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.52,
+        },
+      );
 
       renderGameCover(
-        heartGoldSoulSilverGroup,
+        heartGoldSoulSilverContent,
         0,
         dim * 0.375 + 20,
         imgSize,
@@ -1191,7 +1268,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        heartGoldSoulSilverGroup,
+        heartGoldSoulSilverContent,
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
@@ -1199,7 +1276,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen4/soulsilver-jp.png",
       );
 
-      heartGoldSoulSilverGroup
+      heartGoldSoulSilverContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1213,10 +1290,10 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo DS</span> 
         <br>
         > Sales (Units): <span class="data-section-body">12.72 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      heartGoldSoulSilverGroup
+      heartGoldSoulSilverContent
         .append("foreignObject")
         .attr("class", "data-section-body")
         .attr("x", imgSize * 2.25)
@@ -1232,19 +1309,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 5:
-      const blackWhiteGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      blackWhiteGroup
+      const blackWhiteHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Black & Pokémon White");
+        .style("text-decoration-line", "underline");
+
+      const blackWhiteContent = gamesGroup.append("g");
+
+      handleCollapse(
+        blackWhiteHeader,
+        blackWhiteContent,
+        "Pokémon Black & White",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        blackWhiteGroup,
+        blackWhiteContent,
         0,
         30,
         imgSize,
@@ -1253,7 +1337,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        blackWhiteGroup,
+        blackWhiteContent,
         imgSize + 20,
         30,
         imgSize,
@@ -1261,7 +1345,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen5/white-jp.png",
       );
 
-      blackWhiteGroup
+      blackWhiteContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1275,22 +1359,29 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo DS</span> 
         <br>
         > Sales (Units): <span class="data-section-body">15.64 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const blackWhite2Group = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      blackWhite2Group
+      const blackWhite2Header = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.375)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Black 2 & Pokémon White 2");
+        .style("text-decoration-line", "underline");
+
+      const blackWhite2Content = gamesGroup.append("g");
+
+      handleCollapse(
+        blackWhite2Header,
+        blackWhite2Content,
+        "Pokémon Black 2 & White 2",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.52,
+        },
+      );
 
       renderGameCover(
-        blackWhite2Group,
+        blackWhite2Content,
         0,
         dim * 0.375 + 20,
         imgSize,
@@ -1299,7 +1390,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        blackWhite2Group,
+        blackWhite2Content,
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
@@ -1307,7 +1398,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen5/white2-jp.png",
       );
 
-      blackWhite2Group
+      blackWhite2Content
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1321,11 +1412,11 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo DS</span> 
         <br>
         > Sales (Units): <span class="data-section-body">8.25 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
       renderFactBox(
-        blackWhite2Group,
+        blackWhite2Content,
         imgSize * 2.2,
         dim * 0.37,
         imgSize + 30,
@@ -1340,17 +1431,21 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 6:
-      const xYGroup = gamesGroup.append("g").attr("class", "games-display");
-
-      xYGroup
+      const xYHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon X & Pokémon Y");
+        .style("text-decoration-line", "underline");
+
+      const xYContent = gamesGroup.append("g");
+
+      handleCollapse(xYHeader, xYContent, "Pokémon X & Y", {
+        centerX: dim * 0.25,
+        centerY: dim * 0.15,
+      });
 
       renderGameCover(
-        xYGroup,
+        xYContent,
         0,
         30,
         imgSize,
@@ -1359,7 +1454,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        xYGroup,
+        xYContent,
         imgSize + 20,
         30,
         imgSize,
@@ -1367,7 +1462,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen6/y-jp.png",
       );
 
-      xYGroup
+      xYContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1381,20 +1476,29 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo 3DS</span> 
         <br>
         > Sales (Units): <span class="data-section-body">16.72 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const orasGroup = gamesGroup.append("g").attr("class", "games-display");
-
-      orasGroup
+      const orasHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.375)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Omega Ruby & Pokémon Alpha Sapphire");
+        .style("text-decoration-line", "underline");
+
+      const orasContent = gamesGroup.append("g");
+
+      handleCollapse(
+        orasHeader,
+        orasContent,
+        "Pokémon Omega Ruby & Alpha Sapphire",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.52,
+        },
+      );
 
       renderGameCover(
-        orasGroup,
+        orasContent,
         0,
         dim * 0.375 + 20,
         imgSize,
@@ -1403,7 +1507,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        orasGroup,
+        orasContent,
         imgSize + 20,
         dim * 0.375 + 20,
         imgSize,
@@ -1411,7 +1515,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen6/alphasapphire-jp.png",
       );
 
-      orasGroup
+      orasContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1425,10 +1529,10 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo 3DS</span> 
         <br>
         > Sales (Units): <span class="data-section-body">14.6 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      orasGroup
+      orasContent
         .append("foreignObject")
         .attr("class", "data-section-body")
         .attr("x", imgSize * 2.25)
@@ -1443,7 +1547,7 @@ function gameInfo(gen, container, dim) {
         `);
 
       renderFactBox(
-        orasGroup,
+        xYContent,
         imgSize * 2.15,
         20,
         dim * 0.23,
@@ -1457,19 +1561,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 7:
-      const sunMoonGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      sunMoonGroup
+      const sunMoonHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Sun & Pokémon Moon / Ultra Sun & Ultra Moon");
+        .style("text-decoration-line", "underline");
+
+      const sunMoonContent = gamesGroup.append("g");
+
+      handleCollapse(
+        sunMoonHeader,
+        sunMoonContent,
+        "Pokémon Sun/Moon & Ultra Sun/Ultra Moon",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        sunMoonGroup,
+        sunMoonContent,
         0,
         30,
         imgSizeSmall,
@@ -1478,7 +1589,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        sunMoonGroup,
+        sunMoonContent,
         imgSizeSmall + 7,
         30,
         imgSizeSmall,
@@ -1487,7 +1598,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        sunMoonGroup,
+        sunMoonContent,
         imgSizeSmall * 2 + 14,
         30,
         imgSizeSmall,
@@ -1496,7 +1607,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        sunMoonGroup,
+        sunMoonContent,
         imgSizeSmall * 3 + 21,
         30,
         imgSizeSmall,
@@ -1504,7 +1615,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen7/ultramoon-jp.png",
       );
 
-      sunMoonGroup
+      sunMoonContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1518,15 +1629,13 @@ function gameInfo(gen, container, dim) {
         > [SM] Release (WW): <span class="data-section-body">18/11/16</span> 
         <br>
         >> Sales (Units): <span class="data-section-body">16.32 mil</span> 
-        <a href="">(## Bestselling)</a>
         <br>
         > [USUM] Release (WW): <span class="data-section-body">17/11/17</span> 
         <br>
         >> Sales (Units): <span class="data-section-body">9.19 mil</span> 
-        <a href="">(## Bestselling)</a>
     `);
 
-      sunMoonGroup
+      sunMoonContent
         .append("foreignObject")
         .attr("class", "data-section-body")
         .attr("x", imgSizeSmall * 2 + imgSizeSmall / 1.5)
@@ -1540,19 +1649,16 @@ function gameInfo(gen, container, dim) {
         Ultra Sun & Ultra Moon are akin to enhanced editions/extended cuts
         `);
 
-      const pikachuEeveeGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      pikachuEeveeGroup
+      const pikachuEeveeHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.34)
-        .style("text-decoration-line", "underline")
-        .text("Let's Go Pikachu & Let's Go Eevee");
+        .style("text-decoration-line", "underline");
+
+      const pikachuEeveeContent = gamesGroup.append("g");
 
       renderGameCover(
-        pikachuEeveeGroup,
+        pikachuEeveeContent,
         0,
         dim * 0.34 + 30,
         imgSizeTall,
@@ -1561,7 +1667,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        pikachuEeveeGroup,
+        pikachuEeveeContent,
         imgSizeSmall,
         dim * 0.34 + 30,
         imgSizeTall,
@@ -1569,7 +1675,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen7/lgeevee-jp.png",
       );
 
-      pikachuEeveeGroup
+      pikachuEeveeContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1583,11 +1689,23 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo Switch</span> 
         <br>
         > Sales (Units): <span class="data-section-body">15.07 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
+      const pikachuEeveeBounds = {
+        centerX: dim * 0.25,
+        centerY: dim * 0.5,
+      };
+
+      handleCollapse(
+        pikachuEeveeHeader,
+        pikachuEeveeContent,
+        "Pokémon Let's Go Pikachu & Let's Go Eevee",
+        pikachuEeveeBounds,
+      );
+
       renderFactBox(
-        pikachuEeveeGroup,
+        pikachuEeveeContent,
         imgSizeTall * 1.6,
         dim * 0.34 + 50,
         imgSize * 1.5,
@@ -1595,6 +1713,7 @@ function gameInfo(gen, container, dim) {
         "A first generation throwback with a modern twist!",
         `> Let's Go is a Pokémon Yellow remake, taking place in Kanto Region, but including gameplay elements from hit mobile game, Pokémon Go
         <br> 
+        <br>
         > It contains Gen I pokémon, some with Alolan forms, and a new mythical pokémon—Meltan—who first debuted in Pokémon Go
         `,
       );
@@ -1602,20 +1721,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 8:
-      const swordShieldGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      swordShieldGroup
+      const swordShieldHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
+        .style("text-decoration-line", "underline");
 
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Sword & Shield");
+      const swordShieldContent = gamesGroup.append("g");
+
+      handleCollapse(
+        swordShieldHeader,
+        swordShieldContent,
+        "Pokémon Sword & Shield",
+        {
+          centerX: dim * 0.145,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        swordShieldGroup,
+        swordShieldContent,
         -10,
         30,
         imgSizeTall * 0.85,
@@ -1624,7 +1749,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        swordShieldGroup,
+        swordShieldContent,
         imgSizeSmall * 0.8,
         30,
         imgSizeTall * 0.85,
@@ -1632,7 +1757,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen8/shield-jp.png",
       );
 
-      swordShieldGroup
+      swordShieldContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1647,23 +1772,30 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">26.17 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const legendsArceusGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      legendsArceusGroup
+      const legendsArceusHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
-        .attr("x", dim * 0.335)
+        .attr("x", dim * 0.315)
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Legends: Arceus");
+        .style("text-decoration-line", "underline");
+
+      const legendsArceusContent = gamesGroup.append("g");
+
+      handleCollapse(
+        legendsArceusHeader,
+        legendsArceusContent,
+        "Pokémon Legends: Arceus",
+        {
+          centerX: dim * 0.46,
+          centerY: dim * 0.15,
+        },
+      );
 
       renderGameCover(
-        legendsArceusGroup,
+        legendsArceusContent,
         dim * 0.38,
         30,
         imgSizeTall * 0.85,
@@ -1671,7 +1803,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen8/legendsarceus-jp.png",
       );
 
-      legendsArceusGroup
+      legendsArceusContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", dim * 0.33)
@@ -1686,20 +1818,28 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">14.83 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const bdspGroup = gamesGroup.append("g").attr("class", "games-display");
-
-      bdspGroup
+      const brilliantDiamondShiningPearlHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", dim * 0.35)
-        .style("text-decoration-line", "underline")
-        .text("Brilliant Diamond & Shining Pearl");
+        .style("text-decoration-line", "underline");
 
+      const brilliantDiamondShiningPearlContent = gamesGroup.append("g");
+
+      handleCollapse(
+        brilliantDiamondShiningPearlHeader,
+        brilliantDiamondShiningPearlContent,
+        "Pokémon Brilliant Diamond & Shining Pearl",
+        {
+          centerX: dim * 0.25,
+          centerY: dim * 0.52,
+        },
+      );
       renderGameCover(
-        bdspGroup,
+        brilliantDiamondShiningPearlContent,
         0,
         dim * 0.34 + 30,
         imgSizeTall,
@@ -1708,7 +1848,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        bdspGroup,
+        brilliantDiamondShiningPearlContent,
         imgSizeSmall,
         dim * 0.34 + 30,
         imgSizeTall,
@@ -1716,7 +1856,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen8/shiningpearl-jp.png",
       );
 
-      bdspGroup
+      brilliantDiamondShiningPearlContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1730,13 +1870,13 @@ function gameInfo(gen, container, dim) {
         > Platform: <span class="data-section-body">Nintendo Switch</span> 
         <br>
         > Sales (Units): <span class="data-section-body">15.06 mil</span> 
-        <a href="">(## Bestselling)</a>
+        
     `);
 
       renderFactBox(
-        bdspGroup,
+        brilliantDiamondShiningPearlContent,
         imgSizeTall * 1.6,
-        dim * 0.34 + 50,
+        dim * 0.34 + 65,
         imgSize * 1.5,
         imgSizeTall,
         "Adventures in the past and present of Sinnoh!",
@@ -1748,20 +1888,26 @@ function gameInfo(gen, container, dim) {
       return;
 
     case 9:
-      const scarletVioletGroup = gamesGroup
-        .append("g")
-        .attr("class", "games-display");
-
-      scarletVioletGroup
+      const scarletVioletHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("y", 10)
+        .style("text-decoration-line", "underline");
 
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Scarlet & Violet");
+      const scarletVioletContent = gamesGroup.append("g");
+
+      handleCollapse(
+        scarletVioletHeader,
+        scarletVioletContent,
+        "Pokémon Scarlet & Violet",
+        {
+          centerX: dim * 0.145,
+          centerY: dim * 0.18,
+        },
+      );
 
       renderGameCover(
-        scarletVioletGroup,
+        scarletVioletContent,
         -50,
         30,
         imgSizeTall,
@@ -1770,7 +1916,7 @@ function gameInfo(gen, container, dim) {
       );
 
       renderGameCover(
-        scarletVioletGroup,
+        scarletVioletContent,
         imgSizeSmall * 0.65,
         30,
         imgSizeTall,
@@ -1778,7 +1924,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen9/violet-jp.png",
       );
 
-      scarletVioletGroup
+      scarletVioletContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", 0)
@@ -1793,21 +1939,30 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">24.36 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
-      const legendsZA = gamesGroup.append("g").attr("class", "games-display");
-
-      legendsZA
+      const legendsZAHeader = gamesGroup
         .append("text")
         .attr("class", "data-section-h2")
         .attr("x", dim * 0.335)
         .attr("y", 10)
-        .style("text-decoration-line", "underline")
-        .text("Pokémon Legends: Z-A");
+        .style("text-decoration-line", "underline");
+
+      const legendsZAContent = gamesGroup.append("g");
+
+      handleCollapse(
+        legendsZAHeader,
+        legendsZAContent,
+        "Pokémon Legends: Z-A",
+        {
+          centerX: dim * 0.47,
+          centerY: dim * 0.18,
+        },
+      );
 
       renderGameCover(
-        legendsZA,
+        legendsZAContent,
         dim * 0.35,
         30,
         imgSizeTall,
@@ -1815,7 +1970,7 @@ function gameInfo(gen, container, dim) {
         "../../assets/games/gen9/legendsza-ns2.png",
       );
 
-      legendsZA
+      legendsZAContent
         .append("foreignObject")
         .attr("class", "data-section-stats")
         .attr("x", dim * 0.33)
@@ -1830,16 +1985,64 @@ function gameInfo(gen, container, dim) {
         <br>
         > Sales (Units): <span class="data-section-body">5.8 mil</span> 
         <br>
-        <a href="">(## Bestselling)</a>
+        
     `);
 
       const upcomingGen = gamesGroup.append("g");
 
       renderSpoilerBox(upcomingGen, 0, dim * 0.4, dim * 0.6, dim * 0.25);
       return;
+
     default:
       return;
   }
+}
+
+function handleCollapse(headerElement, contentGroup, sectionName, bounds) {
+  //default state
+  let isVisible = false;
+  contentGroup.style("opacity", 0).style("pointer-events", "none");
+
+  const placeholder = d3
+    .select(contentGroup.node().parentNode)
+    .append("text")
+    .attr("class", "collapsed-placeholder")
+    .attr("x", bounds.centerX)
+    .attr("y", bounds.centerY)
+    .text("— Content Collapsed —");
+
+  headerElement
+    .style("cursor", "pointer")
+    .style("user-select", "none")
+    .on("mouseenter", function () {
+      d3.select(this).style("fill", "#f27a71");
+    })
+    .on("mouseleave", function () {
+      d3.select(this).style("fill", null);
+    });
+
+  headerElement.on("click", function () {
+    isVisible = !isVisible;
+
+    // Toggle the actual content
+    contentGroup
+      .transition()
+      .duration(400)
+      .style("opacity", isVisible ? 1 : 0)
+      .style("pointer-events", isVisible ? "all" : "none");
+
+    placeholder
+      .transition()
+      .duration(400)
+      .style("opacity", isVisible ? 0 : 0.5);
+
+    // Update the text to show status
+    const prefix = isVisible ? "[-] " : "[+] ";
+    // This assumes the header is a d3 text element
+    d3.select(this).text(prefix + sectionName);
+  });
+
+  headerElement.text("[-] " + sectionName);
 }
 
 function displayDataBox() {
@@ -2059,6 +2262,11 @@ function updateUI(gen) {
     setTimeout(() => {
       if (!selectedGen) dataBox.html("");
     }, 500);
+
+    d3.selectAll(".location-icon")
+      .transition()
+      .duration(750)
+      .style("opacity", 1);
   } else {
     //set selected region state, while all other paths are unselected
     const regionID = gen.region;
@@ -2117,6 +2325,24 @@ d3.xml("../../assets/world-map-by-nstav13.svg")
       .attr("style", null)
       .attr("stroke", "rgba(0,0,0,0)")
       .attr("stroke-width", "0px");
+
+    regions.each(function () {
+      const regionID = d3.select(this).attr("id");
+      const bounds = this.getBBox();
+      const centerX = bounds.x + bounds.width / 2;
+      const centerY = bounds.y + bounds.height / 2;
+
+      d3.select(this.parentNode)
+        .append("image")
+        .attr("class", "location-icon")
+        .attr("id", `icon-${regionID}`) // link ID to region
+        .attr("href", "../../assets/icons/location-icon.png")
+        .attr("x", centerX - 20)
+        .attr("y", centerY - 40)
+        .attr("height", 60)
+        .style("pointer-events", "none")
+        .style("transition", "opacity 0.3s ease");
+    });
 
     //selecting region zones with cursor
     hoverRegion(mapElement, regions);
