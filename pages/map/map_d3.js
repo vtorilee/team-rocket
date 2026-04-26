@@ -187,14 +187,15 @@ function zoomToRegion(regionID) {
   const height = container.clientHeight;
 
   //calculate values to zoom in on center of region and offset selected region to the right
+
+  const scale =
+    Math.min(3.5, (width * 0.45) / bounds.width, height / bounds.height) * 0.8;
+
   const centerX = bounds.x + bounds.width / 2;
   const centerY = bounds.y + bounds.height / 2;
 
-  const scale =
-    Math.min(4, (width * 0.45) / bounds.width, height / bounds.height) * 0.85;
-
-  const x = width * 0.68;
-  const y = height / 2;
+  const targetX = width * 0.6;
+  const targetY = height / 2;
 
   //zoom in map
   svgElement
@@ -203,7 +204,7 @@ function zoomToRegion(regionID) {
     .call(
       zoom.transform,
       d3.zoomIdentity
-        .translate(x, y)
+        .translate(targetX, targetY)
         .scale(scale)
         .translate(-centerX, -centerY),
     );
@@ -2050,6 +2051,7 @@ function handleCollapse(headerElement, contentGroup, sectionName, bounds) {
 
 function displayDataBox() {
   const dataBoxContainer = d3.select("#data-container");
+  console.log("Data Container found:", !dataBoxContainer.empty());
 
   //clear old data box info each time
   dataBoxContainer.html("");

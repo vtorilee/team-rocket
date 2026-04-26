@@ -6,6 +6,7 @@
   --hover-color-1: #853636a8;
   --accent-color: #ece2c4;
   --dropdown-color: rgb(242, 217, 142);
+  --timeline-h: clamp(80px, 12vh, 120px);
 }
 
 * {
@@ -484,7 +485,7 @@ svg.focus-mode path.selected-path {
 /* timeline */
 
 #timeline-container {
-  height: 120px;
+  height: var(--timeline-h);
   width: 100%;
   flex-shrink: 0;
   z-index: 20;
@@ -553,7 +554,7 @@ svg.focus-mode path.selected-path {
   left: 20px;
 
   width: 55%;
-  height: 98%;
+  height: calc(100% - var(--timeline-h) - 20px);
   filter: drop-shadow(5px 0px 15px rgba(0, 0, 0, 0.5));
 
   pointer-events: none;
@@ -570,7 +571,7 @@ svg.focus-mode path.selected-path {
 }
 
 #data-container.visible {
-  /* ssmooth enter transition */
+  /* smooth enter transition */
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
