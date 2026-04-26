@@ -372,7 +372,7 @@ function drawOptionsSection(group, data) {
     const buttonGroup = group
       .append("g")
       .attr("class", "button-group")
-      .attr("transform", `translate(${15 + xPos}, ${160 + yPos})`)
+      .attr("transform", `translate(${15 + xPos}, ${180 + yPos})`)
       .style("cursor", "pointer")
       .on("click", (event) => {
         handleSelection(option);
@@ -482,34 +482,35 @@ function drawSelectedSection(group, data) {
 }
 
 function displayResults(container) {
-  const layoutWidth = 1300;
-  const layoutHeight = 900;
+  const layoutWidth = 1250;
+  const layoutHeight = 720;
 
   container.select("svg").remove();
 
   const svg = container
     .append("svg")
-    .attr("viewBox", `0 0 ${layoutWidth} ${layoutHeight}`)
+    .attr("viewBox", `0 -25 ${layoutWidth} ${layoutHeight}`)
     .attr("preserveAspectRatio", "xMinYMin meet")
     .style("width", "100%")
-    .style("height", "auto");
-
-  const heading = svg
-    .append("text")
-    .attr("class", "page-heading")
-    .attr("x", 650)
-    .attr("y", 50)
-    .text("Your Trainer Profile");
+    .style("height", "100%");
 
   const genNumber = userResult.gen;
 
-  function drawResults(svg, x, y, width, height) {
+  function drawResults(svg, x, y) {
+    const heading = svg
+      .append("text")
+      .attr("class", "page-heading")
+      .attr("transform", `translate(${700}, ${0})`)
+      .attr("x", 0)
+      .attr("y", 0)
+      .text("Your Trainer Profile");
+
     const trainerCard = svg
       .append("g")
-      .attr("transform", `translate(${x}, ${y})`);
+      .attr("transform", `translate(${200}, ${45})`);
     const choicesCard = svg
       .append("g")
-      .attr("transform", `translate(${x + 435}, ${y})`);
+      .attr("transform", `translate(${670}, ${45})`);
 
     function drawTrainerCard(group) {
       group
@@ -517,8 +518,8 @@ function displayResults(container) {
         .attr("class", "result-card")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 400)
-        .attr("height", 535);
+        .attr("width", 435)
+        .attr("height", 570);
 
       const nameBox = group
         .append("g")
@@ -529,7 +530,7 @@ function displayResults(container) {
         .attr("class", "bg-rect")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 365)
+        .attr("width", 400)
         .attr("height", 90)
         .attr("rx", 5)
         .style("stroke", "#1f1f1f")
@@ -539,7 +540,7 @@ function displayResults(container) {
         .append("rect")
         .attr("x", 7.5)
         .attr("y", 7)
-        .attr("width", 350)
+        .attr("width", 385)
         .attr("height", 76)
         .style("fill", "transparent")
         .style("stroke", "#1f1f1f")
@@ -548,28 +549,28 @@ function displayResults(container) {
       nameBox
         .append("text")
         .attr("class", "result-h1")
-        .attr("x", 182.5)
+        .attr("x", 197.5)
         .attr("y", 35)
         .text(`${genTrainers[userResult.gen].names}`);
 
       nameBox
         .append("text")
         .attr("class", "result-caption")
-        .attr("x", 182.5)
+        .attr("x", 197.5)
         .attr("y", 65)
         .text(`${genTrainers[userResult.gen].game}`);
 
       const imageBox = group
         .append("g")
-        .attr("transform", `translate(17.5, 115)`);
+        .attr("transform", `translate(17.5, 122.5)`);
 
       imageBox
         .append("rect")
         .attr("class", "bg-rect")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 365)
-        .attr("height", 205 + 85)
+        .attr("width", 400)
+        .attr("height", 325 - 35)
         .attr("rx", "5")
         .style("stroke", "#1f1f1f")
         .style("stroke-width", "4px");
@@ -578,7 +579,7 @@ function displayResults(container) {
         .append("rect")
         .attr("x", 7.5)
         .attr("y", 7)
-        .attr("width", 350)
+        .attr("width", 385)
         .attr("height", 191 + 85)
         .style("fill", "transparent")
         .style("stroke", "#000")
@@ -608,32 +609,32 @@ function displayResults(container) {
 
       const dialogueBox = group
         .append("g")
-        .attr("transform", `translate(15, 410)`);
+        .attr("transform", `translate(15, 425)`);
 
       dialogueBox
         .append("rect")
         .attr("class", "bg-rect")
         .attr("x", 7)
         .attr("y", 5)
-        .attr("width", 356)
-        .attr("height", 105);
+        .attr("width", 356 + 35)
+        .attr("height", 117);
 
       dialogueBox
         .append("image")
         .attr("href", "../../assets/dialoguebox.png")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 370);
+        .attr("width", 370 + 35);
 
       dialogueBox
         .append("foreignObject")
         .attr("x", 22)
         .attr("y", 25)
-        .attr("width", 326)
-        .attr("height", 80)
+        .attr("width", 326 + 35)
+        .attr("height", 85)
         .append("xhtml:div")
         .attr("class", "result-h2")
-        .style("font-size", "23px").html(`
+        .style("font-size", "26px").html(`
           "Thanks Trainer, let's explore together!"
         `);
     }
@@ -671,12 +672,12 @@ function displayResults(container) {
         .attr("class", "result-card")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 500)
-        .attr("height", 535);
+        .attr("width", 535)
+        .attr("height", 570);
 
       group;
       //gen results
-      const genGroup = group.append("g").attr("transform", `translate(22, 20)`);
+      const genGroup = group.append("g").attr("transform", `translate(18, 20)`);
       const roman = romanMap[userResult.gen - 1] || userResult.gen;
 
       genGroup
@@ -684,7 +685,7 @@ function displayResults(container) {
         .attr("class", "sub-rect")
         .attr("x", 0.5)
         .attr("y", 89)
-        .attr("width", 455)
+        .attr("width", 497)
         .attr("height", 65)
         .attr("rx", 5)
         .style("stroke", "#1f1f1f")
@@ -695,11 +696,11 @@ function displayResults(container) {
         .attr("class", "bg-rect")
         .attr("x", 0)
         .attr("y", -5)
-        .attr("width", 456)
+        .attr("width", 499)
         .attr("height", 100)
         .attr("rx", 5)
         .style("stroke", "#1f1f1f")
-        .style("stroke-width", "2px");
+        .style("stroke-width", "4px");
 
       genGroup
         .append("text")
@@ -883,8 +884,8 @@ function displayResults(container) {
       genGroup
         .append("foreignObject")
         .attr("x", 7.5)
-        .attr("y", 100)
-        .attr("width", 450)
+        .attr("y", 102)
+        .attr("width", 450 + 35)
         .attr("height", 65)
         .append("xhtml:div")
         .attr("class", "result-body").html(`
@@ -896,8 +897,8 @@ function displayResults(container) {
       drawButton(
         genGroup,
         0,
-        160,
-        456,
+        165,
+        498,
         35,
         "Explore the whole Pokémon world through the years!",
         "../map/map.html",
@@ -906,13 +907,13 @@ function displayResults(container) {
       //type results
       const typeGroup = choicesCard
         .append("g")
-        .attr("transform", `translate(22, 225)`);
+        .attr("transform", `translate(20, 238)`);
 
       typeGroup
         .append("rect")
         .attr("class", "sub-rect")
         .attr("x", 0.5)
-        .attr("y", 163)
+        .attr("y", 173)
         .attr("width", 222)
         .attr("height", 90)
         .attr("rx", 5)
@@ -924,10 +925,10 @@ function displayResults(container) {
         .attr("class", "bg-rect")
         .attr("y", 0)
         .attr("width", 223)
-        .attr("height", 169)
+        .attr("height", 179)
         .attr("rx", 5)
         .style("stroke", "#1f1f1f")
-        .style("stroke-width", "2px");
+        .style("stroke-width", "4px");
 
       typeGroup
         .append("text")
@@ -940,15 +941,15 @@ function displayResults(container) {
       typeGroup
         .append("image")
         .attr("href", `../../assets/types/${userResult.type.toLowerCase()}.png`)
-        .attr("x", 45)
+        .attr("x", 35)
         .attr("y", 25)
-        .attr("width", 135)
-        .attr("height", 135);
+        .attr("width", 150)
+        .attr("height", 150);
 
       typeGroup
         .append("foreignObject")
         .attr("x", 7.5)
-        .attr("y", 175)
+        .attr("y", 185)
         .attr("width", 212)
         .attr("height", 90)
         .append("xhtml:div")
@@ -962,7 +963,7 @@ function displayResults(container) {
       drawButton(
         typeGroup,
         0,
-        260,
+        275,
         223,
         35,
         "Explore Type Combos!",
@@ -972,14 +973,14 @@ function displayResults(container) {
       //starter results
       const starterGroup = group
         .append("g")
-        .attr("transform", `translate(256, 225)`);
+        .attr("transform", `translate(256, 238)`);
 
       starterGroup
         .append("rect")
         .attr("class", "sub-rect")
         .attr("x", 0.5)
-        .attr("y", 163)
-        .attr("width", 222)
+        .attr("y", 163 + 11)
+        .attr("width", 256)
         .attr("height", 90)
         .attr("rx", 5)
         .style("stroke", "#1f1f1f")
@@ -988,24 +989,24 @@ function displayResults(container) {
       starterGroup
         .append("rect")
         .attr("class", "bg-rect")
-        .attr("width", 223)
-        .attr("height", 169)
+        .attr("width", 258)
+        .attr("height", 179)
         .attr("rx", 5)
         .style("stroke", "#000")
-        .style("stroke-width", "2px");
+        .style("stroke-width", "4px");
 
       starterGroup
         .append("image")
         .attr("href", `../../assets/starters/${userResult.starter}.png`)
-        .attr("x", 45)
-        .attr("y", 35)
-        .attr("width", 120)
-        .attr("height", 120);
+        .attr("x", 50)
+        .attr("y", 42.5)
+        .attr("width", 127.5)
+        .attr("height", 127.5);
 
       starterGroup
         .append("text")
         .attr("class", "result-h2")
-        .attr("x", 111.5)
+        .attr("x", 129)
         .attr("y", 25)
         .style("font-size", "18px")
         .text(`${userResult.starter} Starter`);
@@ -1013,22 +1014,23 @@ function displayResults(container) {
       starterGroup
         .append("foreignObject")
         .attr("x", 7.5)
-        .attr("y", 175)
-        .attr("width", 212)
+        .attr("y", 185)
+        .attr("width", 243)
         .attr("height", 90)
         .append("xhtml:div")
         .attr("class", "result-body")
         .style("font-size", "10px").html(`
             A Trainer's starter Pokémon is their very first companion, received upon beginning their journey. 
             <br>
-            <span class="result-body-feature"}> Starters types are always one of: Grass, Fire, Water.</span>
+            <span class="result-body-feature"}> Starters types are always one of: <br>
+            Grass, Fire, Water.</span>
           `);
 
       drawButton(
         starterGroup,
         0,
-        260,
-        223,
+        275,
+        258,
         35,
         "Check Popularity!",
         "../visualizations.html#starters",
@@ -1040,7 +1042,7 @@ function displayResults(container) {
     const restart = svg
       .append("g")
       .attr("class", "result-button")
-      .attr("transform", `translate(390, 650)`)
+      .attr("transform", `translate(440, 635)`)
       .style("cursor", "pointer")
       .on("click", () => {
         userResult = { gen: null, type: null, starter: null };
@@ -1054,25 +1056,25 @@ function displayResults(container) {
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", 450)
-      .attr("height", 40);
+      .attr("height", 50);
 
     restart
       .append("text")
       .attr("class", "result-button-text")
       .attr("x", 225)
-      .attr("y", 20)
+      .attr("y", 25)
       .style("font-size", 22)
       .style("dominant-baseline", "middle")
       .text("Restart Quiz");
   }
 
-  drawResults(svg, 175, 90, layoutWidth - 100, layoutHeight - 100);
+  drawResults(svg, 0, 0);
 }
 
 function displayQuiz(container) {
   //coords for scaling view
-  const layoutWidth = 1300;
-  const layoutHeight = 1000;
+  const layoutWidth = 1250;
+  const layoutHeight = 720;
 
   //clear reset for next render
   container.select("svg").remove();
@@ -1089,19 +1091,19 @@ function displayQuiz(container) {
   const selectedGroup = quizLayoutSVG
     .append("g")
     .attr("id", "images-section")
-    .attr("transform", "translate(700, 0)");
+    .attr("transform", "translate(800, 0)");
   const optionsGroup = quizLayoutSVG
     .append("g")
     .attr("id", "options-section")
-    .attr("transform", "translate(50, 25)");
+    .attr("transform", "translate(50, 0)");
 
   const currentData = quizData[currentQuestion];
 
   drawOptionsSection(optionsGroup, currentData);
   drawSelectedSection(selectedGroup, currentData);
 
-  function drawNavButtons(svg, width, height) {
-    const navGroup = svg.append("g").attr("transform", `translate(945, 600)`);
+  function drawNavButtons(svg, x, y) {
+    const navGroup = svg.append("g").attr("transform", `translate(${x}, ${y})`);
 
     const resultKeys = ["gen", "type", "starter"];
     const hasSelection = userResult[resultKeys[currentQuestion]] !== null;
@@ -1189,7 +1191,7 @@ function displayQuiz(container) {
         .text("Finish");
     }
   }
-  drawNavButtons(quizLayoutSVG, layoutWidth, layoutHeight);
+  drawNavButtons(quizLayoutSVG, 1055, 600);
 }
 
 const layoutContainer = d3.select("#quiz-layout");
