@@ -290,6 +290,10 @@ body {
 }
 
 /* vis page styles */
+a:hover {
+  color: var(--poketext-color);
+}
+
 .container {
   width: 80%;
   max-width: 1100px;
