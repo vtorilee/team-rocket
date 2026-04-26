@@ -176,25 +176,26 @@ function zoomToRegion(regionID) {
   const regionPath = d3.select(`path#${regionID}`);
   if (regionPath.empty()) return;
 
-  //hide location icons
   d3.selectAll(".location-icon").transition().duration(400).style("opacity", 0);
 
-  //upon click, set selected svg region path as bounding box
-  const bounds = regionPath.node().getBBox();
   const container = d3.select("#map-container").node();
+
+  const bounds = regionPath.node().getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
 
   const screenW = container.clientWidth;
   const screenH = container.clientHeight;
 
-  const centerX = bounds.x + bounds.width / 2;
-  const centerY = bounds.y + bounds.height / 2;
+  const centerX = bounds.left + bounds.width / 2 - containerRect.left;
+  const centerY = bounds.top + bounds.height / 2 - containerRect.top;
 
-  //calculate scale based on region box dimensions and available screen space
   const scale =
     Math.min(4, (screenW * 0.45) / bounds.width, screenH / bounds.height) * 0.8;
 
-  //offset to be seen with active data box
-  const translateX = screenW * 0.7 - scale * centerX;
+  const visibleWidth = screenW * 0.45;
+  const targetX = visibleWidth / 2;
+
+  const translateX = targetX - scale * centerX;
   const translateY = screenH / 2 - scale * centerY;
 
   svgElement
@@ -205,7 +206,6 @@ function zoomToRegion(regionID) {
       d3.zoomIdentity.translate(translateX, translateY).scale(scale),
     );
 
-  //display reset button
   d3.select("#reset-button").style("display", "block");
 }
 
