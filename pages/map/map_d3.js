@@ -183,15 +183,18 @@ function zoomToRegion(regionID) {
   const bounds = regionPath.node().getBBox();
   const container = d3.select("#map-container").node();
 
-  //calculate values to zoom in and offset selected region to the right
   const width = container.clientWidth;
   const height = container.clientHeight;
-  const scale = Math.min(
-    3.5,
-    0.75 / Math.max(bounds.width / width, bounds.height / height),
-  );
-  const x = bounds.x + bounds.width / 6;
-  const y = bounds.y + bounds.height / 3.5;
+
+  //calculate values to zoom in on center of region and offset selected region to the right
+  const centerX = bounds.x + bounds.width / 2;
+  const centerY = bounds.y + bounds.height / 2;
+
+  const scale =
+    Math.min(4, (width * 0.45) / bounds.width, height / bounds.height) * 0.85;
+
+  const x = width * 0.68;
+  const y = height / 2;
 
   //zoom in map
   svgElement
@@ -200,9 +203,9 @@ function zoomToRegion(regionID) {
     .call(
       zoom.transform,
       d3.zoomIdentity
-        .translate(width / 2, height / 2)
+        .translate(x, y)
         .scale(scale)
-        .translate(-x, -y),
+        .translate(-centerX, -centerY),
     );
 
   //display reset button
