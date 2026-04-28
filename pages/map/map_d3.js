@@ -2131,7 +2131,7 @@ function displayDataBox() {
     .style("dominant-baseline", "hanging")
     .append("xhtml:div")
     .html(
-      `<a href="../../pages/visualizations.html#timeline">Main Series Releases:</a>`,
+      `<a class="data-section-hyperlink" href="../../pages/visualizations.html#timeline">Main Series Releases:</a>`,
     );
 
   currentY += 70;

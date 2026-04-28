@@ -644,7 +644,6 @@ svg.focus-mode path.selected-path {
 
 .data-section-hyperlink {
   color: #5d71f5;
-  font-family: "Galindo", sans-serif;
   text-decoration: underline;
   transition: all 0.3s ease;
 }
